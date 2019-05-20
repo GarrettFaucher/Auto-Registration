@@ -1,0 +1,11 @@
+{
+  "name": "UVM Auto-Registration",
+  "version": "1.0",
+  "description": "Allows for the auto-registration of classes at the University of Vermont.",
+  "permissions": ["storage"],
+    "background": {
+      "scripts": ["background.js"],
+      "persistent": false
+    },
+  "manifest_version": 2
+}
