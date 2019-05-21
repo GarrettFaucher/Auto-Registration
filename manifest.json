@@ -3,9 +3,12 @@
   "version": "1.0",
   "description": "Allows for the auto-registration of classes at the University of Vermont.",
   "permissions": ["storage"],
-    "background": {
-      "scripts": ["background.js"],
-      "persistent": false
-    },
+  "background": {
+   "scripts": ["background.js"],
+   "persistent": false
+  },
+  "page_action": {
+   "default_popup": "popup.html"
+  },
   "manifest_version": 2
 }
