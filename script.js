@@ -6,13 +6,18 @@
 // This code is hot garbage
 
 // When save is clicked on popup.html, collectData is called.
-var x = window.addEventListener('load', function load(event) {
-     document.getElementById('saveval').onclick = collectData()
-};
+// TODO: Currently being called when plugin page is loading, not when "Save is being clicked."
+window.addEventListener('load', function load(event) {
+     document.getElementById('save').onclick = collectData()
+});
+
+document.getElementById('save').onclick = collectData();
+
 
 // collectData SHOULD retrieve the filled in text boxes from the HTML display and
 // populate input.json with the data gathered.
 function collectData() {
+  console.log("collectData called.");
   var crn_1 = document.getElementById('crn_1').value;
   var crn_2 = document.getElementById('crn_2').value;
   var crn_3 = document.getElementById('crn_3').value;
@@ -35,8 +40,9 @@ function collectData() {
               password: password
             };
 
+  console.log(data);
   var jsonData = JSON.stringify(data),
        filename = 'input.json',
        blob = new Blob([jsonData], {type: "text/plain;charset=utf-8"});
-  saveAs(blob, filename);
+  // saveAs(blob, filename); // This might not be needed I don't remember
 }
