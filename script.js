@@ -1,3 +1,6 @@
+// This .js file started to store the data from the html drop down
+// into a JSON for webdriver to use.
+
 window.addEventListener('load', function load(event) {
      document.getElementById('send').onclick = function() {
      var crn_1 = document.getElementById('crn_1').value;

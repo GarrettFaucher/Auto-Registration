@@ -1,3 +1,6 @@
+# Used to input CRN data into UVM webpage.
+# Logs into UVM website and opens CRN page.
+
 import time
 import json
 from selenium import webdriver
