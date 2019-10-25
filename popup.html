@@ -1,5 +1,7 @@
-<!DOCTYPE html>
-<html>
+<!-- This looks bad and needs some refinement. -->
+
+<!doctype html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <title>About Me</title>
@@ -9,11 +11,14 @@
         <script src="script.js"></script>
     </head>
     <body style="width:300px">
+
          <div class="jumbotron text-center" style="margin-bottom:0; background-color:#007155; color:white;">
                <h1>UVM Auto Registration</h1>
                <p>Automatic registration for your classes at the University of Vermont.</p>
          </div>
+
          <div class="" style="background-color:#66AC47; color:black; padding:10px;">
+             <p>Enter the CRNs above and click save once ready.</p>
              <p>CRN 1: <input id="crn_1"></p>
              <p>CRN 2: <input id="crn_2"></p>
              <p>CRN 3: <input id="crn_3"></p>
@@ -26,8 +31,6 @@
         <!-- Probably don't want to store users data. Single sign on functonality. -->
         <p>User: <input id="username"></p>
         <p>Pass: <input id="password"></p>
-        <p><input type="submit" id="send" value="Save"></p>
-
-        <p>Enter the CRNs above and select submit once ready.</p>
+        <p><input type="submit" id="save" value="Save"></p>
     </body>
 </html>
