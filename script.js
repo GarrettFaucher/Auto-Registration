@@ -1,13 +1,14 @@
-// This .js file started to store the data from the html drop down
+// script.js started to store the data from the html drop down
 // into a JSON for webdriver to use.
 
 
 // Hi Pat I don't know how js works pls debug this lmao
+// This code is hot garbage
 
 // When save is clicked on popup.html, collectData is called.
-window.addEventListener('load', function load(event) {
-     document.getElementById('save').onclick = collectData() {
-}};
+var x = window.addEventListener('load', function load(event) {
+     document.getElementById('saveval').onclick = collectData()
+};
 
 // collectData SHOULD retrieve the filled in text boxes from the HTML display and
 // populate input.json with the data gathered.
