@@ -1,20 +1,13 @@
 // script.js started to store the data from the html drop down
 // into a JSON for webdriver to use.
 
-
-// Hi Pat I don't know how js works pls debug this lmao
-// This code is hot garbage
-
 // When save is clicked on popup.html, collectData is called.
-// TODO: Currently being called when plugin page is loading, not when "Save is being clicked."
-window.addEventListener('load', function load(event) {
-     document.getElementById('save').onclick = collectData()
+window.addEventListener('load', function load(event){
+    var createButton = document.getElementById('save');
+    createButton.addEventListener('click', function() { collectData(); });
 });
 
-document.getElementById('save').onclick = collectData();
-
-
-// collectData SHOULD retrieve the filled in text boxes from the HTML display and
+// collectData retrieves the filled in text boxes from the HTML display and
 // populate input.json with the data gathered.
 function collectData() {
   console.log("collectData called.");
