@@ -12,6 +12,8 @@ window.addEventListener('load', function load(event){
 function collectData() {
      console.log("collectData called.");
      // Store the data from each textbox
+     var username = document.getElementById('username').value;
+     var password = document.getElementById('password').value;
      var crn_1 = document.getElementById('crn_1').value;
      var crn_2 = document.getElementById('crn_2').value;
      var crn_3 = document.getElementById('crn_3').value;
@@ -20,11 +22,9 @@ function collectData() {
      var crn_6 = document.getElementById('crn_6').value;
      var crn_7 = document.getElementById('crn_7').value;
      var crn_8 = document.getElementById('crn_8').value;
-     var username = document.getElementById('username').value;
-     var password = document.getElementById('password').value;
 
      // Put it in a vector to loop through
-     var crnData = [crn_1, crn_2, crn_3, crn_4, crn_5, crn_6, crn_7, crn_8, username, password];
+     var crnData = [username, password, crn_1, crn_2, crn_3, crn_4, crn_5, crn_6, crn_7, crn_8];
      console.log(crnData); // Show the data for bug fixing
      // Loop through vector and stor it in local Chrome storage
      for(var i = 0; i < crnData.length; i++) {
