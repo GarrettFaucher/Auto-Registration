@@ -28,9 +28,17 @@ function collectData() {
      console.log(crnData); // Show the data for bug fixing
      // Loop through vector and stor it in local Chrome storage
      for(var i = 0; i < crnData.length; i++) {
-          var currentKey = "crn_" + (i+1);
+          if (i == 0 || i == 1) {
+               if (i == 0) {
+                    var currentKey = "username";
+               } else {
+                    var currentKey = "password";
+               }
+          } else {
+               var currentKey = "crn_" + (i-1);
+          }
           chrome.storage.local.set({currentKey: crnData[i]}, (function(crnData) {
-               console.log('Value is set to ' + crnData[i]);
+               console.log(currentKey + ' is set to ' + crnData[i]);
           })(crnData));
      }
 }
