@@ -5,7 +5,7 @@ import time
 import json
 from selenium import webdriver
 
-# I forget how Python works and this main func might be broken lmao
+# This is old code from when json was being used
 def main():
     inputFile = open('input.json', 'r')
     jsonDecode = json.load(inputFile)
