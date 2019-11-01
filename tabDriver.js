@@ -11,12 +11,39 @@
   Calling this file automatically begins the course registration process
 */
 
-//Attempt login with login.js
 
-//Run checkLogin.js
+console.log("TABDRIVER");
+var tabId;
 
-//if logged in, navigate to registrar page
+function driver(){
+  // chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
+  //   console.log(tabs[0]);
+  //   tabId = tabs[0].id;
+  // });
 
-//at specific time, run entryAttempt.js to try to get into course registration
+  chrome.tabs.create({
+    url: 'http://myuvm.uvm.edu'
+  }, function(tab){
+    tabId = tab.id;
+    setTimeout(function(){
+      chrome.tabs.executeScript(tabId, {file: './automations/login.js'},function(){
 
-//when registration page url is detected, run classSignup.js to autofill CRNS and submit the form
+      })
+    }, 1000);
+
+  });
+
+
+
+
+  //Attempt login with login.js
+
+  //Run checkLogin.js
+
+  //if logged in, navigate to registrar page
+
+  //at specific time, run entryAttempt.js to try to get into course registration
+
+  //when registration page url is detected, run classSignup.js to autofill CRNS and submit the form
+}
+driver();
