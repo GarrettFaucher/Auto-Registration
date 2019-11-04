@@ -26,7 +26,7 @@ function collectData() {
      // Put it in a vector to loop through
      var crnData = [username, password, crn_1, crn_2, crn_3, crn_4, crn_5, crn_6, crn_7, crn_8];
      console.log(crnData); // Show the data for bug fixing
-     // Loop through vector and stor it in local Chrome storage
+     // Loop through vector and store it in local Chrome storage
      for(var i = 0; i < crnData.length; i++) {
           if (i == 0 || i == 1) {
                if (i == 0) {
