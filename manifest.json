@@ -5,13 +5,9 @@
      "icons": { "16": "icon16.png",
                 "48": "icon48.png",
                 "128": "icon128.png" },
-     "permissions": ["storage", "tabs","notifications","http://*/","https://*/"],
+     "permissions": ["storage", "tabs","activeTab","notifications","http://*/","https://*/"],
      "browser_action": {
           "default_popup": "popup.html"
      },
-     "background": {
-        "scripts": ["tabDriver.js"],
-        "persistent": false
-      },
      "manifest_version": 2
 }
