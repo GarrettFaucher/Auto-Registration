@@ -2,6 +2,60 @@
 
 <!doctype html>
 <html lang="en">
+     <style>
+          body {
+               font-family: Arial;
+               margin: 0;
+          }
+
+          .header_main {
+               padding: 35px;
+               text-align: center;
+               background: #66AC47;
+               color: white;
+               font-size: 20px;
+          }
+
+          .header_secondary {
+               padding: 10px;
+               text-align: center;
+               background: #007155;
+               color: white;
+               font-size: 20px;
+          }
+
+          .boxes {
+               color: black;
+               padding: 10px;
+               /* background: #A7D4EE; */
+          }
+
+          input[type=text], select, input {
+          width: 100%;
+          padding: 12px 12px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+          }
+
+          input[type=submit] {
+          width: 100%;
+          background-color: #007155;
+          color: white;
+          padding: 14px 20px;
+          margin: 8px 0;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          }
+
+          input[type=submit]:hover {
+          background-color: #01533F;
+          }
+
+     </style>
      <head>
           <meta charset="UTF-8">
           <title>About Me</title>
@@ -11,35 +65,38 @@
           <script src="retrieveData.js"></script>
      </head>
      <body style="width:350px">
-          <div class="jumbotron text-center" style="margin-bottom:0; background-color:#007155; color:white;">
+          <div class="header_main">
                <h1>UVM Auto Registration</h1>
-               <p>Automatic registration for your classes at the University of Vermont.</p>
+               <p size="12">Automatic registration for your classes at the University of Vermont.</p>
           </div>
 
-          <div class="" style="background-color:#66AC47; color:black; padding:10px;">
-               <p>Your UVM data is stored on your machine to log into myuvm.edu</p>
-               <p>UVM Username: <input id="username"></p>
-               <p>UVM Password: <input id="password"></p>
-               <p>Registration Date: <input type="date" id="reg_date" name="trip-start"
+          <div class="header_secondary">
+               <p>Enter your username, password, registration time, and CRNs to get started.</p>
+          </div>
+
+          <div class="boxes">
+               <p>UVM Username<input id="username"></p>
+               <p>UVM Password<input id="password"></p>
+               <p>Registration Date
+                    <input type="date" id="reg_date" name="trip-start"
                     value="2019-01-01"
                     min="2019-01-01" max="2020-12-31">
                </p>
-               <p>Registration Time:
+               <p>Registration Time
                     <select id="reg_time">
                          <option value="600am">6:00 AM</option>
                          <option value="630am">6:30 AM</option>
                          <option value="700am">7:00 AM</option>
                     </select>
                </p>
-               <p>Enter the CRNs below and click save once ready.</p>
-               <p>CRN 1: <input id="crn_1" size="12"></p>
-               <p>CRN 2: <input id="crn_2" size="12"></p>
-               <p>CRN 3: <input id="crn_3" size="12"></p>
-               <p>CRN 4: <input id="crn_4" size="12"></p>
-               <p>CRN 5: <input id="crn_5" size="12"></p>
-               <p>CRN 6: <input id="crn_6" size="12"></p>
-               <p>CRN 7: <input id="crn_7" size="12"></p>
-               <p>CRN 8: <input id="crn_8" size="12"></p>
+               <p>CRN 1<input id="crn_1"></p>
+               <p>CRN 2<input id="crn_2" size="12"></p>
+               <p>CRN 3<input id="crn_3" size="12"></p>
+               <p>CRN 4<input id="crn_4" size="12"></p>
+               <p>CRN 5<input id="crn_5" size="12"></p>
+               <p>CRN 6<input id="crn_6" size="12"></p>
+               <p>CRN 7<input id="crn_7" size="12"></p>
+               <p>CRN 8<input id="crn_8" size="12"></p>
           <div/>
           <p><input type="submit" id="save" value="Save"></p>
      </body>
