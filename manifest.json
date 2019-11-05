@@ -2,6 +2,9 @@
      "name": "UVM Auto-Registration",
      "version": "1.0",
      "description": "Allows for the auto-registration of classes at the University of Vermont.",
+     "icons": { "16": "icon16.png",
+                "48": "icon48.png",
+                "128": "icon128.png" },
      "permissions": ["storage", "tabs","notifications","http://*/","https://*/"],
      "browser_action": {
           "default_popup": "popup.html"
