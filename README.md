@@ -1,2 +1,2 @@
-# Auto-Registration
-Allows for the auto-registration of classes at the University of Vermont.
+# TODO
+     * Add start button to extension HTML
