@@ -1,27 +1,18 @@
-// script.js started to store the data from the html drop down
-// into a JSON for webdriver to use.
-
-// import {driver} from './tabDriver.js'
+//popup.js for javascript event handling and data saving on the popup.html page
 
 // When save is clicked on popup.html, collectData is called.
 window.addEventListener('load', function load(event){
     var createButton = document.getElementById('save');
     createButton.addEventListener('click', function() { collectData(); });
 
+    //listen for clicks on the "run" button
     var runButton = document.getElementById('run');
     runButton.addEventListener('click', event => {
+      //when a click is detected, send a message to the background page
       console.log('sending click event to background page')
       chrome.runtime.sendMessage({event: 'runClick'}, function(response){
 
       });
-
-      // chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
-      //
-      //   var currentTab = tabs[0].id;
-      //   chrome.tabs.executeScript(currentTab, {file: './tabDriver.js'},function(){
-      //
-      //   })
-      // });
 
     });
 });
