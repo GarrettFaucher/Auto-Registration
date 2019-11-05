@@ -12,10 +12,11 @@
 */
 
 
-console.log("TABDRIVER");
-var tabId;
 
-function driver(){
+
+export function driver(){
+  console.log("TABDRIVER: driver() executed");
+  var tabId;
   // chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
   //   console.log(tabs[0]);
   //   tabId = tabs[0].id;
@@ -25,9 +26,10 @@ function driver(){
     url: 'http://myuvm.uvm.edu'
   }, function(tab){
     tabId = tab.id;
+    console.log('tab created');
     setTimeout(function(){
       chrome.tabs.executeScript(tabId, {file: './automations/login.js'},function(){
-
+        console.log('script execution');
       })
     }, 1000);
 
@@ -46,4 +48,4 @@ function driver(){
 
   //when registration page url is detected, run classSignup.js to autofill CRNS and submit the form
 }
-driver();
+// driver();

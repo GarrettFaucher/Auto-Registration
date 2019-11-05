@@ -6,6 +6,8 @@
 // var bg = chrome.extension.getBackgroundPage();
 // bg.console.log('to background page')
 
+console.log('login.js')
+
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }

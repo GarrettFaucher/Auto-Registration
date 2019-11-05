@@ -1,7 +1,7 @@
 // script.js started to store the data from the html drop down
 // into a JSON for webdriver to use.
 
-import {tabDriver} from './tabDriver.js'
+import {driver} from './tabDriver.js'
 
 // When save is clicked on popup.html, collectData is called.
 window.addEventListener('load', function load(event){
@@ -11,7 +11,7 @@ window.addEventListener('load', function load(event){
     var runButton = document.getElementById('run');
     runButton.addEventListener('click', event => {
       chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
-        tabDriver();
+        driver();
         // var currentTab = tabs[0].id;
         // chrome.tabs.executeScript(currentTab, {file: './tabDriver.js'},function(){
         //
