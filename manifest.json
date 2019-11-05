@@ -9,5 +9,15 @@
      "browser_action": {
           "default_popup": "popup.html"
      },
+     "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+      },
+     "content_scripts": [
+       {
+         "matches": ["http://*.uvm.edu/*","https://*.uvm.edu/*"],
+         "js": ["tabDriver.js"]
+       }
+     ],
      "manifest_version": 2
 }
