@@ -15,6 +15,7 @@ function runClick(){
   });
 }
 
+// Listen for incoming messages from the popup javascript file
 chrome.runtime.onMessage.addListener(
 function(request, sender, sendResponse) {
   if (request.event == "runClick")

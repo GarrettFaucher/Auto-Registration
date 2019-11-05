@@ -3,19 +3,27 @@
 
   Drives the whole login/registration process by running automations
   at specific times, or when specific events occur.
-
-  Controls tabs, script injections, and reads information such as URL changes / page changes
-
-  All automations are stored in /automations
-
-  Calling this file automatically begins the course registration process
 */
 
-
+//Sleep function
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+//Run function, starts each automation function and handles return values
+function run(){
+  //try login
+  login();
+  // TODO: check if login failed, if it did send a message to the popup window to alert the user
+}
+
+/*
+AUTOMATIONS
+
+Each automation runs a stage of the process and returns true if it succeeded, or false if it failed.
+Return values are handled by start()
+
+*/
 async function login() {
      console.log("running login automation");
 
@@ -42,50 +50,26 @@ async function login() {
 
 }
 
-
-function driver(){
+// Main function runs when the program is run
+// This function is what is injected into every *.uvm.edu page.
+// The function waits for specific commands from the background page,
+// and does things on the UVM page based on those commands
+function main(){
+  //logs in this file can be seen on the UVM page's console - doesn't log to normal background page
   console.log("TABDRIVER: driver is active - waiting for commands");
   var tabId;
 
-  //
-  // COMMANDS
-  // Commands are sent from other scripts in the extension with access to the chrome API
-  //
-
+  // Create a message listener to listen for messages from background.js
   chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    // console.log(request);
+    // If the received command is start
     if (request.command == "start")
       console.log('recieved start command')
-      login()
-    console.log("sending response")
+      run();
+
+    //send response back to background page, required every time a message is received or else this whole listener shits itsself
     sendResponse();
   });
 
-  // chrome.tabs.create({
-  //   url: 'http://myuvm.uvm.edu'
-  // }, function(tab){
-  //   tabId = tab.id;
-  //   console.log('tab created');
-  //   setTimeout(function(){
-  //     chrome.tabs.executeScript(tabId, {file: './automations/login.js'},function(){
-  //       console.log('script execution');
-  //     })
-  //   }, 1000);
-  //
-  // });
-
-
-
-
-  //Attempt login with login.js
-
-  //Run checkLogin.js
-
-  //if logged in, navigate to registrar page
-
-  //at specific time, run entryAttempt.js to try to get into course registration
-
-  //when registration page url is detected, run classSignup.js to autofill CRNS and submit the form
 }
-driver();
+main();
