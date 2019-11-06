@@ -80,7 +80,7 @@ function handleMessage(request){
   }
 
   //if driverReady was received from tabDriver.js, this means that the page loaded and the driver is ready for the next command
-  if(request.driverReady && nextCommand != "" && nextCommand != NULL){
+  if(request.driverReady && nextCommand != "" && nextCommand != null){
     console.log("Received driverReady, queued command: "+nextCommand)
     sendCommand(nextCommand);
     nextCommand = "";
