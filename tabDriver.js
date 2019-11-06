@@ -73,7 +73,7 @@ function loggedOn() {
      }
 }
 
-// handleCommand handles incoming messages from background.js to 
+// handleCommand handles incoming messages from background.js to
 // run automations and send back the responses via respondToBackground
 async function handleCommand(request){
   console.log('running automation: '+request.command);
