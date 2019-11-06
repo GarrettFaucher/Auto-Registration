@@ -24,23 +24,45 @@ async function login() {
      var passwordInput = document.getElementsByName("password")[0];
      var submitButton = document.getElementsByName("submit")[0];
 
-     chrome.storage.sync.get(['username'], function(result) {
-          console.log(result);
-    });
+     chrome.storage.local.get(['username'], function(result) {
+          console.log("Username: " + result.username);
+          usernameInput.value = result.username;
+     });
 
-    chrome.storage.sync.get(['password'], function(result) {
-         console.log(result);
-   });
-
-     // TODO: Use chrome.local data to fill properly
-     usernameInput.value="username";
-     passwordInput.value="password";
+     chrome.storage.local.get(['password'], function(result) {
+          console.log("Password: " + result.password);
+          passwordInput.value = result.password;
+     });
 
      console.log('Waiting for page to load...');
      await sleep(2000);
      console.log('Page should have loaded.');
-     // submitButton.click();
 
+     submitButton.click();
+
+     await sleep(2000);
+     console.log('Waiting log on...');
+     if (loggedOn()) {
+          console.log("User logged on.")
+     }
+}
+
+
+// loggedOn returns a boolean value based on if the user has navigated past
+// the webauth.uvm.edu/webauth/login page.
+// Returns true if user has logged on
+function loggedOn() {
+     console.log("running checkLogin automation");
+     // Element only on login page
+     var element = document.getElementById("login-topcontainer");
+     // If element is still on page user hasn't logged in
+     if (typeof(element) != 'undefined' && element != null){
+          console.log('User is not logged on');
+          return false;
+     } else {
+          console.log('User is logged on');
+          return true;
+     }
 }
 
 // Main function runs when the program is run
