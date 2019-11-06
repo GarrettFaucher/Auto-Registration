@@ -6,7 +6,7 @@
 */
 
 // globals
-var preLoggedOn = false; // Indicates whether the user is already logged on to chrome
+var preLoggedOn = false; // Indicates whether the user is already logged in to UVM
 
 //Sleep function
 function sleep(ms) {
