@@ -10,6 +10,16 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+function respondToBackground(automationName, returnVal){
+  console.log('Automation '+automationName+' is responding to background.js with returnVal: '+returnVal);
+  chrome.runtime.sendMessage({automation: automationName, success: returnVal}, function(response) {});
+}
+
+function broadcastReady(){
+  console.log('Broadcasting driverReady to background.js');
+  chrome.runtime.sendMessage({driverReady: true});
+}
+
 /*
 AUTOMATIONS
 
@@ -39,12 +49,18 @@ async function login() {
      console.log('Page should have loaded.');
 
      submitButton.click();
+     return true;
+     // await sleep(2000);
+     // console.log('Waiting log on...');
 
-     await sleep(2000);
-     console.log('Waiting log on...');
-     if (loggedOn()) {
-          console.log("User logged on.")
-     }
+     // if (loggedOn()) {
+     //      console.log("User logged on.");
+     //      return true;
+     // }
+     // else{
+     //   console.log("Did not detect successful login");
+     //   return false;
+     // }
 }
 
 
@@ -65,30 +81,39 @@ function loggedOn() {
      }
 }
 
+
+async function handleCommand(request){
+  console.log('running automation: '+request.command);
+  switch (request.command){
+    case 'login':
+      var returnVal = await login();
+      respondToBackground(request.command, returnVal);
+      break;
+    case 'checkLogin':
+      var returnVal = await loggedOn();
+      respondToBackground(request.command, returnVal);
+      break;
+    default:
+      break;
+
+  }
+}
+
+
 // Main function runs when the program is run
 // This function is what is injected into every *.uvm.edu page.
 // The function waits for specific commands from the background page,
 // and does things on the UVM page based on those commands
 function main(){
   //logs in this file can be seen on the UVM page's console - doesn't log to normal background page
-  console.log("TABDRIVER: driver is active - waiting for commands");
-  var tabId;
+  console.log("TABDRIVER: driver is ready");
+  broadcastReady();
 
   // Create a message listener to listen for messages from background.js
   chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-
-    switch (request.command) {
-      case 'start':
-        console.log('running automation: login')
-        var returnVal = login();
-        sendResponse({success: returnVal});
-        break;
-
-      default:
-        break;
-
-    }
+    sendResponse();
+    handleCommand(request);
   });
 
 }
