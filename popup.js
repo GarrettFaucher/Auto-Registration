@@ -2,11 +2,13 @@
 
 // When save is clicked on popup.html, collectData is called.
 window.addEventListener('load', function load(event){
+    fillData();
     var saveButton = document.getElementById('save');
     saveButton.addEventListener('click', function() {
          collectData();
          saveButton.value = "Saved";
     });
+    f
 
     //listen for clicks on the "run" button
     var runButton = document.getElementById('run');
@@ -19,6 +21,38 @@ window.addEventListener('load', function load(event){
 
     });
 });
+
+//fillData fills the form with data previously saved by the user
+function fillData(){
+  // Store the data from each textbox
+  var username = document.getElementById('username');
+  var password = document.getElementById('password');
+  var date = document.getElementById('reg_date'); // Date stored in format YYYY-MM-DD
+  // Possible values for time: 600am, 630am, 700am
+  var time = document.getElementById('reg_time');
+  var crn_1 = document.getElementById('crn_1');
+  var crn_2 = document.getElementById('crn_2');
+  var crn_3 = document.getElementById('crn_3');
+  var crn_4 = document.getElementById('crn_4');
+  var crn_5 = document.getElementById('crn_5');
+  var crn_6 = document.getElementById('crn_6');
+  var crn_7 = document.getElementById('crn_7');
+  var crn_8 = document.getElementById('crn_8');
+
+  chrome.storage.local.get(['username'], function(result) { username.value = result.username; });
+  chrome.storage.local.get(['password'], function(result) { password.value = result.password; });
+  chrome.storage.local.get(['date'], function(result) { date.value = result.date; });
+  chrome.storage.local.get(['time'], function(result) { time.value = result.time; });
+  chrome.storage.local.get(['crn_1'], function(result) { crn_1.value = result.crn_1; });
+  chrome.storage.local.get(['crn_2'], function(result) { crn_2.value = result.crn_2; });
+  chrome.storage.local.get(['crn_3'], function(result) { crn_3.value = result.crn_3; });
+  chrome.storage.local.get(['crn_4'], function(result) { crn_4.value = result.crn_4; });
+  chrome.storage.local.get(['crn_5'], function(result) { crn_5.value = result.crn_5; });
+  chrome.storage.local.get(['crn_6'], function(result) { crn_6.value = result.crn_6; });
+  chrome.storage.local.get(['crn_7'], function(result) { crn_7.value = result.crn_7; });
+  chrome.storage.local.get(['crn_8'], function(result) { crn_8.value = result.crn_8; });
+
+}
 
 // collectData retrieves the filled in text boxes from the HTML display and
 // populate input.json with the data gathered.
