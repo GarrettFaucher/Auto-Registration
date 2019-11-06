@@ -60,7 +60,7 @@ async function login() {
 // the webauth.uvm.edu/webauth/login page.
 // Returns true if user has logged on
 function loggedOn() {
-     console.log("running checkLogin automation");
+     console.log("running loggedOn automation");
      // Element only on login page
      var element = document.getElementById("login-topcontainer");
      // If element is still on page user hasn't logged in
@@ -71,6 +71,17 @@ function loggedOn() {
           console.log('User is logged on');
           return true;
      }
+}
+
+// navigateToButton is called once the user has been logged on
+// The page is redirected to the button waiting for the CRN page to be accessed
+async function navigateToButton() {
+     console.log("running navigateToButton automation");
+     var regButton = document.getElementById("aui_3_4_0_1_241");
+     regButton.click();
+     await sleep(2000);
+     var addDropButton = document.querySelectorAll('[alt="add drop withdraw"]')[0];
+     addDropButton.click();
 }
 
 // handleCommand handles incoming messages from background.js to
@@ -84,6 +95,10 @@ async function handleCommand(request){
       break;
     case 'checkLogin':
       var returnVal = await loggedOn();
+      respondToBackground(request.command, returnVal);
+      break;
+    case 'navigateToButton':
+      var returnVal = await navigateToButton();
       respondToBackground(request.command, returnVal);
       break;
     default:
