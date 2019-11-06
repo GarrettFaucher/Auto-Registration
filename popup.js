@@ -2,8 +2,11 @@
 
 // When save is clicked on popup.html, collectData is called.
 window.addEventListener('load', function load(event){
-    var createButton = document.getElementById('save');
-    createButton.addEventListener('click', function() { collectData(); });
+    var saveButton = document.getElementById('save');
+    saveButton.addEventListener('click', function() {
+         collectData();
+         saveButton.value = "Saved";
+    });
 
     //listen for clicks on the "run" button
     var runButton = document.getElementById('run');
