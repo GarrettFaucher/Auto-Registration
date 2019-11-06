@@ -10,13 +10,6 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-//Run function, starts each automation function and handles return values
-function run(){
-  //try login
-  login();
-  // TODO: check if login failed, if it did send a message to the popup window to alert the user
-}
-
 /*
 AUTOMATIONS
 
@@ -62,13 +55,18 @@ function main(){
   // Create a message listener to listen for messages from background.js
   chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    // If the received command is start
-    if (request.command == "start")
-      console.log('recieved start command')
-      run();
 
-    //send response back to background page, required every time a message is received or else this whole listener shits itsself
-    sendResponse();
+    switch (request.command) {
+      case 'start':
+        console.log('running automation: login')
+        var returnVal = login();
+        sendResponse({success: returnVal});
+        break;
+
+      default:
+        break;
+
+    }
   });
 
 }
