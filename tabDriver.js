@@ -45,10 +45,10 @@ async function login() {
      await sleep(2000);
      console.log('Page should have loaded.');
 
-     // submitButton.click();
+     submitButton.click();
 
-     console.log('Waiting log on...');
      await sleep(2000);
+     console.log('Waiting log on...');
      if (loggedOn()) {
           console.log("User logged on.")
      }
