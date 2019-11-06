@@ -5,6 +5,8 @@
   at specific times, or when specific events occur.
 */
 
+var preLoggedOn = false;
+
 //Sleep function
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -33,25 +35,30 @@ Return values are handled by start()
 async function login() {
      console.log("running login automation");
 
-     var usernameInput = document.getElementsByName("username")[0];
-     var passwordInput = document.getElementsByName("password")[0];
-     var submitButton = document.getElementsByName("submit")[0];
+     if (!loggedOn()) {
+          var usernameInput = document.getElementsByName("username")[0];
+          var passwordInput = document.getElementsByName("password")[0];
+          var submitButton = document.getElementsByName("submit")[0];
 
-     chrome.storage.local.get(['username'], function(result) {
-          console.log("Username: " + result.username);
-          usernameInput.value = result.username;
-     });
+          chrome.storage.local.get(['username'], function(result) {
+               console.log("Username: " + result.username);
+               usernameInput.value = result.username;
+          });
 
-     chrome.storage.local.get(['password'], function(result) {
-          console.log("Password: " + result.password);
-          passwordInput.value = result.password;
-     });
+          chrome.storage.local.get(['password'], function(result) {
+               console.log("Password: " + result.password);
+               passwordInput.value = result.password;
+          });
 
-     console.log('Waiting for page to load...');
-     await sleep(2000);
-     console.log('Page should have loaded.');
+          console.log('Waiting for page to load...');
+          await sleep(2000);
+          console.log('Page should have loaded.');
 
-     submitButton.click();
+          submitButton.click();
+     } else {
+          preLoggedOn = true;
+     }
+
      return true;
 }
 
@@ -92,6 +99,9 @@ async function handleCommand(request){
     case 'login':
       var returnVal = await login();
       respondToBackground(request.command, returnVal);
+      if (preLoggedOn) {
+          broadcastReady();
+      }
       break;
     case 'checkLogin':
       var returnVal = await loggedOn();
