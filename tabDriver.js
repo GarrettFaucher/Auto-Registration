@@ -42,12 +42,10 @@ async function login() {
           var submitButton = document.getElementsByName("submit")[0];
 
           chrome.storage.local.get(['username'], function(result) {
-               console.log("Username: " + result.username);
                usernameInput.value = result.username;
           });
 
           chrome.storage.local.get(['password'], function(result) {
-               console.log("Password: " + result.password);
                passwordInput.value = result.password;
           });
 
