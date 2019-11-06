@@ -68,14 +68,14 @@ function handleMessage(request){
       case 'checkLogin':
         if(request.success){
           console.log('checkLogin automation complete')
-          nextCommand = ""; //TODO, add next command after checkLogin
+          nextCommand = "navigateToButton"; //TODO, add next command after checkLogin
         }
         else{
-          console.log('checkLogin failed')
+          console.log('navigateToButton failed')
         }
+        break;
       default:
         break;
-
     }
   }
 
