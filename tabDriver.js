@@ -5,6 +5,9 @@
   at specific times, or when specific events occur.
 */
 
+// globals
+var preLoggedOn = false; // Indicates whether the user is already logged on to chrome
+
 //Sleep function
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -33,25 +36,30 @@ Return values are handled by start()
 async function login() {
      console.log("running login automation");
 
-     var usernameInput = document.getElementsByName("username")[0];
-     var passwordInput = document.getElementsByName("password")[0];
-     var submitButton = document.getElementsByName("submit")[0];
+     if (!loggedOn()) {
+          var usernameInput = document.getElementsByName("username")[0];
+          var passwordInput = document.getElementsByName("password")[0];
+          var submitButton = document.getElementsByName("submit")[0];
 
-     chrome.storage.local.get(['username'], function(result) {
-          console.log("Username: " + result.username);
-          usernameInput.value = result.username;
-     });
+          chrome.storage.local.get(['username'], function(result) {
+               console.log("Username: " + result.username);
+               usernameInput.value = result.username;
+          });
 
-     chrome.storage.local.get(['password'], function(result) {
-          console.log("Password: " + result.password);
-          passwordInput.value = result.password;
-     });
+          chrome.storage.local.get(['password'], function(result) {
+               console.log("Password: " + result.password);
+               passwordInput.value = result.password;
+          });
 
-     console.log('Waiting for page to load...');
-     await sleep(2000);
-     console.log('Page should have loaded.');
+          console.log('Waiting for page to load...');
+          await sleep(2000);
+          console.log('Page should have loaded.');
 
-     submitButton.click();
+          submitButton.click();
+     } else {
+          preLoggedOn = true;
+     }
+
      return true;
 }
 
@@ -73,15 +81,20 @@ function loggedOn() {
      }
 }
 
-// navigateToButton is called once the user has been logged on
-// The page is redirected to the button waiting for the CRN page to be accessed
-async function navigateToButton() {
-     console.log("running navigateToButton automation");
-     var regButton = document.getElementById("aui_3_4_0_1_241");
+// navigateToRegistrar is called once the user has been logged on
+async function navigateToRegistrar() {
+     console.log("running navigateToRegistrar automation");
+     var regButton = document.querySelectorAll('[href="https://myuvm.uvm.edu/web/home-community/registrar"]')[0];
      regButton.click();
-     await sleep(2000);
+     return true;
+}
+
+// navigateToButton is called once the user has navigated to registrar page
+async function navigateToAddDrop() {
+     console.log("running navigateToAddDrop automation");
      var addDropButton = document.querySelectorAll('[alt="add drop withdraw"]')[0];
      addDropButton.click();
+     return true;
 }
 
 // handleCommand handles incoming messages from background.js to
@@ -92,16 +105,23 @@ async function handleCommand(request){
     case 'login':
       var returnVal = await login();
       respondToBackground(request.command, returnVal);
+      if (preLoggedOn) {
+          broadcastReady();
+      }
       break;
     case 'checkLogin':
       var returnVal = await loggedOn();
       respondToBackground(request.command, returnVal);
       broadcastReady();
       break;
-    case 'navigateToButton':
-      var returnVal = await navigateToButton();
+    case 'navigateToRegistrar':
+      var returnVal = await navigateToRegistrar();
       respondToBackground(request.command, returnVal);
       break;
+    case 'navigateToAddDrop':
+     var returnVal = await navigateToAddDrop();
+     respondToBackground(request.command, returnVal);
+     break;
     default:
       break;
 
