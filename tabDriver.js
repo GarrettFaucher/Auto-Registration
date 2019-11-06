@@ -31,17 +31,15 @@ async function login() {
      var passwordInput = document.getElementsByName("password")[0];
      var submitButton = document.getElementsByName("submit")[0];
 
-     chrome.storage.sync.get(['username'], function(result) {
-          console.log(result);
-    });
+     chrome.storage.local.get(['username'], function(result) {
+          console.log(result.username);
+          usernameInput.value = result.username;
+     });
 
-    chrome.storage.sync.get(['password'], function(result) {
-         console.log(result);
-   });
-
-     // TODO: Use chrome.local data to fill properly
-     usernameInput.value="username";
-     passwordInput.value="password";
+     chrome.storage.local.get(['password'], function(result) {
+          console.log(result.password);
+          passwordInput.value = result.password;
+     });
 
      console.log('Waiting for page to load...');
      await sleep(2000);
