@@ -44,8 +44,26 @@ async function login() {
      console.log('Waiting for page to load...');
      await sleep(2000);
      console.log('Page should have loaded.');
+
      // submitButton.click();
 
+     console.log('Waiting log on...');
+     await sleep(2000);
+     if (loggedOn()) {
+          console.log("User logged on.")
+     }
+}
+
+function loggedOn() {
+     console.log("running checkLogin automation");
+     var element = document.getElementById("login-topcontainer");
+     if(typeof(element) != 'undefined' && element != null){
+          console.log('User is not logged on');
+          return false;
+     } else {
+          console.log('User is logged on');
+          return true;
+     }
 }
 
 // Main function runs when the program is run
