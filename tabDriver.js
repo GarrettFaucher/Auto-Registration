@@ -5,7 +5,8 @@
   at specific times, or when specific events occur.
 */
 
-var preLoggedOn = false;
+// globals
+var preLoggedOn = false; // Indicates whether the user is already logged on to chrome
 
 //Sleep function
 function sleep(ms) {
