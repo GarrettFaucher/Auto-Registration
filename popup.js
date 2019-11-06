@@ -45,27 +45,8 @@ function collectData() {
      var crn_7 = document.getElementById('crn_7').value;
      var crn_8 = document.getElementById('crn_8').value;
 
-     // Put it in a vector to loop through
      var crnData = [username, password, date, time, crn_1, crn_2, crn_3, crn_4, crn_5, crn_6, crn_7, crn_8];
      console.log(crnData); // Show the data for bug fixing
-
-     // TODO: currentKey variable doesn't save data properly
-     // // Loop through vector and store it in local Chrome storage
-     // var currentKey = "";
-     // for(var i = 0; i < crnData.length; i++) {
-     //      if (i <= 3) {
-     //           if (i == 0)      {currentKey = "username";}
-     //           else if (i == 1) {currentKey = "password";}
-     //           else if (i == 2) {currentKey = "date";}
-     //           else if (i == 3) {currentKey = "time";}
-     //      } else {
-     //           currentKey = "crn_" + (i - 3);
-     //      }
-     //      // Storing the data in local chrome storage
-     //      chrome.storage.local.set({currentKey: crnData[i]}, (function(crnData) {
-     //           console.log(currentKey + ' is set to ' + crnData[i]);
-     //      })(crnData));
-     // }
 
      chrome.storage.local.set({'username': username});
      chrome.storage.local.set({'password': password});
