@@ -71,7 +71,7 @@ function handleMessage(request){
           nextCommand = "navigateToButton"; //TODO, add next command after checkLogin
         }
         else{
-          console.log('navigateToButton failed')
+          console.log('checkLogin failed')
         }
         break;
       default:

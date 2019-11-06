@@ -96,6 +96,7 @@ async function handleCommand(request){
     case 'checkLogin':
       var returnVal = await loggedOn();
       respondToBackground(request.command, returnVal);
+      driverReady();
       break;
     case 'navigateToButton':
       var returnVal = await navigateToButton();
