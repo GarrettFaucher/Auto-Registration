@@ -54,10 +54,16 @@ async function login() {
      }
 }
 
+
+// loggedOn returns a boolean value based on if the user has navigated past
+// the webauth.uvm.edu/webauth/login page.
+// Returns true if user has logged on
 function loggedOn() {
      console.log("running checkLogin automation");
+     // Element only on login page
      var element = document.getElementById("login-topcontainer");
-     if(typeof(element) != 'undefined' && element != null){
+     // If element is still on page user hasn't logged in
+     if (typeof(element) != 'undefined' && element != null){
           console.log('User is not logged on');
           return false;
      } else {
