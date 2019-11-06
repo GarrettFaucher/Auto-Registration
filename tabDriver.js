@@ -10,11 +10,14 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+//Sends a response to background.js in reference to an automation
+//This function is used to send the return value of an automation
 function respondToBackground(automationName, returnVal){
   console.log('Automation '+automationName+' is responding to background.js with returnVal: '+returnVal);
   chrome.runtime.sendMessage({automation: automationName, success: returnVal}, function(response) {});
 }
 
+//Sends driverReady to background.js, so that it knows when to execute the next command
 function broadcastReady(){
   console.log('Broadcasting driverReady to background.js');
   chrome.runtime.sendMessage({driverReady: true});
@@ -50,17 +53,6 @@ async function login() {
 
      submitButton.click();
      return true;
-     // await sleep(2000);
-     // console.log('Waiting log on...');
-
-     // if (loggedOn()) {
-     //      console.log("User logged on.");
-     //      return true;
-     // }
-     // else{
-     //   console.log("Did not detect successful login");
-     //   return false;
-     // }
 }
 
 
@@ -81,7 +73,8 @@ function loggedOn() {
      }
 }
 
-
+// handleCommand handles incoming messages from background.js to 
+// run automations and send back the responses via respondToBackground
 async function handleCommand(request){
   console.log('running automation: '+request.command);
   switch (request.command){
