@@ -80,15 +80,20 @@ function loggedOn() {
      }
 }
 
-// navigateToButton is called once the user has been logged on
-// The page is redirected to the button waiting for the CRN page to be accessed
-async function navigateToButton() {
-     console.log("running navigateToButton automation");
-     var regButton = document.getElementById("aui_3_4_0_1_241");
+// navigateToRegistrar is called once the user has been logged on
+async function navigateToRegistrar() {
+     console.log("running navigateToRegistrar automation");
+     var regButton = document.querySelectorAll('[href="https://myuvm.uvm.edu/web/home-community/registrar"]')[0];
      regButton.click();
-     await sleep(2000);
+     return true;
+}
+
+// navigateToButton is called once the user has navigated to registrar page
+async function navigateToAddDrop() {
+     console.log("running navigateToAddDrop automation");
      var addDropButton = document.querySelectorAll('[alt="add drop withdraw"]')[0];
      addDropButton.click();
+     return true;
 }
 
 // handleCommand handles incoming messages from background.js to
@@ -108,10 +113,14 @@ async function handleCommand(request){
       respondToBackground(request.command, returnVal);
       broadcastReady();
       break;
-    case 'navigateToButton':
-      var returnVal = await navigateToButton();
+    case 'navigateToRegistrar':
+      var returnVal = await navigateToRegistrar();
       respondToBackground(request.command, returnVal);
       break;
+    case 'navigateToAddDrop':
+     var returnVal = await navigateToAddDrop();
+     respondToBackground(request.command, returnVal);
+     break;
     default:
       break;
 
