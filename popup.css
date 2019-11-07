@@ -36,6 +36,7 @@ body {
      /* background: #A7D4EE; */
 }
 
+
 input[type=text], select, input {
 width: 100%;
 padding: 12px 12px;
@@ -55,6 +56,22 @@ margin: 8px 0;
 border: none;
 border-radius: 4px;
 cursor: pointer;
+}
+
+.warning{
+  background-color: rgb(249, 132, 27) !important;
+}
+.crnInfo{
+  background-color: rgb(160, 164, 193);
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  padding-left: 13px;
+  margin-bottom: 0;
+}
+.crnResolver > input{
+  margin-top: 0;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 }
 
 input[type=submit]:hover {
