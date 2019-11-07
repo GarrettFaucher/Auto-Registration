@@ -104,6 +104,23 @@ async function selectSubmit() {
      return true;
 }
 
+// regOpen returns a boolean value based on if the user has navigated past
+// the wait for registration page
+// Returns true if reg is open UVM-server side
+async function regOpen() {
+  console.log("running regOpen automation");
+  // Element only on invalid reg page page
+  var element = document.querySelectorAll('[href="bwskfreg.P_AddDropCrse"]')[0];
+  // If element is still on page user hasn't logged in
+  if (typeof(element) != 'undefined' && element != null){
+       console.log('Reg not ready');
+       return false;
+  } else {
+       console.log('Reg ready');
+       return true;
+  }
+}
+
 // handleCommand handles incoming messages from background.js to
 // run automations and send back the responses via respondToBackground
 async function handleCommand(request){
@@ -129,10 +146,10 @@ async function handleCommand(request){
      var returnVal = await navigateToAddDrop();
      respondToBackground(request.command, returnVal);
      break;
-   case 'selectSubmit':
-    var returnVal = await selectSubmit();
-    respondToBackground(request.command, returnVal);
-    break;
+    case 'selectSubmit':
+      var returnVal = await selectSubmit();
+      respondToBackground(request.command, returnVal);
+      break;
     default:
       break;
 
