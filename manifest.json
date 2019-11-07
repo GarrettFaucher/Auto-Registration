@@ -10,7 +10,7 @@
           "default_popup": "popup.html"
      },
      "background": {
-        "scripts": ["background.js"],
+        "scripts": ["jquery.min.js","background.js"],
         "persistent": false
       },
      "content_scripts": [

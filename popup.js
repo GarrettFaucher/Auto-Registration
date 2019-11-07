@@ -1,13 +1,95 @@
 //popup.js for javascript event handling and data saving on the popup.html page
 
+
+//getCourseData converts a crn to courseName, totalEnrolled, totalSeats, and totalRemaining
+async function getCourseData(crn){
+  // $.get("https://giraffe.uvm.edu/~rgweb/batch/swrsectc_spring_soc_202001/all_sections.html", function(data, status){
+  //   var regex = /<pre>([\s\S]*)<\/pre>/;
+  //   var matched = regex.exec(data)[1];
+  //   matched = matched.replace(/(>>>====>)(.*?)(<====<<<)/g,"");
+  //   console.log(matched);
+  // });
+  var returnVal;
+  await $.get("http://www.uvm.edu/academics/courses/?term=202001&crn="+crn, function(data,status){
+
+    if(status != "success"){
+      console.log(status)
+      returnVal = false;
+    }
+
+    try {
+
+      var courseNameRegex = /rel="displayInfoLink">(.*?)<\/a><\/h3>/g;
+      var courseName = courseNameRegex.exec(data)[1];
+
+      console.log("Course name for "+crn+" is "+decodeURI(courseName));
+
+      var seatCountRegex = /Enrolled\/Seats:<\/span>(.*?)<br>/g;
+      var seatCount = seatCountRegex.exec(data)[1];
+
+      console.log("Seat Count for "+crn+" is "+seatCount);
+      var seatDist = seatCount.split("/");
+      var totalEnrolled = seatDist[0];
+      var totalSeats = seatDist[1];
+      var seatsRemaining = totalSeats - totalEnrolled;
+
+      console.log("Total Enrolled: "+totalEnrolled);
+      console.log("Total Seats: "+totalSeats);
+      console.log("Seats Remaining: "+seatsRemaining);
+
+      returnVal = {totalEnrolled: Number(totalEnrolled), totalSeats: Number(totalSeats), totalRemaining: seatsRemaining, courseName: courseName}
+
+    } catch (e) {
+
+      returnVal = false;
+
+    }
+
+
+
+  });
+
+  return returnVal;
+}
+
+function updateAllCrnInfo(){
+  console.log("running updateAllCrnInfo")
+  $(".crnResolver").each(async function(){
+
+    var newCrn = $('> input',this).val();
+    console.log("Checking crn "+newCrn)
+    var crnData = await getCourseData(newCrn);
+    if(crnData){
+      console.log("Found crndata for "+newCrn);
+      console.log(crnData);
+      $('> .crnInfo',this).html(crnData.courseName);
+      $('> .crnInfo',this).removeClass('warning');
+    }
+    else{
+      console.log("No crndata for "+newCrn);
+      $('> .crnInfo',this).html("Invalid CRN");
+      $('> .crnInfo',this).addClass('warning');
+    }
+
+  });
+}
+
 // When save is clicked on popup.html, collectData is called.
 window.addEventListener('load', function load(event){
     fillData();
-
+    setTimeout(function(){
+      updateAllCrnInfo();
+    }, 500);
 
     document.getElementById('dataForm').addEventListener('change', function() {
         collectData();
+        updateAllCrnInfo();
     });
+
+
+
+
+
 
     // var saveButton = document.getElementById('save');
     // saveButton.addEventListener('click', function() {

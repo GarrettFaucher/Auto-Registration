@@ -104,5 +104,3 @@ function(request, sender, sendResponse) {
   sendResponse();
   handleMessage(request);
 });
-
-//incoming messages from tabDriver.js
