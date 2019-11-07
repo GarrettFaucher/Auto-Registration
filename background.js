@@ -77,10 +77,19 @@ function handleMessage(request){
       case 'navigateToRegistrar':
         if(request.success){
           console.log('navigateToRegistrar automation complete')
-          nextCommand = "navigateToAddDrop"; //TODO, add next command after checkLogin
+          nextCommand = "navigateToAddDrop";
         }
         else {
           console.log('checkLogin failed')
+        }
+        break;
+      case 'navigateToAddDrop':
+        if(request.success){
+          console.log('navigateToAddDrop automation complete')
+          nextCommand = "selectSubmit";
+        }
+        else {
+          console.log('navigateToAddDrop failed')
         }
         break;
       default:

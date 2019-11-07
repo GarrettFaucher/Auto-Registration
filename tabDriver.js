@@ -7,6 +7,7 @@
 
 // globals
 var preLoggedOn = false; // Indicates whether the user is already logged in to UVM
+var regPageReady = false; // Indicates if registration has opened on UVM-server
 
 //Sleep function
 function sleep(ms) {
@@ -82,7 +83,7 @@ function loggedOn() {
 // navigateToRegistrar is called once the user has been logged on
 async function navigateToRegistrar() {
      console.log("running navigateToRegistrar automation");
-     var regButton = document.querySelectorAll('[href="https://aisweb1.uvm.edu/pls/owa_prod/twbkwbis.P_GenMenu?name=bmenu.P_RegMnu"]')[0];
+     var regButton = document.querySelectorAll('[href="/pls/owa_prod/twbkwbis.P_GenMenu?name=bmenu.P_RegMnu"]')[0];
      regButton.click();
      return true;
 }
@@ -92,6 +93,14 @@ async function navigateToAddDrop() {
      console.log("running navigateToAddDrop automation");
      var addDropButton = document.querySelectorAll('[href="/pls/owa_prod/bwskfreg.P_AltPin"]')[0];
      addDropButton.click();
+     return true;
+}
+
+// selectSubmit is called once the user has navigated to registrar page
+async function selectSubmit() {
+     console.log("running selectSubmit automation");
+     var submitButton = document.querySelectorAll('[value="Submit"]')[0];
+     submitButton.click();
      return true;
 }
 
@@ -110,7 +119,7 @@ async function handleCommand(request){
     case 'checkLogin':
       var returnVal = await loggedOn();
       respondToBackground(request.command, returnVal);
-      broadcastReady();
+      // broadcastReady(); // Unneeded
       break;
     case 'navigateToRegistrar':
       var returnVal = await navigateToRegistrar();
@@ -120,6 +129,10 @@ async function handleCommand(request){
      var returnVal = await navigateToAddDrop();
      respondToBackground(request.command, returnVal);
      break;
+   case 'selectSubmit':
+    var returnVal = await selectSubmit();
+    respondToBackground(request.command, returnVal);
+    break;
     default:
       break;
 
