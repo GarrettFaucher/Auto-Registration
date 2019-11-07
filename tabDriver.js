@@ -82,7 +82,7 @@ function loggedOn() {
 // navigateToRegistrar is called once the user has been logged on
 async function navigateToRegistrar() {
      console.log("running navigateToRegistrar automation");
-     var regButton = document.querySelectorAll('[href="/pls/owa_prod/twbkwbis.P_GenMenu?name=bmenu.P_RegMnu"]')[0];
+     var regButton = document.querySelectorAll('[href="https://aisweb1.uvm.edu/pls/owa_prod/twbkwbis.P_GenMenu?name=bmenu.P_RegMnu"]')[0];
      regButton.click();
      return true;
 }
