@@ -22,7 +22,7 @@ function sendCommand(newCommand){
 function spawnTab(){
   console.log("Run button was clicked, beginning spawnTab()")
   chrome.tabs.create({
-    url: 'http://myuvm.uvm.edu'
+    url: 'https://aisweb1.uvm.edu/pls/owa_prod/bwskfreg.P_AddDropCrse'
   }, function(tab){
 
 
