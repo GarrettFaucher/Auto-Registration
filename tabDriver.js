@@ -58,11 +58,11 @@ async function login() {
           console.log('Page should have loaded.');
 
           submitButton.click();
+          return true;
      } else {
           preLoggedOn = true;
+          return false;
      }
-
-     return true;
 }
 
 

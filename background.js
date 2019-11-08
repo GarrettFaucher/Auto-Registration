@@ -65,6 +65,10 @@ function handleMessage(request){
           console.log('login automation complete, queuing checkLogin automation')
           nextCommand = "checkLogin";
         }
+        else {
+          console.log("User already logged on, progressing to waitForRegStatus")
+          nextCommand = "waitForRegStatus";
+        }
 
         break;
       case 'checkLogin':
@@ -142,11 +146,17 @@ function(request, sender, sendResponse) {
   handleMessage(request);
 });
 
-function checkTime() {
+async function checkTime() {
   // TODO: Check if close to reg time.
-  // var registrationTime;
-  // chrome.storage.local.get(['reg_time'], function(result) {
-  //      registrationTime = result.reg_time;
+  var regTime;
+  var regDate;
+  // chrome.storage.local.get(['time'], function(result) {
+  //   console.log(result.time);
+  //   regTime = result.time;
   // });
-  // console.log(registrationTime);
+  // chrome.storage.local.get(['date'], function(result) {
+  //   console.log(result.date);
+  //   regDate = result.date;
+  // });
+
 }
