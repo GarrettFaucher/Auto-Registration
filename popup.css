@@ -74,6 +74,10 @@ cursor: pointer;
   border-top-right-radius: 0px;
 }
 
+.crnResolver > input.empty{
+  border-radius: 4px;
+}
+
 input[type=submit]:hover {
 background-color: #01533F;
 }
