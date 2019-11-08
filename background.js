@@ -3,6 +3,8 @@
 
 //globals
 var nextCommand;
+var refreshInterval = 3000;
+var quickRefresh = 50;
 
 
 //sends a command to our spawned tab (created with spawnTab)
@@ -92,6 +94,32 @@ function handleMessage(request){
           console.log('navigateToAddDrop failed')
         }
         break;
+      case 'selectSubmit':
+        if(request.success){
+          console.log('selectSubmit automation complete')
+          nextCommand = "waitForRegStatus";
+        }
+        else {
+          console.log('navigateToAddDrop failed')
+        }
+        break;
+      case 'waitForRegStatus':
+        if(request.success){
+          console.log('waitForRegStatus automation complete')
+          nextCommand = "register";
+        }
+        else {
+          console.log('waitForRegStatus failed')
+          setTimeout(function() {
+            nextCommand = "waitForRegStatus";
+            sendCommand(nextCommand);
+            nextCommand = "";
+            if (refreshInterval != quickRefresh) {
+              checkTime();
+            }
+          }, refreshInterval);
+        }
+        break;
       default:
         break;
     }
@@ -113,3 +141,12 @@ function(request, sender, sendResponse) {
   sendResponse();
   handleMessage(request);
 });
+
+function checkTime() {
+  // TODO: Check if close to reg time.
+  // var registrationTime;
+  // chrome.storage.local.get(['reg_time'], function(result) {
+  //      registrationTime = result.reg_time;
+  // });
+  // console.log(registrationTime);
+}

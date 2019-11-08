@@ -7,7 +7,10 @@
 
 // globals
 var preLoggedOn = false; // Indicates whether the user is already logged in to UVM
-var regPageReady = false; // Indicates if registration has opened on UVM-server
+
+//TODO: Change to FALSE
+var timeForReg = true; // Indicates if registration has opened on UVM-server
+var refreshInterval = 30000 // Refresh interval that changes when close to reg time
 
 //Sleep function
 function sleep(ms) {
@@ -104,21 +107,23 @@ async function selectSubmit() {
      return true;
 }
 
-// regOpen returns a boolean value based on if the user has navigated past
-// the wait for registration page
-// Returns true if reg is open UVM-server side
-async function regOpen() {
-  console.log("running regOpen automation");
-  // Element only on invalid reg page page
+async function waitForRegStatus() {
+  // Element only on invalid reg page
   var element = document.querySelectorAll('[href="bwskfreg.P_AddDropCrse"]')[0];
   // If element is still on page user hasn't logged in
   if (typeof(element) != 'undefined' && element != null){
-       console.log('Reg not ready');
+       console.log('Reg closed');
+       window.location.reload(); // Reload the page
        return false;
   } else {
        console.log('Reg ready');
        return true;
   }
+}
+
+// TODO: Crete registering logic
+async function register() {
+  console.log("running register automation");
 }
 
 // handleCommand handles incoming messages from background.js to
@@ -148,6 +153,14 @@ async function handleCommand(request){
      break;
     case 'selectSubmit':
       var returnVal = await selectSubmit();
+      respondToBackground(request.command, returnVal);
+      break;
+    case 'waitForRegStatus':
+      var returnVal = await waitForRegStatus();
+      respondToBackground(request.command, returnVal);
+      break;
+    case 'register':
+      var returnVal = await register();
       respondToBackground(request.command, returnVal);
       break;
     default:
