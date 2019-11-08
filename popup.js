@@ -57,19 +57,27 @@ function updateAllCrnInfo(){
   $(".crnResolver").each(async function(){
 
     var newCrn = $('> input',this).val();
-    console.log("Checking crn "+newCrn)
-    var crnData = await getCourseData(newCrn);
-    if(crnData){
-      console.log("Found crndata for "+newCrn);
-      console.log(crnData);
-      $('> .crnInfo',this).html(crnData.courseName);
-      $('> .crnInfo',this).removeClass('warning');
+    if(newCrn){
+      $('> input',this).removeClass("empty");
+      console.log("Checking crn "+newCrn)
+      var crnData = await getCourseData(newCrn);
+      if(crnData){
+        console.log("Found crndata for "+newCrn);
+        console.log(crnData);
+        $('> .crnInfo',this).html(crnData.courseName);
+        $('> .crnInfo',this).removeClass('warning');
+      }
+      else{
+        console.log("No crndata for "+newCrn);
+        $('> .crnInfo',this).html("Invalid CRN");
+        $('> .crnInfo',this).addClass('warning');
+      }
     }
     else{
-      console.log("No crndata for "+newCrn);
-      $('> .crnInfo',this).html("Invalid CRN");
-      $('> .crnInfo',this).addClass('warning');
+      $('> input',this).addClass("empty");
+      $('> .crnInfo',this).removeClass("")
     }
+
 
   });
 }
