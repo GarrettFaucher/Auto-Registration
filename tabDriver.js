@@ -7,6 +7,7 @@
 
 // globals
 var preLoggedOn = false; // Indicates whether the user is already logged in to UVM
+var regPageReady = false; // Indicates if registration has opened on UVM-server
 
 //Sleep function
 function sleep(ms) {
