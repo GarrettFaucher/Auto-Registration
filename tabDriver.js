@@ -110,7 +110,7 @@ async function handleCommand(request){
     case 'checkLogin':
       var returnVal = await loggedOn();
       respondToBackground(request.command, returnVal);
-      broadcastReady();
+      // broadcastReady(); // Unneeded
       break;
     case 'navigateToRegistrar':
       var returnVal = await navigateToRegistrar();
@@ -120,6 +120,10 @@ async function handleCommand(request){
      var returnVal = await navigateToAddDrop();
      respondToBackground(request.command, returnVal);
      break;
+    case 'selectSubmit':
+      var returnVal = await selectSubmit();
+      respondToBackground(request.command, returnVal);
+      break;
     default:
       break;
 
