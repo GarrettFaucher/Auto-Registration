@@ -37,9 +37,9 @@ async function login() {
      console.log("running login automation");
 
      if (!loggedOn()) {
-          var usernameInput = document.getElementsByName("username")[0];
-          var passwordInput = document.getElementsByName("password")[0];
-          var submitButton = document.getElementsByName("submit")[0];
+          var usernameInput = document.getElementsByName("sid")[0];
+          var passwordInput = document.getElementsByName("PIN")[0];
+          var submitButton = document.querySelectorAll('[value="Login"]')[0];
 
           chrome.storage.local.get(['username'], function(result) {
                usernameInput.value = result.username;
@@ -68,7 +68,7 @@ async function login() {
 function loggedOn() {
      console.log("running loggedOn automation");
      // Element only on login page
-     var element = document.getElementById("login-topcontainer");
+     var element = document.querySelectorAll('[href="http://www.uvm.edu/registrar/Luminis/password_help_form.html"]')[0];
      // If element is still on page user hasn't logged in
      if (typeof(element) != 'undefined' && element != null){
           console.log('User is not logged on');
@@ -82,7 +82,7 @@ function loggedOn() {
 // navigateToRegistrar is called once the user has been logged on
 async function navigateToRegistrar() {
      console.log("running navigateToRegistrar automation");
-     var regButton = document.querySelectorAll('[href="https://myuvm.uvm.edu/web/home-community/registrar"]')[0];
+     var regButton = document.querySelectorAll('[href="/pls/owa_prod/twbkwbis.P_GenMenu?name=bmenu.P_RegMnu"]')[0];
      regButton.click();
      return true;
 }
@@ -90,9 +90,34 @@ async function navigateToRegistrar() {
 // navigateToButton is called once the user has navigated to registrar page
 async function navigateToAddDrop() {
      console.log("running navigateToAddDrop automation");
-     var addDropButton = document.querySelectorAll('[alt="add drop withdraw"]')[0];
+     var addDropButton = document.querySelectorAll('[href="/pls/owa_prod/bwskfreg.P_AltPin"]')[0];
      addDropButton.click();
      return true;
+}
+
+// selectSubmit is called once the user has navigated to registrar page
+async function selectSubmit() {
+     console.log("running selectSubmit automation");
+     var submitButton = document.querySelectorAll('[value="Submit"]')[0];
+     submitButton.click();
+     return true;
+}
+
+// regOpen returns a boolean value based on if the user has navigated past
+// the wait for registration page
+// Returns true if reg is open UVM-server side
+async function regOpen() {
+  console.log("running regOpen automation");
+  // Element only on invalid reg page page
+  var element = document.querySelectorAll('[href="bwskfreg.P_AddDropCrse"]')[0];
+  // If element is still on page user hasn't logged in
+  if (typeof(element) != 'undefined' && element != null){
+       console.log('Reg not ready');
+       return false;
+  } else {
+       console.log('Reg ready');
+       return true;
+  }
 }
 
 // handleCommand handles incoming messages from background.js to
