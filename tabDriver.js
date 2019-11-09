@@ -104,6 +104,7 @@ async function selectSubmit() {
 }
 
 async function waitForRegStatus() {
+  console.log("running waitForRegStatus automation");
   // Element only on invalid reg page
   var element = document.querySelectorAll('[href="bwskfreg.P_AddDropCrse"]')[0];
   // If element is still on page user hasn't logged in
@@ -120,6 +121,17 @@ async function waitForRegStatus() {
 // TODO: Crete registering logic
 async function register() {
   console.log("running register automation");
+  // var crnBoxes = document.querySelectorAll('[type="text"]');
+  // console.log(crnBoxes);
+  // chrome.storage.local.get(['crn_1'], function(result) {
+  //      crnBoxes[0].value = result.crn_1;
+  // });
+  // chrome.storage.local.get(['crn_2'], function(result) {
+  //      crnBoxes[1].value = result.crn_2;
+  // });
+  var regButton = document.getElementsByName("REG_BTN")[0];
+  regButton.click();
+  return true;
 }
 
 // handleCommand handles incoming messages from background.js to
