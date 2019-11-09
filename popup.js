@@ -145,27 +145,43 @@ function fillData(){
   var date = document.getElementById('reg_date'); // Date stored in format YYYY-MM-DD
   // Possible values for time: 600am, 630am, 700am
   var time = document.getElementById('reg_time');
-  var crn_1 = document.getElementById('crn_1');
-  var crn_2 = document.getElementById('crn_2');
-  var crn_3 = document.getElementById('crn_3');
-  var crn_4 = document.getElementById('crn_4');
-  var crn_5 = document.getElementById('crn_5');
-  var crn_6 = document.getElementById('crn_6');
-  var crn_7 = document.getElementById('crn_7');
-  var crn_8 = document.getElementById('crn_8');
+  var crn_1a = document.getElementById('crn_1a');
+  var crn_2a = document.getElementById('crn_2a');
+  var crn_3a = document.getElementById('crn_3a');
+  var crn_4a = document.getElementById('crn_4a');
+  var crn_5a = document.getElementById('crn_5a');
+  var crn_6a = document.getElementById('crn_6a');
+  var crn_7a = document.getElementById('crn_7a');
+  var crn_8a = document.getElementById('crn_8a');
+  var crn_1b = document.getElementById('crn_1b');
+  var crn_2b = document.getElementById('crn_2b');
+  var crn_3b = document.getElementById('crn_3b');
+  var crn_4b = document.getElementById('crn_4b');
+  var crn_5b = document.getElementById('crn_5b');
+  var crn_6b = document.getElementById('crn_6b');
+  var crn_7b = document.getElementById('crn_7b');
+  var crn_8b = document.getElementById('crn_8b');
 
   chrome.storage.local.get(['username'], function(result) { username.value = result.username; });
   chrome.storage.local.get(['password'], function(result) { password.value = result.password; });
   chrome.storage.local.get(['date'], function(result) { date.value = result.date; });
   chrome.storage.local.get(['time'], function(result) { time.value = result.time; });
-  chrome.storage.local.get(['crn_1'], function(result) { crn_1.value = result.crn_1; });
-  chrome.storage.local.get(['crn_2'], function(result) { crn_2.value = result.crn_2; });
-  chrome.storage.local.get(['crn_3'], function(result) { crn_3.value = result.crn_3; });
-  chrome.storage.local.get(['crn_4'], function(result) { crn_4.value = result.crn_4; });
-  chrome.storage.local.get(['crn_5'], function(result) { crn_5.value = result.crn_5; });
-  chrome.storage.local.get(['crn_6'], function(result) { crn_6.value = result.crn_6; });
-  chrome.storage.local.get(['crn_7'], function(result) { crn_7.value = result.crn_7; });
-  chrome.storage.local.get(['crn_8'], function(result) { crn_8.value = result.crn_8; });
+  chrome.storage.local.get(['crn_1a'], function(result) { crn_1a.value = result.crn_1a; });
+  chrome.storage.local.get(['crn_2a'], function(result) { crn_2a.value = result.crn_2a; });
+  chrome.storage.local.get(['crn_3a'], function(result) { crn_3a.value = result.crn_3a; });
+  chrome.storage.local.get(['crn_4a'], function(result) { crn_4a.value = result.crn_4a; });
+  chrome.storage.local.get(['crn_5a'], function(result) { crn_5a.value = result.crn_5a; });
+  chrome.storage.local.get(['crn_6a'], function(result) { crn_6a.value = result.crn_6a; });
+  chrome.storage.local.get(['crn_7a'], function(result) { crn_7a.value = result.crn_7a; });
+  chrome.storage.local.get(['crn_8a'], function(result) { crn_8a.value = result.crn_8a; });
+  chrome.storage.local.get(['crn_1b'], function(result) { crn_1b.value = result.crn_1b; });
+  chrome.storage.local.get(['crn_2b'], function(result) { crn_2b.value = result.crn_2b; });
+  chrome.storage.local.get(['crn_3b'], function(result) { crn_3b.value = result.crn_3b; });
+  chrome.storage.local.get(['crn_4b'], function(result) { crn_4b.value = result.crn_4b; });
+  chrome.storage.local.get(['crn_5b'], function(result) { crn_5b.value = result.crn_5b; });
+  chrome.storage.local.get(['crn_6b'], function(result) { crn_6b.value = result.crn_6b; });
+  chrome.storage.local.get(['crn_7b'], function(result) { crn_7b.value = result.crn_7b; });
+  chrome.storage.local.get(['crn_8b'], function(result) { crn_8b.value = result.crn_8b; });
 
 }
 
@@ -188,28 +204,44 @@ function collectData() {
      var date = document.getElementById('reg_date').value; // Date stored in format YYYY-MM-DD
      // Possible values for time: 600am, 630am, 700am
      var time = document.getElementById('reg_time').value;
-     var crn_1 = document.getElementById('crn_1').value;
-     var crn_2 = document.getElementById('crn_2').value;
-     var crn_3 = document.getElementById('crn_3').value;
-     var crn_4 = document.getElementById('crn_4').value;
-     var crn_5 = document.getElementById('crn_5').value;
-     var crn_6 = document.getElementById('crn_6').value;
-     var crn_7 = document.getElementById('crn_7').value;
-     var crn_8 = document.getElementById('crn_8').value;
+     var crn_1a = document.getElementById('crn_1a').value;
+     var crn_2a = document.getElementById('crn_2a').value;
+     var crn_3a = document.getElementById('crn_3a').value;
+     var crn_4a = document.getElementById('crn_4a').value;
+     var crn_5a = document.getElementById('crn_5a').value;
+     var crn_6a = document.getElementById('crn_6a').value;
+     var crn_7a = document.getElementById('crn_7a').value;
+     var crn_8a = document.getElementById('crn_8a').value;
+     var crn_1b = document.getElementById('crn_1b').value;
+     var crn_2b = document.getElementById('crn_2b').value;
+     var crn_3b = document.getElementById('crn_3b').value;
+     var crn_4b = document.getElementById('crn_4b').value;
+     var crn_5b = document.getElementById('crn_5b').value;
+     var crn_6b = document.getElementById('crn_6b').value;
+     var crn_7b = document.getElementById('crn_7b').value;
+     var crn_8b = document.getElementById('crn_8b').value;
 
-     var crnData = [username, password, date, time, crn_1, crn_2, crn_3, crn_4, crn_5, crn_6, crn_7, crn_8];
+     var crnData = [username, password, date, time, crn_1a, crn_2a, crn_3a, crn_4a, crn_5a, crn_6a, crn_7a, crn_8a, crn_1b, crn_2b, crn_3b, crn_4b, crn_5b, crn_6b, crn_7b, crn_8b];
      console.log(crnData); // Show the data for bug fixing
 
      chrome.storage.local.set({'username': username});
      chrome.storage.local.set({'password': password});
      chrome.storage.local.set({'date': date});
      chrome.storage.local.set({'time': time});
-     chrome.storage.local.set({'crn_1': crn_1});
-     chrome.storage.local.set({'crn_2': crn_2});
-     chrome.storage.local.set({'crn_3': crn_3});
-     chrome.storage.local.set({'crn_4': crn_4});
-     chrome.storage.local.set({'crn_5': crn_5});
-     chrome.storage.local.set({'crn_6': crn_6});
-     chrome.storage.local.set({'crn_7': crn_7});
-     chrome.storage.local.set({'crn_8': crn_8});
+     chrome.storage.local.set({'crn_1a': crn_1a});
+     chrome.storage.local.set({'crn_2a': crn_2a});
+     chrome.storage.local.set({'crn_3a': crn_3a});
+     chrome.storage.local.set({'crn_4a': crn_4a});
+     chrome.storage.local.set({'crn_5a': crn_5a});
+     chrome.storage.local.set({'crn_6a': crn_6a});
+     chrome.storage.local.set({'crn_7a': crn_7a});
+     chrome.storage.local.set({'crn_8a': crn_8a});
+     chrome.storage.local.set({'crn_1b': crn_1b});
+     chrome.storage.local.set({'crn_2b': crn_2b});
+     chrome.storage.local.set({'crn_3b': crn_3b});
+     chrome.storage.local.set({'crn_4b': crn_4b});
+     chrome.storage.local.set({'crn_5b': crn_5b});
+     chrome.storage.local.set({'crn_6b': crn_6b});
+     chrome.storage.local.set({'crn_7b': crn_7b});
+     chrome.storage.local.set({'crn_8b': crn_8b});
 }
