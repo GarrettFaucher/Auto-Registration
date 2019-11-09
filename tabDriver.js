@@ -79,14 +79,6 @@ function loggedOn() {
   }
 }
 
-// checkForHolds is called once the user has been logged on
-async function checkForHolds() {
-  console.log("running checkForHolds automation");
-
-  return true;
-}
-
-
 // navigateToRegistrar is called once the user has been logged on
 async function navigateToRegistrar() {
   console.log("running navigateToRegistrar automation");
@@ -118,27 +110,83 @@ async function waitForRegStatus() {
   // If element is still on page user hasn't logged in
   if (typeof(element) != 'undefined' && element != null){
     console.log('Reg closed');
-    window.location.reload(); // Reload the page
-    return false;
+    await window.location.assign('http://www.uvm.edu/~pdundas/sandbox.html'); // REMOVE
+    return true; // REMOVE
+    // window.location.reload(); // Reload the page
+    // return false;
   } else {
     console.log('Reg ready');
     return true;
   }
 }
 
-// TODO: Crete registering logic
+// register fills text boxes with CRN data when courc
 async function register() {
   console.log("running register automation");
-  // var crnBoxes = document.querySelectorAll('[type="text"]');
-  // console.log(crnBoxes);
-  // chrome.storage.local.get(['crn_1'], function(result) {
-  //      crnBoxes[0].value = result.crn_1;
-  // });
-  // chrome.storage.local.get(['crn_2'], function(result) {
-  //      crnBoxes[1].value = result.crn_2;
-  // });
+
   var regButton = document.getElementsByName("REG_BTN")[0];
-  regButton.click();
+
+  var crnPrimary = [];
+  chrome.storage.local.get(['crn_1a'], function(result) {
+    crnPrimary[0] = result.crn_1a;
+  });
+  chrome.storage.local.get(['crn_2a'], function(result) {
+    crnPrimary[1] = result.crn_2a;
+  });
+  chrome.storage.local.get(['crn_3a'], function(result) {
+    crnPrimary[2] = result.crn_3a;
+  });
+  chrome.storage.local.get(['crn_4a'], function(result) {
+    crnPrimary[3] = result.crn_4a;
+  });
+  chrome.storage.local.get(['crn_5a'], function(result) {
+    crnPrimary[4] = result.crn_5a;
+  });
+  chrome.storage.local.get(['crn_6a'], function(result) {
+    crnPrimary[5] = result.crn_6a;
+  });
+  chrome.storage.local.get(['crn_7a'], function(result) {
+    crnPrimary[6] = result.crn_7a;
+  });
+  chrome.storage.local.get(['crn_8a'], function(result) {
+    crnPrimary[7] = result.crn_8a;
+  });
+
+  var crnSecondary = [];
+  chrome.storage.local.get(['crn_1b'], function(result) {
+    crnPrimary[0] = result.crn_1b;
+  });
+  chrome.storage.local.get(['crn_2b'], function(result) {
+    crnPrimary[1] = result.crn_2b;
+  });
+  chrome.storage.local.get(['crn_3b'], function(result) {
+    crnPrimary[2] = result.crn_3b;
+  });
+  chrome.storage.local.get(['crn_4b'], function(result) {
+    crnPrimary[3] = result.crn_4b;
+  });
+  chrome.storage.local.get(['crn_5b'], function(result) {
+    crnPrimary[4] = result.crn_5b;
+  });
+  chrome.storage.local.get(['crn_6b'], function(result) {
+    crnPrimary[5] = result.crn_6b;
+  });
+  chrome.storage.local.get(['crn_7b'], function(result) {
+    crnPrimary[6] = result.crn_7b;
+  });
+  chrome.storage.local.get(['crn_8b'], function(result) {
+    crnPrimary[7] = result.crn_8b;
+  });
+
+  console.log(crnPrimary);
+  console.log(crnPrimary[0]);
+
+  $(":text").each(function(){
+    console.log(crnPrimary[0]);
+    $(this).val(crnPrimary[0]);
+  });
+
+  // regButton.click();
   return true;
 }
 
