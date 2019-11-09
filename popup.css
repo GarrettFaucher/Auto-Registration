@@ -61,6 +61,15 @@ cursor: pointer;
 .warning{
   background-color: rgb(249, 132, 27) !important;
 }
+
+.danger{
+  background-color: rgb(235, 67, 67) !important;
+}
+
+.crnResolver{
+  width: 100%;
+  float: left;
+}
 .crnInfo{
   background-color: rgb(160, 164, 193);
   border-top-left-radius: 4px;
@@ -70,12 +79,34 @@ cursor: pointer;
 }
 .crnResolver > input{
   margin-top: 0;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
+  border-radius: 4px;
+  display: table-cell;
+  float:left;
+  width: 100%;
 }
 
-.crnResolver > input.empty{
+.crnResolver > input.valid{
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  width: 50%;
+}
+
+.crnResolver > input.invalid{
+  width: 100%;
   border-radius: 4px;
+}
+
+.crnSeatInfo{
+  border-bottom-right-radius: 4px;
+  background-color: rgb(67, 241, 109);
+  height: 50px;
+  padding-top: 13px;
+  padding-left: 55%;
+}
+.seatsRemaining{
+  font-size: 12pt;
+  padding-left: .75em;
 }
 
 input[type=submit]:hover {

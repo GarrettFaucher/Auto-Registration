@@ -37,7 +37,7 @@ async function getCourseData(crn){
       console.log("Total Seats: "+totalSeats);
       console.log("Seats Remaining: "+seatsRemaining);
 
-      returnVal = {totalEnrolled: Number(totalEnrolled), totalSeats: Number(totalSeats), totalRemaining: seatsRemaining, courseName: courseName}
+      returnVal = {totalEnrolled: Number(totalEnrolled), totalSeats: Number(totalSeats), totalRemaining: seatsRemaining - 41, courseName: courseName}
 
     } catch (e) {
 
@@ -55,27 +55,49 @@ async function getCourseData(crn){
 function updateAllCrnInfo(){
   console.log("running updateAllCrnInfo")
   $(".crnResolver").each(async function(){
+    $('> .crnSeatInfo',this).hide();
+    $('> input',this).removeClass("empty");
+    $('> input',this).removeClass("valid");
+    $('> .crnInfo',this).removeClass('warning');
+    $('> .crnSeatInfo',this).removeClass("danger");
 
     var newCrn = $('> input',this).val();
     if(newCrn){
-      $('> input',this).removeClass("empty");
       console.log("Checking crn "+newCrn)
       var crnData = await getCourseData(newCrn);
       if(crnData){
         console.log("Found crndata for "+newCrn);
         console.log(crnData);
+        $('> input',this).addClass("valid");
         $('> .crnInfo',this).html(crnData.courseName);
-        $('> .crnInfo',this).removeClass('warning');
+        $('> .crnSeatInfo',this).show();
+
+        if(crnData.totalRemaining < 1){
+          console.log(crnData.courseName+" is full");
+          $('> .crnSeatInfo',this).removeClass("fa-user-check");
+          $('> .crnSeatInfo > .fas',this).addClass("fa-user-slash");
+          $('> .crnSeatInfo',this).addClass("danger");
+
+        }
+        else{
+          console.log(crnData.courseName+" is not full");
+          $('> .crnSeatInfo',this).removeClass("fa-user-slash");
+          $('> .crnSeatInfo > .fas',this).addClass("fa-user-check");
+        }
+
+        $('> .crnSeatInfo > .seatsRemaining',this).html(crnData.totalRemaining+" seats left")
+
       }
       else{
         console.log("No crndata for "+newCrn);
         $('> .crnInfo',this).html("Invalid CRN");
         $('> .crnInfo',this).addClass('warning');
+        $('> .crnSeatInfo',this).hide();
       }
     }
     else{
       $('> input',this).addClass("empty");
-      $('> .crnInfo',this).removeClass("")
+      $('> .crnInfo',this).html("")
     }
 
 
