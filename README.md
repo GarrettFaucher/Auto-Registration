@@ -10,6 +10,13 @@
   * Make YouTube video on how to use plugin?
   * Detailed instructions
   * Git documentation
+* UI improvements
+  * only reload changed textbox data, not all textboxes should fetch new data every time
+
+  * show a loading animation in textbox when fetching data
+
+  * Notification on course open/close
+
 
 
 # popup.js
