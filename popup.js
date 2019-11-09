@@ -1,6 +1,6 @@
 //popup.js for javascript event handling and data saving on the popup.html page
 
-
+var crnCache = [];
 //getCourseData converts a crn to courseName, totalEnrolled, totalSeats, and totalRemaining
 async function getCourseData(crn){
   // $.get("https://giraffe.uvm.edu/~rgweb/batch/swrsectc_spring_soc_202001/all_sections.html", function(data, status){
@@ -52,53 +52,64 @@ async function getCourseData(crn){
   return returnVal;
 }
 
-function updateAllCrnInfo(){
+function updateAllCrnInfo(updateChangedOnly){
   console.log("running updateAllCrnInfo")
+  var index = -1;
+  console.log(crnCache);
   $(".crnResolver").each(async function(){
-    $('> .crnSeatInfo',this).hide();
-    $('> input',this).removeClass("empty");
-    $('> input',this).removeClass("valid");
-    $('> .crnInfo',this).removeClass('warning');
-    $('> .crnSeatInfo',this).removeClass("danger");
-
+    index+=1;
     var newCrn = $('> input',this).val();
-    if(newCrn){
-      console.log("Checking crn "+newCrn)
-      var crnData = await getCourseData(newCrn);
-      if(crnData){
-        console.log("Found crndata for "+newCrn);
-        console.log(crnData);
-        $('> input',this).addClass("valid");
-        $('> .crnInfo',this).html(crnData.courseName);
-        $('> .crnSeatInfo',this).show();
+    console.log("previous crn "+crnCache[index]+", new crn: "+newCrn);
+    console.log("updateChangedOnly: "+updateChangedOnly+", cache:"+crnCache[index]+" new:"+newCrn+", index:"+index);
+    if((updateChangedOnly && crnCache[index]!=newCrn) || (!updateChangedOnly)){
 
-        if(crnData.totalRemaining < 1){
-          console.log(crnData.courseName+" is full");
-          $('> .crnSeatInfo',this).removeClass("fa-user-check");
-          $('> .crnSeatInfo > .fas',this).addClass("fa-user-slash");
-          $('> .crnSeatInfo',this).addClass("danger");
+
+      crnCache[index] = newCrn;
+
+      $('> .crnSeatInfo',this).hide();
+      $('> input',this).removeClass("empty");
+      $('> input',this).removeClass("valid");
+      $('> .crnInfo',this).removeClass('warning');
+      $('> .crnSeatInfo',this).removeClass("danger");
+
+      if(newCrn){
+        console.log("Checking crn "+newCrn)
+        var crnData = await getCourseData(newCrn);
+        if(crnData){
+          console.log("Found crndata for "+newCrn);
+          console.log(crnData);
+          $('> input',this).addClass("valid");
+          $('> .crnInfo',this).html(crnData.courseName);
+          $('> .crnSeatInfo',this).show();
+
+          if(crnData.totalRemaining < 1){
+            console.log(crnData.courseName+" is full");
+            $('> .crnSeatInfo',this).removeClass("fa-user-check");
+            $('> .crnSeatInfo > .fas',this).addClass("fa-user-slash");
+            $('> .crnSeatInfo',this).addClass("danger");
+
+          }
+          else{
+            console.log(crnData.courseName+" is not full");
+            $('> .crnSeatInfo',this).removeClass("fa-user-slash");
+            $('> .crnSeatInfo > .fas',this).addClass("fa-user-check");
+          }
+
+          $('> .crnSeatInfo > .seatsRemaining',this).attr('href',"http://www.uvm.edu/academics/courses/?term=202001&crn="+newCrn);
+          $('> .crnSeatInfo > .seatsRemaining',this).html(crnData.totalRemaining+" seats left")
 
         }
         else{
-          console.log(crnData.courseName+" is not full");
-          $('> .crnSeatInfo',this).removeClass("fa-user-slash");
-          $('> .crnSeatInfo > .fas',this).addClass("fa-user-check");
+          console.log("No crndata for "+newCrn);
+          $('> .crnInfo',this).html("Invalid CRN");
+          $('> .crnInfo',this).addClass('warning');
+          $('> .crnSeatInfo',this).hide();
         }
-
-        $('> .crnSeatInfo > .seatsRemaining',this).attr('href',"http://www.uvm.edu/academics/courses/?term=202001&crn="+newCrn);
-        $('> .crnSeatInfo > .seatsRemaining',this).html(crnData.totalRemaining+" seats left")
-
       }
       else{
-        console.log("No crndata for "+newCrn);
-        $('> .crnInfo',this).html("Invalid CRN");
-        $('> .crnInfo',this).addClass('warning');
-        $('> .crnSeatInfo',this).hide();
+        $('> input',this).addClass("empty");
+        $('> .crnInfo',this).html("")
       }
-    }
-    else{
-      $('> input',this).addClass("empty");
-      $('> .crnInfo',this).html("")
     }
 
 
@@ -116,12 +127,12 @@ $(document).ready(function(){
 window.addEventListener('load', function load(event){
     fillData();
     setTimeout(function(){
-      updateAllCrnInfo();
+      updateAllCrnInfo(false);
     }, 500);
 
     document.getElementById('dataForm').addEventListener('change', function() {
         collectData();
-        updateAllCrnInfo();
+        updateAllCrnInfo(true);
     });
 
     //listen for clicks on the "run" button
