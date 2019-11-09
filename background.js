@@ -19,6 +19,8 @@ function sendCommand(newCommand){
 //spawnTab is called when the "Run" button is clicked in the popup
 //function is executed when our listener detects "runClick" event sent by popup.js
 function spawnTab(){
+  chrome.power.requestKeepAwake("display");
+  chrome.power.requestKeepAwake("system");
   console.log("Run button was clicked, beginning spawnTab()")
   chrome.tabs.create({
     url: 'https://aisweb1.uvm.edu/pls/owa_prod/bwskfreg.P_AddDropCrse'
