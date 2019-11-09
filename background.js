@@ -3,19 +3,16 @@
 
 //globals
 var nextCommand;
-var refreshInterval = 3000;
-var quickRefresh = 500;
+var regTab; // Stores regtab
+var refreshInterval = 3000; // Slow page reload interval
+var quickRefresh = 500; // Quick page reload interval
 
 
 //sends a command to our spawned tab (created with spawnTab)
 function sendCommand(newCommand){
-  //get listing of tabs
-  chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
-      //send a message to the active tab with given command
-      //the active tab should be myuvm.uvm.edu since we just created that with spawnTab
-      //this tab will have tabDriver injected into it, so it will be waiting for a command
-      chrome.tabs.sendMessage(tabs[0].id, {command: newCommand}, function(response) {});
-  });
+  //send a message to the active tab with given command
+  //this tab will have tabDriver injected into it, so it will be waiting for a command
+  chrome.tabs.sendMessage(regTab.id, {command: newCommand}, function(response) {});
 }
 
 
@@ -26,16 +23,7 @@ function spawnTab(){
   chrome.tabs.create({
     url: 'https://aisweb1.uvm.edu/pls/owa_prod/bwskfreg.P_AddDropCrse'
   }, function(tab){
-
-
-    // //once the tab is created, but not neccesarily loaded
-    // console.log("tab created, waiting 2 seconds to start tabDriver")
-    //
-    // //set a timeout to execute start command after 2 seconds
-    // setTimeout(function(){
-    //   console.log("Firing up tabDriver")
-    // },2000);
-
+    regTab = tab; // Setting the newly made tab to a global to be used later
   });
 }
 

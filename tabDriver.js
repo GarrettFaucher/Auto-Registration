@@ -8,10 +8,6 @@
 // globals
 var preLoggedOn = false; // Indicates whether the user is already logged in to UVM
 
-//TODO: Change to FALSE
-var timeForReg = true; // Indicates if registration has opened on UVM-server
-var refreshInterval = 30000 // Refresh interval that changes when close to reg time
-
 //Sleep function
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
