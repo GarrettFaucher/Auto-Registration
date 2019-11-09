@@ -124,7 +124,7 @@ async function waitForRegStatus() {
 async function register() {
   console.log("running register automation");
 
-  var regButton = document.getElementsByName("REG_BTN")[0];
+  var regButton = document.querySelectorAll('[value="Submit Changes"]')[0];
 
   var crnPrimary = [];
   chrome.storage.local.get(['crn_1a'], function(result) {
