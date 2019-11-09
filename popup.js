@@ -85,6 +85,7 @@ function updateAllCrnInfo(){
           $('> .crnSeatInfo > .fas',this).addClass("fa-user-check");
         }
 
+        $('> .crnSeatInfo > .seatsRemaining',this).attr('href',"http://www.uvm.edu/academics/courses/?term=202001&crn="+newCrn);
         $('> .crnSeatInfo > .seatsRemaining',this).html(crnData.totalRemaining+" seats left")
 
       }
@@ -104,6 +105,13 @@ function updateAllCrnInfo(){
   });
 }
 
+$(document).ready(function(){
+  $('body').on('click', 'a', function(){
+   chrome.tabs.create({url: $(this).attr('href')});
+   return false;
+  });
+});
+
 // When save is clicked on popup.html, collectData is called.
 window.addEventListener('load', function load(event){
     fillData();
@@ -115,17 +123,6 @@ window.addEventListener('load', function load(event){
         collectData();
         updateAllCrnInfo();
     });
-
-
-
-
-
-
-    // var saveButton = document.getElementById('save');
-    // saveButton.addEventListener('click', function() {
-    //      collectData();
-    //      saveButton.value = "Saved";
-    // });
 
     //listen for clicks on the "run" button
     var runButton = document.getElementById('run');

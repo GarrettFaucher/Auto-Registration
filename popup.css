@@ -107,6 +107,13 @@ cursor: pointer;
 .seatsRemaining{
   font-size: 12pt;
   padding-left: .75em;
+  color: black;
+  text-decoration: none;
+}
+
+.seatsRemaining:focus, .seatsRemaining:hover{
+  color: rgba(0,0,0,0.5) !important;
+  text-decoration: none !important;
 }
 
 input[type=submit]:hover {
