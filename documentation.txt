@@ -1,0 +1,9 @@
+WARNING
+
+This software is not endorsed by the University of Vermont. You must use at your
+own risk. Software offered with absolutely no warranty. While this software was
+designed to handle tasks efficiently, it is not tested on all machines and
+results may vary. This software does not guarantee enrollment in classes, it
+registers for them quickly and is a tool.
+
+By clicking accept below, I agree that I understand all statements above above.
