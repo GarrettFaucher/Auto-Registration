@@ -4,7 +4,7 @@
 //globals
 var nextCommand;
 var refreshInterval = 3000;
-var quickRefresh = 50;
+var quickRefresh = 100;
 
 
 //sends a command to our spawned tab (created with spawnTab)
@@ -119,7 +119,7 @@ function handleMessage(request){
             sendCommand(nextCommand);
             nextCommand = "";
             if (refreshInterval != quickRefresh) {
-              checkTime();
+              // checkTime();
             }
           }, refreshInterval);
         }
@@ -146,17 +146,34 @@ function(request, sender, sendResponse) {
   handleMessage(request);
 });
 
-async function checkTime() {
-  // TODO: Check if close to reg time.
-  var regTime;
-  var regDate;
-  // chrome.storage.local.get(['time'], function(result) {
-  //   console.log(result.time);
-  //   regTime = result.time;
-  // });
-  // chrome.storage.local.get(['date'], function(result) {
-  //   console.log(result.date);
-  //   regDate = result.date;
-  // });
 
-}
+// Checks if it is time to start refreshing quickly.
+// async function checkTime() {
+//   var regTime;
+//   var regDate;
+//   await chrome.storage.local.get(['time'], function(result) {
+//     regTime = result.time;
+//   });
+//   await chrome.storage.local.get(['date'], function(result) {
+//     regDate = result.date;
+//   });
+//
+//   var data;
+//   await $.getJSON("http://worldclockapi.com/api/json/est/now", function(response) {
+//     data = response;
+//   });
+//
+//   var atomDate = data.currentDateTime.slice(0,10);
+//   var atomTime = data.currentDateTime.slice(11,16);
+//
+//   if (regTime == '600am') {regTime = '05:59';}
+//   else if (regTime == '630am') {regTime = '06:29';}
+//   else if (regTime == '700am') {regTime = '06:59';}
+//
+//   console.log(regDate + " and " + atomDate);
+//   console.log(regTime + " and " + atomTime);
+//
+//   if (true) { //(regDate == atomDate && regTime == atomTime)
+//     refreshInterval = quickRefresh;
+//   }
+// }
