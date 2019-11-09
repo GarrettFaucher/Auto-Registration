@@ -34,31 +34,31 @@ Return values are handled by start()
 
 */
 async function login() {
-     console.log("running login automation");
+  console.log("running login automation");
 
-     if (!loggedOn()) {
-          var usernameInput = document.getElementsByName("sid")[0];
-          var passwordInput = document.getElementsByName("PIN")[0];
-          var submitButton = document.querySelectorAll('[value="Login"]')[0];
+  if (!loggedOn()) {
+    var usernameInput = document.getElementsByName("sid")[0];
+    var passwordInput = document.getElementsByName("PIN")[0];
+    var submitButton = document.querySelectorAll('[value="Login"]')[0];
 
-          chrome.storage.local.get(['username'], function(result) {
-               usernameInput.value = result.username;
-          });
+    chrome.storage.local.get(['username'], function(result) {
+      usernameInput.value = result.username;
+    });
 
-          chrome.storage.local.get(['password'], function(result) {
-               passwordInput.value = result.password;
-          });
+    chrome.storage.local.get(['password'], function(result) {
+      passwordInput.value = result.password;
+    });
 
-          console.log('Waiting for page to load...');
-          await sleep(2000);
-          console.log('Page should have loaded.');
+    console.log('Waiting for page to load...');
+    await sleep(2000);
+    console.log('Page should have loaded.');
 
-          submitButton.click();
-          return true;
-     } else {
-          preLoggedOn = true;
-          return false;
-     }
+    submitButton.click();
+    return true;
+  } else {
+    preLoggedOn = true;
+    return false;
+  }
 }
 
 
@@ -66,41 +66,49 @@ async function login() {
 // the webauth.uvm.edu/webauth/login page.
 // Returns true if user has logged on
 function loggedOn() {
-     console.log("running loggedOn automation");
-     // Element only on login page
-     var element = document.querySelectorAll('[href="http://www.uvm.edu/registrar/Luminis/password_help_form.html"]')[0];
-     // If element is still on page user hasn't logged in
-     if (typeof(element) != 'undefined' && element != null){
-          console.log('User is not logged on');
-          return false;
-     } else {
-          console.log('User is logged on');
-          return true;
-     }
+  console.log("running loggedOn automation");
+  // Element only on login page
+  var element = document.querySelectorAll('[href="http://www.uvm.edu/registrar/Luminis/password_help_form.html"]')[0];
+  // If element is still on page user hasn't logged in
+  if (typeof(element) != 'undefined' && element != null){
+    console.log('User is not logged on');
+    return false;
+  } else {
+    console.log('User is logged on');
+    return true;
+  }
 }
+
+// checkForHolds is called once the user has been logged on
+async function checkForHolds() {
+  console.log("running checkForHolds automation");
+
+  return true;
+}
+
 
 // navigateToRegistrar is called once the user has been logged on
 async function navigateToRegistrar() {
-     console.log("running navigateToRegistrar automation");
-     var regButton = document.querySelectorAll('[href="/pls/owa_prod/twbkwbis.P_GenMenu?name=bmenu.P_RegMnu"]')[0];
-     regButton.click();
-     return true;
+  console.log("running navigateToRegistrar automation");
+  var regButton = document.querySelectorAll('[href="/pls/owa_prod/twbkwbis.P_GenMenu?name=bmenu.P_RegMnu"]')[0];
+  regButton.click();
+  return true;
 }
 
 // navigateToButton is called once the user has navigated to registrar page
 async function navigateToAddDrop() {
-     console.log("running navigateToAddDrop automation");
-     var addDropButton = document.querySelectorAll('[href="/pls/owa_prod/bwskfreg.P_AltPin"]')[0];
-     addDropButton.click();
-     return true;
+  console.log("running navigateToAddDrop automation");
+  var addDropButton = document.querySelectorAll('[href="/pls/owa_prod/bwskfreg.P_AltPin"]')[0];
+  addDropButton.click();
+  return true;
 }
 
 // selectSubmit is called once the user has navigated to registrar page
 async function selectSubmit() {
-     console.log("running selectSubmit automation");
-     var submitButton = document.querySelectorAll('[value="Submit"]')[0];
-     submitButton.click();
-     return true;
+  console.log("running selectSubmit automation");
+  var submitButton = document.querySelectorAll('[value="Submit"]')[0];
+  submitButton.click();
+  return true;
 }
 
 async function waitForRegStatus() {
@@ -109,12 +117,12 @@ async function waitForRegStatus() {
   var element = document.querySelectorAll('[href="bwskfreg.P_AddDropCrse"]')[0];
   // If element is still on page user hasn't logged in
   if (typeof(element) != 'undefined' && element != null){
-       console.log('Reg closed');
-       window.location.reload(); // Reload the page
-       return false;
+    console.log('Reg closed');
+    window.location.reload(); // Reload the page
+    return false;
   } else {
-       console.log('Reg ready');
-       return true;
+    console.log('Reg ready');
+    return true;
   }
 }
 
