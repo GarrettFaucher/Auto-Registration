@@ -37,7 +37,7 @@ async function getCourseData(crn){
       console.log("Total Seats: "+totalSeats);
       console.log("Seats Remaining: "+seatsRemaining);
 
-      returnVal = {totalEnrolled: Number(totalEnrolled), totalSeats: Number(totalSeats), totalRemaining: seatsRemaining - 41, courseName: courseName}
+      returnVal = {totalEnrolled: Number(totalEnrolled), totalSeats: Number(totalSeats), totalRemaining: seatsRemaining, courseName: courseName}
 
     } catch (e) {
 
