@@ -1,14 +1,11 @@
 # TODO
 * Enter CRNs
-  * Click submit on Add Drop page and ensure its for the right semester
   * Autofill the CRN input
   * Make sure classes were registered for
-  * Report back to the user how they driverReady
+  * Report back to the user how registration went
+  * Backup classes
 * Clean HTML
-  * Nice scroll bar
-  * Fix padding on button
   * Indicate if running in background
-  * Make header smaller
 * Document how to use
   * Make YouTube video on how to use plugin?
   * Detailed instructions
