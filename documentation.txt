@@ -6,4 +6,21 @@ designed to handle tasks efficiently, it is not tested on all machines and
 results may vary. This software does not guarantee enrollment in classes, it
 registers for them quickly and is a tool.
 
-By clicking accept below, I agree that I understand all statements above above.
+By clicking accept below, I agree that I understand all statements above.
+
+
+
+HOW TO USE ROBO-REG
+
+1. Install UVM Robo-Reg on the Chrome Web Store.
+2. Locate the Robo-Reg icon in the top right of the Chrome window.
+   NOTE: You may have to click the 3 dots to find the icon.
+3. Enter your UVM Username and UVM Password.
+4. Choose the time and date that you are supposed to be registering at.
+5. Input your CRNs and their backups.
+6. Ensure your computer will not sleep on its own overnight.
+   NOTE: We have built a system to keep your computer awake, but we cannot
+   ensure the fact that it will stay awake.
+7. Click "Run" at the bottom of the page.
+8. If your screen displays the yellow button labeled "Check Registration Availability Again"
+   the program is waiting for your registration time and is primed and ready to go.
