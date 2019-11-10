@@ -154,28 +154,28 @@ async function register() {
 
   var crnSecondary = [];
   chrome.storage.local.get(['crn_1b'], function(result) {
-    crnPrimary[0] = result.crn_1b;
+    crnSecondary[0] = result.crn_1b;
   });
   chrome.storage.local.get(['crn_2b'], function(result) {
-    crnPrimary[1] = result.crn_2b;
+    crnSecondary[1] = result.crn_2b;
   });
   chrome.storage.local.get(['crn_3b'], function(result) {
-    crnPrimary[2] = result.crn_3b;
+    crnSecondary[2] = result.crn_3b;
   });
   chrome.storage.local.get(['crn_4b'], function(result) {
-    crnPrimary[3] = result.crn_4b;
+    crnSecondary[3] = result.crn_4b;
   });
   chrome.storage.local.get(['crn_5b'], function(result) {
-    crnPrimary[4] = result.crn_5b;
+    crnSecondary[4] = result.crn_5b;
   });
   chrome.storage.local.get(['crn_6b'], function(result) {
-    crnPrimary[5] = result.crn_6b;
+    crnSecondary[5] = result.crn_6b;
   });
   chrome.storage.local.get(['crn_7b'], function(result) {
-    crnPrimary[6] = result.crn_7b;
+    crnSecondary[6] = result.crn_7b;
   });
   chrome.storage.local.get(['crn_8b'], function(result) {
-    crnPrimary[7] = result.crn_8b;
+    crnSecondary[7] = result.crn_8b;
   });
 
   console.log(crnPrimary);
