@@ -142,33 +142,15 @@ async function register() {
   var crnSlot7 = document.getElementById('crn_id7');
   var crnSlot8 = document.getElementById('crn_id8');
 
-  if(classesToRegFor[0] != undefined) {
-    crnSlot1.value = classesToRegFor[0];
-  }
-  if(classesToRegFor[1] != undefined) {
-    crnSlot2.value = classesToRegFor[1];
-  }
-  if(classesToRegFor[2] != undefined) {
-    crnSlot3.value = classesToRegFor[2];
-  }
-  if(classesToRegFor[3] != undefined) {
-    crnSlot4.value = classesToRegFor[3];
-  }
-  if(classesToRegFor[4] != undefined) {
-    crnSlot5.value = classesToRegFor[4];
-  }
-  if(classesToRegFor[5] != undefined) {
-    crnSlot6.value = classesToRegFor[5];
-  }
-  if(classesToRegFor[6] != undefined) {
-    crnSlot7.value = classesToRegFor[6];
-  }
-  if(classesToRegFor[7] != undefined) {
-    crnSlot8.value = classesToRegFor[7];
+  var crnSlots = [crnSlot1, crnSlot2, crnSlot3, crnSlot4, crnSlot5, crnSlot6, crnSlot7, crnSlot8];
+  for (var i = 0; crnSlots.length > i; i++) {
+    if(classesToRegFor[i] != undefined) {
+      crnSlots[i].value = classesToRegFor[i];
+    }
   }
 
   var regButton = document.querySelectorAll('[value="Submit Changes"]')[0];
-  regButton.click(); // Comment me out for testing purposes
+  // regButton.click(); // Comment me out for testing purposes
 
   return true;
 }
@@ -224,33 +206,15 @@ async function registerSecond() {
   var crnSlot7 = document.getElementById('crn_id7');
   var crnSlot8 = document.getElementById('crn_id8');
 
-  if(backupsToRegFor[0] != undefined) {
-    crnSlot1.value = backupsToRegFor[0];
-  }
-  if(backupsToRegFor[1] != undefined) {
-    crnSlot2.value = backupsToRegFor[1];
-  }
-  if(backupsToRegFor[2] != undefined) {
-    crnSlot3.value = backupsToRegFor[2];
-  }
-  if(backupsToRegFor[3] != undefined) {
-    crnSlot4.value = backupsToRegFor[3];
-  }
-  if(backupsToRegFor[4] != undefined) {
-    crnSlot5.value = backupsToRegFor[4];
-  }
-  if(backupsToRegFor[5] != undefined) {
-    crnSlot6.value = backupsToRegFor[5];
-  }
-  if(backupsToRegFor[6] != undefined) {
-    crnSlot7.value = backupsToRegFor[6];
-  }
-  if(backupsToRegFor[7] != undefined) {
-    crnSlot8.value = backupsToRegFor[7];
+  var crnSlots = [crnSlot1, crnSlot2, crnSlot3, crnSlot4, crnSlot5, crnSlot6, crnSlot7, crnSlot8];
+  for (var i = 0; crnSlots.length > i; i++) {
+    if(backupsToRegFor[i] != undefined) {
+      crnSlots[i].value = backupsToRegFor[i];
+    }
   }
 
   var regButton = document.querySelectorAll('[value="Submit Changes"]')[0];
-  regButton.click(); // Comment me out for testing purposes
+  // regButton.click(); // Comment me out for testing purposes
 
   return true;
 }
