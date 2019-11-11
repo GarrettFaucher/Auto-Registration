@@ -131,66 +131,74 @@ async function register() {
   //in callback mark promise as fulfilled
   //await the Promise
   //print the array, access indexes of the array
-  var crnPrimary = [];
-  await chrome.storage.local.get(['crn_1a'], async function(result) {
-    crnPrimary[0] = result.crn_1a;
-    console.log("ADDED TO ARRAY async");
-  });
-  chrome.storage.local.get(['crn_2a'], function(result) {
-    crnPrimary[1] = result.crn_2a;
-    console.log("ADDED TO ARRAY");
-  });
-  chrome.storage.local.get(['crn_3a'], function(result) {
-    crnPrimary[2] = result.crn_3a;
-    console.log("ADDED TO ARRAY");
-  });
-  chrome.storage.local.get(['crn_4a'], function(result) {
-    crnPrimary[3] = result.crn_4a;
-    console.log("ADDED TO ARRAY");
-  });
-  chrome.storage.local.get(['crn_5a'], function(result) {
-    crnPrimary[4] = result.crn_5a;
-    console.log("ADDED TO ARRAY");
-  });
-  chrome.storage.local.get(['crn_6a'], function(result) {
-    crnPrimary[5] = result.crn_6a;
-    console.log("ADDED TO ARRAY");
-  });
-  chrome.storage.local.get(['crn_7a'], function(result) {
-    crnPrimary[6] = result.crn_7a;
-    console.log("ADDED TO ARRAY");
-  });
-  chrome.storage.local.get(['crn_8a'], function(result) {
-    crnPrimary[7] = result.crn_8a;
-    console.log("ADDED TO ARRAY");
+
+  var crnPrimary = await new Promise((resolve,reject) => {
+    chrome.storage.local.get(['crn_data'], function(result){
+      console.log("local storage for crn_data:")
+      console.log(result.crn_data);
+      resolve(result.crn_data);
+    });
   });
 
-  var crnSecondary = [];
-  chrome.storage.local.get(['crn_1b'], function(result) {
-    crnSecondary[0] = result.crn_1b;
-
-  });
-  chrome.storage.local.get(['crn_2b'], function(result) {
-    crnSecondary[1] = result.crn_2b;
-  });
-  chrome.storage.local.get(['crn_3b'], function(result) {
-    crnSecondary[2] = result.crn_3b;
-  });
-  chrome.storage.local.get(['crn_4b'], function(result) {
-    crnSecondary[3] = result.crn_4b;
-  });
-  chrome.storage.local.get(['crn_5b'], function(result) {
-    crnSecondary[4] = result.crn_5b;
-  });
-  chrome.storage.local.get(['crn_6b'], function(result) {
-    crnSecondary[5] = result.crn_6b;
-  });
-  chrome.storage.local.get(['crn_7b'], function(result) {
-    crnSecondary[6] = result.crn_7b;
-  });
-  chrome.storage.local.get(['crn_8b'], function(result) {
-    crnSecondary[7] = result.crn_8b;
-  });
+  // await chrome.storage.local.get(['crn_1a'], async function(result) {
+  //   crnPrimary[0] = result.crn_1a;
+  //   console.log("ADDED TO ARRAY async");
+  // });
+  // chrome.storage.local.get(['crn_2a'], function(result) {
+  //   crnPrimary[1] = result.crn_2a;
+  //   console.log("ADDED TO ARRAY");
+  // });
+  // chrome.storage.local.get(['crn_3a'], function(result) {
+  //   crnPrimary[2] = result.crn_3a;
+  //   console.log("ADDED TO ARRAY");
+  // });
+  // chrome.storage.local.get(['crn_4a'], function(result) {
+  //   crnPrimary[3] = result.crn_4a;
+  //   console.log("ADDED TO ARRAY");
+  // });
+  // chrome.storage.local.get(['crn_5a'], function(result) {
+  //   crnPrimary[4] = result.crn_5a;
+  //   console.log("ADDED TO ARRAY");
+  // });
+  // chrome.storage.local.get(['crn_6a'], function(result) {
+  //   crnPrimary[5] = result.crn_6a;
+  //   console.log("ADDED TO ARRAY");
+  // });
+  // chrome.storage.local.get(['crn_7a'], function(result) {
+  //   crnPrimary[6] = result.crn_7a;
+  //   console.log("ADDED TO ARRAY");
+  // });
+  // chrome.storage.local.get(['crn_8a'], function(result) {
+  //   crnPrimary[7] = result.crn_8a;
+  //   console.log("ADDED TO ARRAY");
+  // });
+  //
+  // var crnSecondary = [];
+  // chrome.storage.local.get(['crn_1b'], function(result) {
+  //   crnSecondary[0] = result.crn_1b;
+  //
+  // });
+  // chrome.storage.local.get(['crn_2b'], function(result) {
+  //   crnSecondary[1] = result.crn_2b;
+  // });
+  // chrome.storage.local.get(['crn_3b'], function(result) {
+  //   crnSecondary[2] = result.crn_3b;
+  // });
+  // chrome.storage.local.get(['crn_4b'], function(result) {
+  //   crnSecondary[3] = result.crn_4b;
+  // });
+  // chrome.storage.local.get(['crn_5b'], function(result) {
+  //   crnSecondary[4] = result.crn_5b;
+  // });
+  // chrome.storage.local.get(['crn_6b'], function(result) {
+  //   crnSecondary[5] = result.crn_6b;
+  // });
+  // chrome.storage.local.get(['crn_7b'], function(result) {
+  //   crnSecondary[6] = result.crn_7b;
+  // });
+  // chrome.storage.local.get(['crn_8b'], function(result) {
+  //   crnSecondary[7] = result.crn_8b;
+  // });
 
   console.log("array holds:")
   console.log(crnPrimary);
