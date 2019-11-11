@@ -173,26 +173,26 @@ function fillData(){
   var crn_7b = document.getElementById('crn_7b');
   var crn_8b = document.getElementById('crn_8b');
 
-  chrome.storage.local.get(['username'], function(result) { username.value = result.username; });
-  chrome.storage.local.get(['password'], function(result) { password.value = result.password; });
-  chrome.storage.local.get(['date'], function(result) { date.value = result.date; });
-  chrome.storage.local.get(['time'], function(result) { time.value = result.time; });
-  chrome.storage.local.get(['crn_1a'], function(result) { crn_1a.value = result.crn_1a; });
-  chrome.storage.local.get(['crn_2a'], function(result) { crn_2a.value = result.crn_2a; });
-  chrome.storage.local.get(['crn_3a'], function(result) { crn_3a.value = result.crn_3a; });
-  chrome.storage.local.get(['crn_4a'], function(result) { crn_4a.value = result.crn_4a; });
-  chrome.storage.local.get(['crn_5a'], function(result) { crn_5a.value = result.crn_5a; });
-  chrome.storage.local.get(['crn_6a'], function(result) { crn_6a.value = result.crn_6a; });
-  chrome.storage.local.get(['crn_7a'], function(result) { crn_7a.value = result.crn_7a; });
-  chrome.storage.local.get(['crn_8a'], function(result) { crn_8a.value = result.crn_8a; });
-  chrome.storage.local.get(['crn_1b'], function(result) { crn_1b.value = result.crn_1b; });
-  chrome.storage.local.get(['crn_2b'], function(result) { crn_2b.value = result.crn_2b; });
-  chrome.storage.local.get(['crn_3b'], function(result) { crn_3b.value = result.crn_3b; });
-  chrome.storage.local.get(['crn_4b'], function(result) { crn_4b.value = result.crn_4b; });
-  chrome.storage.local.get(['crn_5b'], function(result) { crn_5b.value = result.crn_5b; });
-  chrome.storage.local.get(['crn_6b'], function(result) { crn_6b.value = result.crn_6b; });
-  chrome.storage.local.get(['crn_7b'], function(result) { crn_7b.value = result.crn_7b; });
-  chrome.storage.local.get(['crn_8b'], function(result) { crn_8b.value = result.crn_8b; });
+  chrome.storage.local.get(['username'], function(result) { if (result.username){ username.value = result.username; }});
+  chrome.storage.local.get(['password'], function(result) { if (result.password){ password.value = result.password; }});
+  chrome.storage.local.get(['date'], function(result) { if (result.date){ date.value = result.date; }});
+  chrome.storage.local.get(['time'], function(result) { if (result.time){ time.value = result.time; }});
+  chrome.storage.local.get(['crn_1a'], function(result) { if (result.crn_1a){ console.log(result.crn_1a); crn_1a.value = result.crn_1a; }});
+  chrome.storage.local.get(['crn_2a'], function(result) { if (result.crn_2a){ crn_2a.value = result.crn_2a; }});
+  chrome.storage.local.get(['crn_4a'], function(result) { if (result.crn_3a){ crn_4a.value = result.crn_4a; }});
+  chrome.storage.local.get(['crn_3a'], function(result) { if (result.crn_4a){ crn_3a.value = result.crn_3a; }});
+  chrome.storage.local.get(['crn_5a'], function(result) { if (result.crn_5a){ crn_5a.value = result.crn_5a; }});
+  chrome.storage.local.get(['crn_6a'], function(result) { if (result.crn_6a){ crn_6a.value = result.crn_6a; }});
+  chrome.storage.local.get(['crn_7a'], function(result) { if (result.crn_7a){ crn_7a.value = result.crn_7a; }});
+  chrome.storage.local.get(['crn_8a'], function(result) { if (result.crn_8a){ crn_8a.value = result.crn_8a; }});
+  chrome.storage.local.get(['crn_1b'], function(result) { if (result.crn_1b){ crn_1b.value = result.crn_1b; }});
+  chrome.storage.local.get(['crn_2b'], function(result) { if (result.crn_2b){ crn_2b.value = result.crn_2b; }});
+  chrome.storage.local.get(['crn_3b'], function(result) { if (result.crn_3b){ crn_3b.value = result.crn_3b; }});
+  chrome.storage.local.get(['crn_4b'], function(result) { if (result.crn_4b){ crn_4b.value = result.crn_4b; }});
+  chrome.storage.local.get(['crn_5b'], function(result) { if (result.crn_5b){ crn_5b.value = result.crn_5b; }});
+  chrome.storage.local.get(['crn_6b'], function(result) { if (result.crn_6b){ crn_6b.value = result.crn_6b; }});
+  chrome.storage.local.get(['crn_7b'], function(result) { if (result.crn_7b){ crn_7b.value = result.crn_7b; }});
+  chrome.storage.local.get(['crn_8b'], function(result) { if (result.crn_8b){ crn_8b.value = result.crn_8b; }});
 
 }
 
