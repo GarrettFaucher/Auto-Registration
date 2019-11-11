@@ -1,20 +1,17 @@
 # TODO
 * Enter CRNs
-  * Autofill the CRN input
-  * Make sure classes were registered for
   * Report back to the user how registration went
-  * Backup classes
+  * Load tab at 5:30am instead of immediately
 * Clean HTML
-  * Indicate if running in background
+  * Indicate if running and ready to load at 5:30am
+  * Primary and secondary options side by side
 * Document how to use
   * Make YouTube video on how to use plugin?
   * Detailed instructions
   * Git documentation
 * UI improvements
   * only reload changed textbox data, not all textboxes should fetch new data every time
-
   * show a loading animation in textbox when fetching data
-
   * Notification on course open/close
 
 
