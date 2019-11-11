@@ -120,73 +120,56 @@ async function waitForRegStatus() {
   }
 }
 
-// register fills text boxes with CRN data when courc
+// register fills text boxes with CRN first choice data and clicks submit
 async function register() {
   console.log("running register automation");
 
+  var classesToRegFor = await new Promise((resolve,reject) => {
+    chrome.storage.local.get(['crnAB'], function(result){
+      console.log("local storage for classesToRegFor:")
+      console.log(result.crnAB);
+      resolve(result.crnAB);
+    });
+  });
+
+  // Register for classes
+  var crnSlot1 = document.getElementById('crn_id1');
+  var crnSlot2 = document.getElementById('crn_id2');
+  var crnSlot3 = document.getElementById('crn_id3');
+  var crnSlot4 = document.getElementById('crn_id4');
+  var crnSlot5 = document.getElementById('crn_id5');
+  var crnSlot6 = document.getElementById('crn_id6');
+  var crnSlot7 = document.getElementById('crn_id7');
+  var crnSlot8 = document.getElementById('crn_id8');
+
+  if(classesToRegFor[0] != undefined) {
+    crnSlot1.value = classesToRegFor[0];
+  }
+  if(classesToRegFor[1] != undefined) {
+    crnSlot2.value = classesToRegFor[1];
+  }
+  if(classesToRegFor[2] != undefined) {
+    crnSlot3.value = classesToRegFor[2];
+  }
+  if(classesToRegFor[3] != undefined) {
+    crnSlot4.value = classesToRegFor[3];
+  }
+  if(classesToRegFor[4] != undefined) {
+    crnSlot5.value = classesToRegFor[4];
+  }
+  if(classesToRegFor[5] != undefined) {
+    crnSlot6.value = classesToRegFor[5];
+  }
+  if(classesToRegFor[6] != undefined) {
+    crnSlot7.value = classesToRegFor[6];
+  }
+  if(classesToRegFor[7] != undefined) {
+    crnSlot8.value = classesToRegFor[7];
+  }
+
   var regButton = document.querySelectorAll('[value="Submit Changes"]')[0];
+  regButton.click(); // Comment me out for testing purposes
 
-  var crnPrimary = [];
-  chrome.storage.local.get(['crn_1a'], function(result) {
-    crnPrimary[0] = result.crn_1a;
-  });
-  chrome.storage.local.get(['crn_2a'], function(result) {
-    crnPrimary[1] = result.crn_2a;
-  });
-  chrome.storage.local.get(['crn_3a'], function(result) {
-    crnPrimary[2] = result.crn_3a;
-  });
-  chrome.storage.local.get(['crn_4a'], function(result) {
-    crnPrimary[3] = result.crn_4a;
-  });
-  chrome.storage.local.get(['crn_5a'], function(result) {
-    crnPrimary[4] = result.crn_5a;
-  });
-  chrome.storage.local.get(['crn_6a'], function(result) {
-    crnPrimary[5] = result.crn_6a;
-  });
-  chrome.storage.local.get(['crn_7a'], function(result) {
-    crnPrimary[6] = result.crn_7a;
-  });
-  chrome.storage.local.get(['crn_8a'], function(result) {
-    crnPrimary[7] = result.crn_8a;
-  });
-
-  var crnSecondary = [];
-  chrome.storage.local.get(['crn_1b'], function(result) {
-    crnSecondary[0] = result.crn_1b;
-  });
-  chrome.storage.local.get(['crn_2b'], function(result) {
-    crnSecondary[1] = result.crn_2b;
-  });
-  chrome.storage.local.get(['crn_3b'], function(result) {
-    crnSecondary[2] = result.crn_3b;
-  });
-  chrome.storage.local.get(['crn_4b'], function(result) {
-    crnSecondary[3] = result.crn_4b;
-  });
-  chrome.storage.local.get(['crn_5b'], function(result) {
-    crnSecondary[4] = result.crn_5b;
-  });
-  chrome.storage.local.get(['crn_6b'], function(result) {
-    crnSecondary[5] = result.crn_6b;
-  });
-  chrome.storage.local.get(['crn_7b'], function(result) {
-    crnSecondary[6] = result.crn_7b;
-  });
-  chrome.storage.local.get(['crn_8b'], function(result) {
-    crnSecondary[7] = result.crn_8b;
-  });
-
-  console.log(crnPrimary);
-  console.log(crnPrimary[0]);
-
-  $(":text").each(function(){
-    console.log(crnPrimary[0]);
-    $(this).val(crnPrimary[0]);
-  });
-
-  // regButton.click();
   return true;
 }
 
@@ -265,7 +248,6 @@ async function registerSecond() {
   if(backupsToRegFor[7] != undefined) {
     crnSlot8.value = backupsToRegFor[7];
   }
-
 
   var regButton = document.querySelectorAll('[value="Submit Changes"]')[0];
   regButton.click(); // Comment me out for testing purposes
