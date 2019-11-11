@@ -190,20 +190,22 @@ async function register() {
   return true;
 }
 
-// checkSuccess gets all the classes that have been registered for
-async function checkSuccess() {
-  console.log("running checkSuccess automation");
+// registerSecond registers for backup CRNs
+async function registerSecond() {
+  console.log("running registerSecond automation");
+  // Check success of first round of registration
   var crnElements = document.getElementsByName("CRN_IN");
   var crnRegistered = [];
   for (var i = 1; crnElements.length-10 > i; i++) {
     crnRegistered.push(crnElements[i].value);
   }
   chrome.storage.local.set({'crnRegistered': crnRegistered}); // Stores CRNs that have been registered for
-  chrome.storage.local.get(['crnRegistered'], function(result) {
-    if(result.crnRegistered) {
-      console.log(result.crnRegistered);
-    }
-  });
+  // Done checking success
+
+  // Determine backups to register for
+
+  // Register for backups
+
 }
 
 // handleCommand handles incoming messages from background.js to
@@ -243,8 +245,8 @@ async function handleCommand(request){
       var returnVal = await register();
       respondToBackground(request.command, returnVal);
       break;
-    case 'checkSuccess':
-      var returnVal = await checkSuccess();
+    case 'registerSecond':
+      var returnVal = await registerSecond();
       respondToBackground(request.command, returnVal);
       break;
     default:

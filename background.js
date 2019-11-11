@@ -123,13 +123,13 @@ function handleMessage(request){
           console.log('register failed')
         }
         break;
-      case 'checkSuccess':
+      case 'registerSecond':
         if(request.success){
-          console.log('checkSuccess automation complete')
+          console.log('registerSecond automation complete')
           nextCommand = "";
         }
         else {
-          console.log('checkSuccess failed')
+          console.log('registerSecond failed')
         }
         break;
       default:
