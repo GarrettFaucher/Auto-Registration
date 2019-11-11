@@ -204,7 +204,33 @@ async function registerSecond() {
   // Done checking success
 
   // Determine backups to register for
-  
+  var crnAB = await new Promise((resolve,reject) => {
+    chrome.storage.local.get(['crnAB'], function(result){
+      console.log("local storage for crnAB:")
+      console.log(result.crnAB);
+      resolve(result.crnAB);
+    });
+  });
+
+  var backupsToRegFor = [];
+  // Loop through CRN A to see if they were registered for
+  for(var i = 0; 8 > i; i++) {
+    var didReg = false; // Boolean to flag if course has been registered for
+    for(var j = 0; crnRegistered.length > j; j++) {
+      // If crnAB is found in registered crns we mark it as registered
+      // also if it is a blank box we mark it as registered
+      if(crnAB[i] == crnRegistered[j] || crnAB[i] == "") {
+        didReg = true;
+      }
+    }
+    // If we havent flagged it as registered, we add the backup to backupsToRegFor
+    if (!didReg) {
+      backupsToRegFor.push(crnAB[i+8]);
+    }
+  }
+
+  console.log(backupsToRegFor);
+
   // Register for backups
 
   return true;
