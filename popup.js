@@ -179,8 +179,8 @@ function fillData(){
   chrome.storage.local.get(['time'], function(result) { if (result.time){ time.value = result.time; }});
   chrome.storage.local.get(['crn_1a'], function(result) { if (result.crn_1a){ console.log(result.crn_1a); crn_1a.value = result.crn_1a; }});
   chrome.storage.local.get(['crn_2a'], function(result) { if (result.crn_2a){ crn_2a.value = result.crn_2a; }});
-  chrome.storage.local.get(['crn_4a'], function(result) { if (result.crn_3a){ crn_4a.value = result.crn_4a; }});
-  chrome.storage.local.get(['crn_3a'], function(result) { if (result.crn_4a){ crn_3a.value = result.crn_3a; }});
+  chrome.storage.local.get(['crn_3a'], function(result) { if (result.crn_3a){ crn_3a.value = result.crn_3a; }});
+  chrome.storage.local.get(['crn_4a'], function(result) { if (result.crn_4a){ crn_4a.value = result.crn_4a; }});
   chrome.storage.local.get(['crn_5a'], function(result) { if (result.crn_5a){ crn_5a.value = result.crn_5a; }});
   chrome.storage.local.get(['crn_6a'], function(result) { if (result.crn_6a){ crn_6a.value = result.crn_6a; }});
   chrome.storage.local.get(['crn_7a'], function(result) { if (result.crn_7a){ crn_7a.value = result.crn_7a; }});
@@ -232,8 +232,15 @@ function collectData() {
      var crn_7b = document.getElementById('crn_7b').value;
      var crn_8b = document.getElementById('crn_8b').value;
 
-     var crnData = [username, password, date, time, crn_1a, crn_2a, crn_3a, crn_4a, crn_5a, crn_6a, crn_7a, crn_8a, crn_1b, crn_2b, crn_3b, crn_4b, crn_5b, crn_6b, crn_7b, crn_8b];
+     var crnData = [username, password, date, time,
+                    crn_1a, crn_2a, crn_3a, crn_4a, crn_5a, crn_6a, crn_7a, crn_8a,
+                    crn_1b, crn_2b, crn_3b, crn_4b, crn_5b, crn_6b, crn_7b, crn_8b];
      console.log(crnData); // Show the data for bug fixing
+
+     var crnAB = [crn_1a, crn_2a, crn_3a, crn_4a, crn_5a, crn_6a, crn_7a, crn_8a,
+                  crn_1b, crn_2b, crn_3b, crn_4b, crn_5b, crn_6b, crn_7b, crn_8b];
+
+     chrome.storage.local.set({'crnAB': crnAB});
 
      chrome.storage.local.set({'username': username});
      chrome.storage.local.set({'password': password});
