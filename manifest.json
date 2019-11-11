@@ -16,7 +16,7 @@
      "content_scripts": [
        {
          "matches": ["http://*.uvm.edu/*","https://*.uvm.edu/*"],
-         "js": ["tabDriver.js"]
+         "js": ["jquery.min.js", "tabDriver.js"]
        }
      ],
      "manifest_version": 2

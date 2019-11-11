@@ -114,6 +114,15 @@ function handleMessage(request){
           }, refreshInterval);
         }
         break;
+      case 'register':
+        if(request.success){
+          console.log('register automation complete')
+          nextCommand = "";
+        }
+        else {
+          console.log('register failed')
+        }
+        break;
       default:
         break;
     }
