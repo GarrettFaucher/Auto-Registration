@@ -232,6 +232,43 @@ async function registerSecond() {
   console.log(backupsToRegFor);
 
   // Register for backups
+  var crnSlot1 = document.getElementById('crn_id1');
+  var crnSlot2 = document.getElementById('crn_id2');
+  var crnSlot3 = document.getElementById('crn_id3');
+  var crnSlot4 = document.getElementById('crn_id4');
+  var crnSlot5 = document.getElementById('crn_id5');
+  var crnSlot6 = document.getElementById('crn_id6');
+  var crnSlot7 = document.getElementById('crn_id7');
+  var crnSlot8 = document.getElementById('crn_id8');
+
+  if(backupsToRegFor[0] != undefined) {
+    crnSlot1.value = backupsToRegFor[0];
+  }
+  if(backupsToRegFor[1] != undefined) {
+    crnSlot2.value = backupsToRegFor[1];
+  }
+  if(backupsToRegFor[2] != undefined) {
+    crnSlot3.value = backupsToRegFor[2];
+  }
+  if(backupsToRegFor[3] != undefined) {
+    crnSlot4.value = backupsToRegFor[3];
+  }
+  if(backupsToRegFor[4] != undefined) {
+    crnSlot5.value = backupsToRegFor[4];
+  }
+  if(backupsToRegFor[5] != undefined) {
+    crnSlot6.value = backupsToRegFor[5];
+  }
+  if(backupsToRegFor[6] != undefined) {
+    crnSlot7.value = backupsToRegFor[6];
+  }
+  if(backupsToRegFor[7] != undefined) {
+    crnSlot8.value = backupsToRegFor[7];
+  }
+
+
+  var regButton = document.querySelectorAll('[value="Submit Changes"]')[0];
+  regButton.click(); // Comment me out for testing purposes
 
   return true;
 }
