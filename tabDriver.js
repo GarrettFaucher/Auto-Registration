@@ -126,35 +126,49 @@ async function register() {
 
   var regButton = document.querySelectorAll('[value="Submit Changes"]')[0];
 
+  //create blank promise
+  //get all crns in one storage space
+  //in callback mark promise as fulfilled
+  //await the Promise
+  //print the array, access indexes of the array
   var crnPrimary = [];
-  chrome.storage.local.get(['crn_1a'], function(result) {
+  await chrome.storage.local.get(['crn_1a'], async function(result) {
     crnPrimary[0] = result.crn_1a;
+    console.log("ADDED TO ARRAY async");
   });
   chrome.storage.local.get(['crn_2a'], function(result) {
     crnPrimary[1] = result.crn_2a;
+    console.log("ADDED TO ARRAY");
   });
   chrome.storage.local.get(['crn_3a'], function(result) {
     crnPrimary[2] = result.crn_3a;
+    console.log("ADDED TO ARRAY");
   });
   chrome.storage.local.get(['crn_4a'], function(result) {
     crnPrimary[3] = result.crn_4a;
+    console.log("ADDED TO ARRAY");
   });
   chrome.storage.local.get(['crn_5a'], function(result) {
     crnPrimary[4] = result.crn_5a;
+    console.log("ADDED TO ARRAY");
   });
   chrome.storage.local.get(['crn_6a'], function(result) {
     crnPrimary[5] = result.crn_6a;
+    console.log("ADDED TO ARRAY");
   });
   chrome.storage.local.get(['crn_7a'], function(result) {
     crnPrimary[6] = result.crn_7a;
+    console.log("ADDED TO ARRAY");
   });
   chrome.storage.local.get(['crn_8a'], function(result) {
     crnPrimary[7] = result.crn_8a;
+    console.log("ADDED TO ARRAY");
   });
 
   var crnSecondary = [];
   chrome.storage.local.get(['crn_1b'], function(result) {
     crnSecondary[0] = result.crn_1b;
+
   });
   chrome.storage.local.get(['crn_2b'], function(result) {
     crnSecondary[1] = result.crn_2b;
@@ -178,8 +192,12 @@ async function register() {
     crnSecondary[7] = result.crn_8b;
   });
 
+  console.log("array holds:")
   console.log(crnPrimary);
-  console.log(crnPrimary[0]);
+  console.log(typeof(crnPrimary));
+  console.log("array 0 holds:")
+  var keys = Object.keys( crnPrimary );
+  console.log(crnPrimary.length);
 
   $(":text").each(function(){
     console.log(crnPrimary[0]);
