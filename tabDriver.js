@@ -110,7 +110,7 @@ async function waitForRegStatus() {
   // If element is still on page user hasn't logged in
   if (typeof(element) != 'undefined' && element != null){
     console.log('Reg closed');
-    await window.location.assign('http://www.uvm.edu/~pdundas/sandbox.html'); // REMOVE
+    await window.location.assign('http://gfaucher.w3.uvm.edu/Add_Drop_Withdraw%20Classes_.htm'); // REMOVE
     return true; // REMOVE
     // window.location.reload(); // Reload the page
     // return false;
@@ -190,6 +190,22 @@ async function register() {
   return true;
 }
 
+// checkSuccess gets all the classes that have been registered for
+async function checkSuccess() {
+  console.log("running checkSuccess automation");
+  var crnElements = document.getElementsByName("CRN_IN");
+  var crnRegistered = [];
+  for (var i = 1; crnElements.length-10 > i; i++) {
+    crnRegistered.push(crnElements[i].value);
+  }
+  chrome.storage.local.set({'crnRegistered': crnRegistered}); // Stores CRNs that have been registered for
+  chrome.storage.local.get(['crnRegistered'], function(result) {
+    if(result.crnRegistered) {
+      console.log(result.crnRegistered);
+    }
+  });
+}
+
 // handleCommand handles incoming messages from background.js to
 // run automations and send back the responses via respondToBackground
 async function handleCommand(request){
@@ -225,6 +241,10 @@ async function handleCommand(request){
       break;
     case 'register':
       var returnVal = await register();
+      respondToBackground(request.command, returnVal);
+      break;
+    case 'checkSuccess':
+      var returnVal = await checkSuccess();
       respondToBackground(request.command, returnVal);
       break;
     default:

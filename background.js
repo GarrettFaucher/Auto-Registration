@@ -117,10 +117,19 @@ function handleMessage(request){
       case 'register':
         if(request.success){
           console.log('register automation complete')
-          nextCommand = "";
+          nextCommand = "checkSuccess";
         }
         else {
           console.log('register failed')
+        }
+        break;
+      case 'checkSuccess':
+        if(request.success){
+          console.log('checkSuccess automation complete')
+          nextCommand = "";
+        }
+        else {
+          console.log('checkSuccess failed')
         }
         break;
       default:
