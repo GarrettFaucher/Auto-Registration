@@ -200,12 +200,14 @@ async function registerSecond() {
     crnRegistered.push(crnElements[i].value);
   }
   chrome.storage.local.set({'crnRegistered': crnRegistered}); // Stores CRNs that have been registered for
+  console.log("The CRN's that were registered for are: " + crnRegistered);
   // Done checking success
 
   // Determine backups to register for
-
+  
   // Register for backups
 
+  return true;
 }
 
 // handleCommand handles incoming messages from background.js to
