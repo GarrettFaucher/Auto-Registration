@@ -23,16 +23,23 @@ function sendCommand(newCommand){
 async function timeToSpawn() {
   var regTime;
   var regDate;
-  await chrome.storage.local.get(['time'], function(result) {
-    regTime = result.time;
-  });
-  await chrome.storage.local.get(['date'], function(result) {
-    regDate = result.date;
+
+  var regTime = await new Promise((resolve,reject) => {
+    chrome.storage.local.get(['time'], function(result) {
+      resolve(result.time);
+    });
   });
 
-  var data;
-  await $.getJSON("http://worldclockapi.com/api/json/est/now", function(response) {
-    data = response;
+  var regDate = await new Promise((resolve,reject) => {
+    chrome.storage.local.get(['date'], function(result) {
+      resolve(result.date);
+    });
+  });
+
+  var data = await new Promise((resolve,reject) => {
+    $.getJSON("http://worldclockapi.com/api/json/est/now", function(response) {
+      resolve(response);
+    });
   });
 
   var atomDate = data.currentDateTime.slice(0,10);
@@ -41,6 +48,9 @@ async function timeToSpawn() {
   if (regTime == '600am') {regTime = '05:30';}
   else if (regTime == '630am') {regTime = '06:00';}
   else if (regTime == '700am') {regTime = '06:30';}
+
+  regTime.replace(":","");
+  atomTime.replace(":","");
 
   console.log("Atom: " + atomDate + "\nReg: " + regDate + "\nAtom: " + atomTime + "\nReg: " + regTime);
   console.log("Evaluating as: " + (regDate <= atomDate) && (regTime <= atomTime));
@@ -61,10 +71,16 @@ async function spawnTab(){
   chrome.power.requestKeepAwake("system");
   console.log("Run button was clicked, beginning spawnTab()");
   // TODO: Build promise statement into this, tab is still being created
-  while(1) {
-    if(timeToSpawn()) {
+  while(true) {
+    console.log("entered while loop")
+    var returnData = await timeToSpawn();
+    console.log("Time to spawn returned ");
+    console.log(returnData);
+    if(returnData) {
+      console.log("entered break");
       break;
     } else {
+      console.log("Not time yet, sleeping for 30")
       await sleep(30000);
     }
   }
