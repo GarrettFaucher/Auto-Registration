@@ -1,7 +1,7 @@
 from datetime import datetime
 from urllib.request import urlopen
 from time import sleep
-SLEEPAMOUNT = 1
+SLEEPAMOUNT = 15
 keepGoing = True
 lastStatus = 0
 i = 0
