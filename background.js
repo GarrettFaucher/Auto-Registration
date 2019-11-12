@@ -42,9 +42,11 @@ async function timeToSpawn() {
   else if (regTime == '630am') {regTime = '06:00';}
   else if (regTime == '700am') {regTime = '06:30';}
 
-  console.log("Date: " + atomDate + "\nTime: " + atomTime);
+  console.log("Atom: " + atomDate + "\nReg: " + regDate + "\nAtom: " + atomTime + "\nReg: " + regTime);
+  console.log("Evaluating as: " + (regDate <= atomDate) && (regTime <= atomTime));
 
-  if (regDate == atomDate && regTime == atomTime) {
+  // TODO: THIS HAS AN ERROR, evaluating as true
+  if ((regDate <= atomDate) && (regTime <= atomTime)) {
     console.log("timeToSpawn");
     return true;
   } else {
@@ -58,13 +60,14 @@ async function timeToSpawn() {
 async function spawnTab(){
   chrome.power.requestKeepAwake("display");
   chrome.power.requestKeepAwake("system");
-  var spawnNotReady = true;
   console.log("Run button was clicked, beginning spawnTab()");
-  // TODO: Uncomment lines below for release
-  // while(spawnNotReady) {
-  //   spawnNotReady = timeToSpawn();
-  //   await sleep(30000);
-  // }
+  while(1) {
+    if(timeToSpawn()) {
+      break;
+    } else {
+      await sleep(30000);
+    }
+  }
   chrome.tabs.create({
     url: 'https://aisweb1.uvm.edu/pls/owa_prod/bwskfreg.P_AddDropCrse'
   }, function(tab){
@@ -290,7 +293,7 @@ async function checkRegClose() {
   console.log(regDate + " and " + atomDate);
   console.log(regTime + " and " + atomTime);
 
-  if (regDate == atomDate && regTime == atomTime) {
+  if ((regDate <= atomDate) && (regTime <= atomTime)) {
     refreshInterval = quickRefresh;
   }
 }
