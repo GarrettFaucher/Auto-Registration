@@ -67,6 +67,7 @@ function updateAllCrnInfo(updateChangedOnly){
       crnCache[index] = newCrn;
 
       $('> .crnSeatInfo',this).hide();
+      $('> .crnSeatInfo > .seatsDetail',this).hide();
       $('> input',this).removeClass("empty");
       $('> input',this).removeClass("valid");
       $('> .crnInfo',this).removeClass('warning');
@@ -96,7 +97,8 @@ function updateAllCrnInfo(updateChangedOnly){
           }
 
           $('> .crnInfo > .courseLink',this).attr('href',"http://www.uvm.edu/academics/courses/?term=202001&crn="+newCrn);
-          $('> .crnSeatInfo > .seatsRemaining',this).html(crnData.totalRemaining+" seats left")
+          $('> .crnSeatInfo > .seatsRemaining',this).html(crnData.totalRemaining+" seats left");
+          $('> .crnSeatInfo > .seatsDetail',this).html(crnData.totalRemaining+" of "+crnData.totalSeats+" seats remaining - "+ (1 - (crnData.totalRemaining / crnData.totalSeats))+"% full" );
 
         }
         else{
@@ -121,6 +123,32 @@ $(document).ready(function(){
    chrome.tabs.create({url: $(this).attr('href')});
    return false;
   });
+
+  $('.crnSeatInfo').each(function(){
+    $(this).on('click', function(){
+      $(this).siblings(":text").fadeOut(250);
+      var currentElem = $(this);
+      setTimeout(function(){
+        currentElem.addClass("seatInfoExpanded");
+      }, 275);
+
+      $('> .seatsRemaining',this).fadeOut(500);
+      $('> .seatsDetail',this).delay(500).fadeIn(500);
+    });
+  });
+
+  $('.seatInfoExpanded').each(function(){
+    $(this).on('click', function(){
+      $('> .seatsDetail',this).fadeOut(500);
+      var currentElem = $(this);
+      setTimeout(function(){
+        currentElem.removeClass("seatInfoExpanded");
+      }, 500);
+      $('> .seatsRemaining',this).delay(750).fadeIn(500);
+      $(this).siblings(":text").delay(750).fadeIn(250);
+    });
+  });
+
 });
 
 // When save is clicked on popup.html, collectData is called.
