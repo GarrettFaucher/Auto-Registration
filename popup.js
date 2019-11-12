@@ -125,7 +125,11 @@ $(document).ready(function(){
   });
 
   $('.crnSeatInfo').each(function(){
-    $(this).on('click', function(){
+
+  });
+
+  $('.crnSeatInfo').on('click', function(){
+    if(!$(this).attr("expanded")){
       $(this).siblings(":text").fadeOut(250);
       var currentElem = $(this);
       setTimeout(function(){
@@ -134,11 +138,9 @@ $(document).ready(function(){
 
       $('> .seatsRemaining',this).fadeOut(500);
       $('> .seatsDetail',this).delay(500).fadeIn(500);
-    });
-  });
-
-  $('.seatInfoExpanded').each(function(){
-    $(this).on('click', function(){
+      $(this).attr("expanded","true");
+    }
+    else{
       $('> .seatsDetail',this).fadeOut(500);
       var currentElem = $(this);
       setTimeout(function(){
@@ -146,8 +148,13 @@ $(document).ready(function(){
       }, 500);
       $('> .seatsRemaining',this).delay(750).fadeIn(500);
       $(this).siblings(":text").delay(750).fadeIn(250);
-    });
+      $(this).removeAttr("expanded");
+    }
+
+
   });
+
+
 
 });
 
