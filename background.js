@@ -45,7 +45,6 @@ async function timeToSpawn() {
   console.log("Atom: " + atomDate + "\nReg: " + regDate + "\nAtom: " + atomTime + "\nReg: " + regTime);
   console.log("Evaluating as: " + (regDate <= atomDate) && (regTime <= atomTime));
 
-  // TODO: THIS HAS AN ERROR, evaluating as true
   if ((regDate <= atomDate) && (regTime <= atomTime)) {
     console.log("timeToSpawn");
     return true;
@@ -61,6 +60,7 @@ async function spawnTab(){
   chrome.power.requestKeepAwake("display");
   chrome.power.requestKeepAwake("system");
   console.log("Run button was clicked, beginning spawnTab()");
+  // TODO: Build promise statement into this, tab is still being created
   while(1) {
     if(timeToSpawn()) {
       break;
