@@ -76,6 +76,7 @@ cursor: pointer;
   border-top-right-radius: 4px;
   padding-left: 13px;
   margin-bottom: 0;
+  font-size: 12pt;
 }
 .crnResolver > input{
   margin-top: 0;
@@ -111,7 +112,12 @@ cursor: pointer;
   text-decoration: none;
 }
 
-.seatsRemaining:focus, .seatsRemaining:hover{
+.courseLink{
+  text-decoration: none;
+  color: black;
+}
+
+.courseLink:focus, .courseLink:hover{
   color: rgba(0,0,0,0.5) !important;
   text-decoration: none !important;
 }

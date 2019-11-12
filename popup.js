@@ -79,7 +79,7 @@ function updateAllCrnInfo(updateChangedOnly){
           console.log("Found crndata for "+newCrn);
           console.log(crnData);
           $('> input',this).addClass("valid");
-          $('> .crnInfo',this).html(crnData.courseName);
+          $('> .crnInfo > .courseLink',this).html(crnData.courseName);
           $('> .crnSeatInfo',this).show();
 
           if(crnData.totalRemaining < 1){
@@ -95,7 +95,7 @@ function updateAllCrnInfo(updateChangedOnly){
             $('> .crnSeatInfo > .fas',this).addClass("fa-user-check");
           }
 
-          $('> .crnSeatInfo > .seatsRemaining',this).attr('href',"http://www.uvm.edu/academics/courses/?term=202001&crn="+newCrn);
+          $('> .crnInfo > .courseLink',this).attr('href',"http://www.uvm.edu/academics/courses/?term=202001&crn="+newCrn);
           $('> .crnSeatInfo > .seatsRemaining',this).html(crnData.totalRemaining+" seats left")
 
         }
