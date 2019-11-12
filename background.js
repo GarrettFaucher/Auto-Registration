@@ -7,6 +7,10 @@ var regTab; // Stores regtab
 var refreshInterval = 3000; // Slow page reload interval
 var quickRefresh = 500; // Quick page reload interval
 
+//Sleep function
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 //sends a command to our spawned tab (created with spawnTab)
 function sendCommand(newCommand){
@@ -15,13 +19,52 @@ function sendCommand(newCommand){
   chrome.tabs.sendMessage(regTab.id, {command: newCommand}, function(response) {});
 }
 
+// Checks if it is time to start refreshing quickly.
+async function timeToSpawn() {
+  var regTime;
+  var regDate;
+  await chrome.storage.local.get(['time'], function(result) {
+    regTime = result.time;
+  });
+  await chrome.storage.local.get(['date'], function(result) {
+    regDate = result.date;
+  });
+
+  var data;
+  await $.getJSON("http://worldclockapi.com/api/json/est/now", function(response) {
+    data = response;
+  });
+
+  var atomDate = data.currentDateTime.slice(0,10);
+  var atomTime = data.currentDateTime.slice(11,16);
+
+  if (regTime == '600am') {regTime = '05:30';}
+  else if (regTime == '630am') {regTime = '06:00';}
+  else if (regTime == '700am') {regTime = '06:30';}
+
+  console.log("Date: " + atomDate + "\nTime: " + atomTime);
+
+  if (regDate == atomDate && regTime == atomTime) {
+    console.log("timeToSpawn");
+    return true;
+  } else {
+    console.log("!timeToSpawn")
+    return false;
+  }
+}
 
 //spawnTab is called when the "Run" button is clicked in the popup
 //function is executed when our listener detects "runClick" event sent by popup.js
-function spawnTab(){
+async function spawnTab(){
   chrome.power.requestKeepAwake("display");
   chrome.power.requestKeepAwake("system");
-  console.log("Run button was clicked, beginning spawnTab()")
+  var spawnNotReady = true;
+  console.log("Run button was clicked, beginning spawnTab()");
+  // TODO: Uncomment lines below for release
+  // while(spawnNotReady) {
+  //   spawnNotReady = timeToSpawn();
+  //   await sleep(30000);
+  // }
   chrome.tabs.create({
     url: 'https://aisweb1.uvm.edu/pls/owa_prod/bwskfreg.P_AddDropCrse'
   }, function(tab){
@@ -109,7 +152,7 @@ function handleMessage(request){
             sendCommand(nextCommand);
             nextCommand = "";
             if (refreshInterval != quickRefresh) {
-              checkTime();
+              checkRegClose();
             }
           }, refreshInterval);
         }
@@ -156,7 +199,7 @@ function(request, sender, sendResponse) {
 
 
 // Checks if it is time to start refreshing quickly.
-async function checkTime() {
+async function checkRegClose() {
   var regTime;
   var regDate;
   await chrome.storage.local.get(['time'], function(result) {
