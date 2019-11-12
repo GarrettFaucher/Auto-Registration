@@ -145,6 +145,17 @@ window.addEventListener('load', function load(event){
       });
 
     });
+
+    //listen for clicks on the "run" button
+    var testButton = document.getElementById('test');
+    testButton.addEventListener('click', event => {
+      //when a click is detected, send a message to the background page
+      console.log('sending click event to background page')
+      chrome.runtime.sendMessage({event: 'testClick'}, function(response){
+
+      });
+
+    });
 });
 
 

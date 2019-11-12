@@ -82,8 +82,13 @@ function handleMessage(request){
   if (request.event){
     switch (request.event) {
       case 'runClick':
-        console.log("login automation queued")
-        nextCommand = "login";
+        console.log("clearCache automation queued")
+        nextCommand = "clearCache";
+        spawnTab();
+        break;
+      case 'testClick':
+        console.log("loginTest automation queued")
+        nextCommand = "loginTest";
         spawnTab();
         break;
       default:
@@ -95,6 +100,15 @@ function handleMessage(request){
   //incoming messages from background.js (message contains an automation and boolean success)
   if(request.automation){
     switch (request.automation) {
+      case 'clearCache':
+        if(request.success){
+          console.log('clearCache automation complete')
+          nextCommand = "login";
+        }
+        else {
+          console.log('clearCache failed')
+        }
+        break;
       case 'login':
         if(request.success){
           console.log('login automation complete, queuing checkLogin automation')
@@ -177,6 +191,56 @@ function handleMessage(request){
           console.log('registerSecond failed')
         }
         break;
+
+      /* TEST CLICK CASES */
+      case 'loginTest':
+        if(request.success){
+          console.log('loginTest automation complete, queuing checkLogin automation')
+          nextCommand = "checkLoginTest";
+        }
+        else {
+          console.log("User already logged on, progressing to waitForRegStatus")
+          nextCommand = "waitForRegStatus";
+        }
+
+        break;
+      case 'checkLoginTest':
+        if(request.success){
+          console.log('checkLoginTest automation complete')
+          nextCommand = "navigateToRegistrarTest";
+        }
+        else {
+          console.log('checkLogin failed')
+        }
+        break;
+      case 'navigateToRegistrarTest':
+        if(request.success){
+          console.log('navigateToRegistrarTest automation complete')
+          nextCommand = "navigateToAddDropTest";
+        }
+        else {
+          console.log('checkLoginTest failed')
+        }
+        break;
+      case 'navigateToAddDropTest':
+        if(request.success){
+          console.log('navigateToAddDropTest automation complete')
+          nextCommand = "selectSubmitTest";
+        }
+        else {
+          console.log('navigateToAddDropTest failed')
+        }
+        break;
+      case 'selectSubmitTest':
+        if(request.success){
+          console.log('selectSubmitTest automation complete')
+          nextCommand = "closeTest";
+        }
+        else {
+          console.log('navigateToAddDropTest failed')
+        }
+        break;
+
       default:
         break;
     }

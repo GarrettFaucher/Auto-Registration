@@ -33,6 +33,11 @@ Each automation runs a stage of the process and returns true if it succeeded, or
 Return values are handled by start()
 
 */
+async function clearCache() {
+  window.location.reload(true);
+  return true;
+}
+
 async function login() {
   // return true;
   console.log("running login automation");
@@ -245,11 +250,26 @@ async function registerSecond() {
   return true;
 }
 
+/* ---------- TEST CLICK FUNCTIONS ---------- */
+async function closeTest() {
+  var regButton = document.querySelectorAll('[href="/pls/owa_prod/twbkwbis.P_GenMenu?name=bmenu.P_RegMnu"]')[0];
+  if (regButton == undefined) {
+    alert("Oops, something went wrong.\nPlease ensure that you can access the page that has the yellow button saying:\n\"Check Regestration Again\"");
+  } else {
+    alert("Login process success!\nYou are ready to register. Press the \"Run\" button in the extension.");
+  }
+}
+
+
 // handleCommand handles incoming messages from background.js to
 // run automations and send back the responses via respondToBackground
 async function handleCommand(request){
   console.log('running automation: '+request.command);
   switch (request.command){
+    case 'clearCache':
+      var returnVal = await clearCache();
+      respondToBackground(request.command, returnVal);
+      break;
     case 'login':
       var returnVal = await login();
       respondToBackground(request.command, returnVal);
@@ -260,7 +280,6 @@ async function handleCommand(request){
     case 'checkLogin':
       var returnVal = await loggedOn();
       respondToBackground(request.command, returnVal);
-      // broadcastReady(); // Unneeded
       break;
     case 'navigateToRegistrar':
       var returnVal = await navigateToRegistrar();
@@ -286,12 +305,40 @@ async function handleCommand(request){
       var returnVal = await registerSecond();
       respondToBackground(request.command, returnVal);
       break;
+
+      /* TEST CLICK CASES */
+    case 'loginTest':
+      var returnVal = await login();
+      respondToBackground(request.command, returnVal);
+      if (preLoggedOn) {
+          broadcastReady();
+      }
+      break;
+    case 'checkLoginTest':
+      var returnVal = await loggedOn();
+      respondToBackground(request.command, returnVal);
+      break;
+    case 'navigateToRegistrarTest':
+      var returnVal = await navigateToRegistrar();
+      respondToBackground(request.command, returnVal);
+      break;
+    case 'navigateToAddDropTest':
+      var returnVal = await navigateToAddDrop();
+      respondToBackground(request.command, returnVal);
+      break;
+    case 'selectSubmitTest':
+      var returnVal = await selectSubmit();
+      respondToBackground(request.command, returnVal);
+      break;
+    case 'closeTest':
+      var returnVal = await closeTest();
+      respondToBackground(request.command, returnVal);
+      break;
     default:
       break;
 
   }
 }
-
 
 // Main function runs when the program is run
 // This function is what is injected into every *.uvm.edu page.
