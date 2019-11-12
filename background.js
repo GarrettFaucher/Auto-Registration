@@ -74,6 +74,8 @@ async function spawnTab(){
 
 //HANDLE INCOMING MESSAGES
 function handleMessage(request){
+  console.log("recieved request:")
+  console.log(request);
   console.log("NEXT COMMAND: "+nextCommand);
 
   //incoming messages from popup.js (message contains an event)

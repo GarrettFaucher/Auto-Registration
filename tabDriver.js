@@ -34,31 +34,54 @@ Return values are handled by start()
 
 */
 async function login() {
+  // return true;
   console.log("running login automation");
+  await sleep(5000);
+  var alreadyLoggedIn = true;
 
   if (!loggedOn()) {
+    alreadyLoggedIn = false;
+    console.log("LoggedOn was false, attempting to fill form")
     var usernameInput = document.getElementsByName("sid")[0];
     var passwordInput = document.getElementsByName("PIN")[0];
     var submitButton = document.querySelectorAll('[value="Login"]')[0];
 
-    chrome.storage.local.get(['username'], function(result) {
-      usernameInput.value = result.username;
+    var savedUsername = await new Promise((resolve,reject) => {
+      chrome.storage.local.get(['username'], function(result) {
+        console.log("Username resolved");
+        resolve(result.username);
+      });
     });
 
-    chrome.storage.local.get(['password'], function(result) {
-      passwordInput.value = result.password;
+    var savedPassword = await new Promise((resolve,reject) => {
+      chrome.storage.local.get(['password'], function(result) {
+        console.log("Password resolved");
+        resolve(result.password);
+      });
     });
 
-    console.log('Waiting for page to load...');
-    await sleep(2000);
-    console.log('Page should have loaded.');
+    console.log("Filling form");
+    usernameInput.value = savedUsername;
+    passwordInput.value = savedPassword;
 
+    console.log("Submitting form");
     submitButton.click();
-    return true;
-  } else {
+
+    //document.querySelectorAll('[name="loginform"]')[0].submit()
+
+  }
+
+  if(alreadyLoggedIn){
+    console.log("Login returning false, preloggedon true");
     preLoggedOn = true;
     return false;
   }
+  else{
+    console.log("Login returning true")
+    return true;
+  }
+
+
 }
 
 
