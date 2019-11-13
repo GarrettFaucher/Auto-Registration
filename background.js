@@ -3,8 +3,7 @@
 
 //globals
 var nextCommand;
-var regTab; // Stores tab used for registration
-var testTab; // Stores tab used for testing login
+var workingTab; // Stores tab besing used by program
 var refreshInterval = 3000; // Slow page reload interval
 var quickRefresh = 500; // Quick page reload interval
 
@@ -17,7 +16,7 @@ function sleep(ms) {
 function sendCommand(newCommand){
   //send a message to the active tab with given command
   //this tab will have tabDriver injected into it, so it will be waiting for a command
-  chrome.tabs.sendMessage(regTab.id, {command: newCommand}, function(response) {});
+  chrome.tabs.sendMessage(workingTab.id, {command: newCommand}, function(response) {});
 }
 
 // Checks if it is time to start refreshing quickly.
@@ -75,7 +74,7 @@ async function spawnTab(){
     chrome.tabs.create({
       url: 'https://aisweb1.uvm.edu/pls/owa_prod/bwskfreg.P_AddDropCrse'
     }, function(tab){
-      regTab = tab; // Setting the newly made tab to a global to be used later
+      workingTab = tab; // Setting the newly made tab to a global to be used later
     });
   }
   while(true) {
@@ -107,7 +106,7 @@ async function spawnTabTest(){
     chrome.tabs.create({
       url: 'https://aisweb1.uvm.edu/pls/owa_prod/bwskfreg.P_AddDropCrse'
     }, function(tab){
-      testTab = tab; // Setting the newly made tab to a global to be used later
+      workingTab = tab; // Setting the newly made tab to a global to be used later
     });
   }
   chrome.browsingData.remove({
