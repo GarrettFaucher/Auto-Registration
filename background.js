@@ -48,6 +48,7 @@ async function timeToSpawn() {
   if (regTime == '600am') {regTime = '05:55';}
   else if (regTime == '630am') {regTime = '06:25';}
   else if (regTime == '700am') {regTime = '06:55';}
+  else if (regTime == 'n_a') {regTime = atomTime;}
 
   regTime.replace(":","");
   atomTime.replace(":","");
@@ -198,6 +199,8 @@ async function handleMessage(request){
         if(request.success){
           console.log('waitForRegStatus automation complete')
           nextCommand = "register";
+          sendCommand(nextCommand);
+          nextCommand = "";
         }
         else {
           console.log('waitForRegStatus failed')
@@ -322,6 +325,7 @@ async function checkRegClose() {
   if (regTime == '600am') {regTime = '05:59';}
   else if (regTime == '630am') {regTime = '06:29';}
   else if (regTime == '700am') {regTime = '06:59';}
+  else if (regTime == 'n_a') {regTime = atomTime;}
 
   console.log(regDate + " and " + atomDate);
   console.log(regTime + " and " + atomTime);
