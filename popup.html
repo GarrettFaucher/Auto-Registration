@@ -25,10 +25,14 @@
           </div> -->
           <form id="dataForm">
             <div class="boxes">
+                <div id="testError" class="danger">
+                  <b>Account Error</b><br>Make sure you can get to the "Check Availability" Registrar page with this account, then try again.
+                </div>
                <p>UVM Username<input id="username" placeholder="NetID"></p>
-               <p>UVM Password<input id="password" type="password" placeholder="Password"></p>
+               <p style="margin-bottom: 0;">UVM Password<input id="password" type="password" placeholder="Password"></p>
 
                <p class=""><input type="button" id="test" value="Test Login"></p>
+               <p class="hideAfterTest testTextInfo">A valid login is required to proceed. Your credentials will be stored on your computer.</p>
 
                <!-- Times primed for Spring 2020 registration -->
                <p class="hideBeforeTest">Registration Date

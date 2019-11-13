@@ -174,6 +174,20 @@ $(document).ready(function(){
 
 // When save is clicked on popup.html, collectData is called.
 window.addEventListener('load', async function load(event){
+    $("#testError").hide();
+
+    var testError = await new Promise((resolve, reject)=>{
+      chrome.storage.local.get(["testError"],function(result){
+        console.log("testError contains "+result.testError);
+        resolve(result.testError);
+      })
+    });
+
+    if(testError){
+      $("#testError").show();
+    }
+
+
     fillData();
     setTimeout(function(){
       updateAllCrnInfo(false);
@@ -188,15 +202,19 @@ window.addEventListener('load', async function load(event){
 
       chrome.storage.local.set({'tested': false}); // mark as untested
       $(".hideBeforeTest").hide();
+      $(".hideAfterTest").show();
       $("#test").val("Test Login");
       $("#test").removeClass("secondaryBtn");
+      // $("#testError").hide();
 
     });
     document.getElementById('username').addEventListener('change', function() {
       chrome.storage.local.set({'tested': false}); // mark as untested
       $(".hideBeforeTest").hide();
+      $(".hideAfterTest").show();
       $("#test").val("Test Login");
       $("#test").removeClass("secondaryBtn");
+      // $("#testError").hide();
     });
 
     var running = await new Promise((resolve, reject)=>{

@@ -98,6 +98,8 @@ function loggedOn() {
     return false;
   } else {
     console.log('User is logged on');
+    chrome.storage.local.set({'tested': true}); // mark as tested
+    chrome.storage.local.set({'testError': false});
     return true;
   }
 }
@@ -245,9 +247,14 @@ async function registerSecond() {
 async function closeTest() {
   var regButton = document.querySelectorAll('[href="/pls/owa_prod/twbkwbis.P_GenMenu?name=bmenu.P_RegMnu"]')[0];
   if (regButton == undefined) {
-    alert("Oops, something went wrong.\nPlease ensure that you can access the page that has the yellow button saying:\n\"Check Regestration Again\"");
+    chrome.storage.local.set({'tested': false}); // mark as nontested
+    chrome.storage.local.set({'testError': true});
+    console.log("closeTest set testError to true");
+    alert("Oops, something went wrong.\nPlease ensure that you can access the page that has the yellow button saying:\n\"Check registration Again\"");
   } else {
     chrome.storage.local.set({'tested': true}); // mark as tested
+    chrome.storage.local.set({'testError': false}); // mark as nontested
+    console.log("closeTest set testError to false");
     alert("Login process success!\nYou are ready to register. Press the \"Run\" button in the extension.");
   }
 }
@@ -304,6 +311,12 @@ async function handleCommand(request){
       break;
     case 'checkLoginTest':
       var returnVal = await loggedOn();
+      if(!returnVal){
+        chrome.storage.local.set({'tested': false}); // mark as nontested
+        chrome.storage.local.set({'testError': true});
+        console.log("checkLoginTest set testError to true");
+        alert("Oops, something went wrong.\nPlease ensure that you can access the page that has the yellow button saying:\n\"Check Registration Again\"");
+      }
       respondToBackground(request.command, returnVal);
       break;
     case 'navigateToRegistrarTest':
