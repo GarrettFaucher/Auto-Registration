@@ -3,9 +3,9 @@
 
 //globals
 var nextCommand;
-var regTab; // Stores regtab
+var workingTab; // Stores tab besing used by program
 var refreshInterval = 3000; // Slow page reload interval
-var quickRefresh = 500; // Quick page reload interval
+var quickRefresh = 3000; // Quick page reload interval
 
 //Sleep function
 function sleep(ms) {
@@ -16,7 +16,7 @@ function sleep(ms) {
 function sendCommand(newCommand){
   //send a message to the active tab with given command
   //this tab will have tabDriver injected into it, so it will be waiting for a command
-  chrome.tabs.sendMessage(regTab.id, {command: newCommand}, function(response) {});
+  chrome.tabs.sendMessage(workingTab.id, {command: newCommand}, function(response) {});
 }
 
 // Checks if it is time to start refreshing quickly.
@@ -70,7 +70,13 @@ async function spawnTab(){
   chrome.power.requestKeepAwake("display");
   chrome.power.requestKeepAwake("system");
   console.log("Run button was clicked, beginning spawnTab()");
-  // TODO: Build promise statement into this, tab is still being created
+  var createTab = function () {
+    chrome.tabs.create({
+      url: 'https://aisweb1.uvm.edu/pls/owa_prod/bwskfreg.P_AddDropCrse'
+    }, function(tab){
+      workingTab = tab; // Setting the newly made tab to a global to be used later
+    });
+  }
   while(true) {
     console.log("entered while loop")
     var returnData = await timeToSpawn();
@@ -84,15 +90,37 @@ async function spawnTab(){
       await sleep(30000);
     }
   }
-  chrome.tabs.create({
-    url: 'https://aisweb1.uvm.edu/pls/owa_prod/bwskfreg.P_AddDropCrse'
-  }, function(tab){
-    regTab = tab; // Setting the newly made tab to a global to be used later
-  });
+  chrome.browsingData.remove({
+        "origins": ["http://*.uvm.edu/*","https://*.uvm.edu/*"]
+      }, {
+        "appcache": true,
+        "cache": true,
+        "cacheStorage": true,
+        "cookies": true
+      }, createTab);
+}
+
+async function spawnTabTest(){
+  console.log("Test button was clicked, beginning spawnTabTest()");
+  var createTab = function () {
+    chrome.tabs.create({
+      url: 'https://aisweb1.uvm.edu/pls/owa_prod/bwskfreg.P_AddDropCrse'
+    }, function(tab){
+      workingTab = tab; // Setting the newly made tab to a global to be used later
+    });
+  }
+  chrome.browsingData.remove({
+        "origins": ["http://*.uvm.edu/*","https://*.uvm.edu/*"]
+      }, {
+        "appcache": true,
+        "cache": true,
+        "cacheStorage": true,
+        "cookies": true
+      }, createTab);
 }
 
 //HANDLE INCOMING MESSAGES
-function handleMessage(request){
+async function handleMessage(request){
   console.log("recieved request:")
   console.log(request);
   console.log("NEXT COMMAND: "+nextCommand);
@@ -101,14 +129,14 @@ function handleMessage(request){
   if (request.event){
     switch (request.event) {
       case 'runClick':
-        console.log("clearCache automation queued")
-        nextCommand = "clearCache";
+        console.log("login automation queued")
+        nextCommand = "login";
         spawnTab();
         break;
       case 'testClick':
         console.log("loginTest automation queued")
         nextCommand = "loginTest";
-        spawnTab();
+        spawnTabTest();
         break;
       default:
         break;
@@ -119,15 +147,6 @@ function handleMessage(request){
   //incoming messages from background.js (message contains an automation and boolean success)
   if(request.automation){
     switch (request.automation) {
-      case 'clearCache':
-        if(request.success){
-          console.log('clearCache automation complete')
-          nextCommand = "login";
-        }
-        else {
-          console.log('clearCache failed')
-        }
-        break;
       case 'login':
         if(request.success){
           console.log('login automation complete, queuing checkLogin automation')
@@ -182,14 +201,12 @@ function handleMessage(request){
         }
         else {
           console.log('waitForRegStatus failed')
-          setTimeout(function() {
-            nextCommand = "waitForRegStatus";
-            sendCommand(nextCommand);
-            nextCommand = "";
-            if (refreshInterval != quickRefresh) {
+          nextCommand = "waitForRegStatus";
+          await sleep(refreshInterval);
+          console.log(refreshInterval);
+          if (refreshInterval != quickRefresh) {
               checkRegClose();
-            }
-          }, refreshInterval);
+          }
         }
         break;
       case 'register':

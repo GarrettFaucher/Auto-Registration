@@ -33,11 +33,6 @@ Each automation runs a stage of the process and returns true if it succeeded, or
 Return values are handled by start()
 
 */
-async function clearCache() {
-  window.location.reload(true);
-  return true;
-}
-
 async function login() {
   // return true;
   console.log("running login automation");
@@ -138,11 +133,8 @@ async function waitForRegStatus() {
   // If element is still on page user hasn't logged in
   if (typeof(element) != 'undefined' && element != null){
     console.log('Reg closed');
-    // TODO: Uncomment and remove for release
-    await window.location.assign('http://gfaucher.w3.uvm.edu/Add_Drop_Withdraw%20Classes_.htm'); // REMOVE
-    return true; // REMOVE
-    // window.location.reload(); // Reload the page
-    // return false;
+    window.location.reload(); // NOTE: Comment this to test
+    return false;
   } else {
     console.log('Reg ready');
     return true;
@@ -179,8 +171,7 @@ async function register() {
   }
 
   var regButton = document.querySelectorAll('[value="Submit Changes"]')[0];
-  // TODO: Uncomment for release
-  // regButton.click(); // Comment me out for testing purposes
+  regButton.click(); // NOTE: Comment this to test
 
   return true;
 }
@@ -244,8 +235,7 @@ async function registerSecond() {
   }
 
   var regButton = document.querySelectorAll('[value="Submit Changes"]')[0];
-  // TODO: Uncomment for release
-  // regButton.click();
+  regButton.click(); // NOTE: Comment this to test
 
   return true;
 }
@@ -266,10 +256,6 @@ async function closeTest() {
 async function handleCommand(request){
   console.log('running automation: '+request.command);
   switch (request.command){
-    case 'clearCache':
-      var returnVal = await clearCache();
-      respondToBackground(request.command, returnVal);
-      break;
     case 'login':
       var returnVal = await login();
       respondToBackground(request.command, returnVal);
