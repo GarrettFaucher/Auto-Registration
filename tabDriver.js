@@ -133,6 +133,7 @@ async function waitForRegStatus() {
   // If element is still on page user hasn't logged in
   if (typeof(element) != 'undefined' && element != null){
     console.log('Reg closed');
+    await sleep(1000);
     window.location.reload(); // NOTE: Comment this to test
     return false;
   } else {

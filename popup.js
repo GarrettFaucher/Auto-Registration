@@ -112,7 +112,7 @@ function updateAllCrnInfo(updateChangedOnly){
 
           $('> .crnInfo > .courseLink',this).attr('href',"http://www.uvm.edu/academics/courses/?term=202001&crn="+newCrn);
           $('> .crnSeatInfo > .seatsRemaining',this).html(crnData.totalRemaining+" seats left");
-          $('> .crnSeatInfo > .seatsDetail',this).html(crnData.totalRemaining+" of "+crnData.totalSeats+" seats remaining - "+ (1 - (crnData.totalRemaining / crnData.totalSeats))+"% full" );
+          $('> .crnSeatInfo > .seatsDetail',this).html(crnData.totalRemaining+" of "+crnData.totalSeats+" seats remaining - "+ Math.round((1 - (crnData.totalRemaining / crnData.totalSeats))*100) +"% full" );
 
         }
         else{
