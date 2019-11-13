@@ -3,7 +3,8 @@
 
 //globals
 var nextCommand;
-var regTab; // Stores regtab
+var regTab; // Stores tab used for registration
+var testTab; // Stores tab used for testing login
 var refreshInterval = 3000; // Slow page reload interval
 var quickRefresh = 500; // Quick page reload interval
 
@@ -70,7 +71,13 @@ async function spawnTab(){
   chrome.power.requestKeepAwake("display");
   chrome.power.requestKeepAwake("system");
   console.log("Run button was clicked, beginning spawnTab()");
-  // TODO: Build promise statement into this, tab is still being created
+  var createTab = function () {
+    chrome.tabs.create({
+      url: 'https://aisweb1.uvm.edu/pls/owa_prod/bwskfreg.P_AddDropCrse'
+    }, function(tab){
+      regTab = tab; // Setting the newly made tab to a global to be used later
+    });
+  }
   while(true) {
     console.log("entered while loop")
     var returnData = await timeToSpawn();
@@ -84,11 +91,33 @@ async function spawnTab(){
       await sleep(30000);
     }
   }
-  chrome.tabs.create({
-    url: 'https://aisweb1.uvm.edu/pls/owa_prod/bwskfreg.P_AddDropCrse'
-  }, function(tab){
-    regTab = tab; // Setting the newly made tab to a global to be used later
-  });
+  chrome.browsingData.remove({
+        "origins": ["http://*.uvm.edu/*","https://*.uvm.edu/*"]
+      }, {
+        "appcache": true,
+        "cache": true,
+        "cacheStorage": true,
+        "cookies": true
+      }, createTab);
+}
+
+async function spawnTabTest(){
+  console.log("Test button was clicked, beginning spawnTabTest()");
+  var createTab = function () {
+    chrome.tabs.create({
+      url: 'https://aisweb1.uvm.edu/pls/owa_prod/bwskfreg.P_AddDropCrse'
+    }, function(tab){
+      testTab = tab; // Setting the newly made tab to a global to be used later
+    });
+  }
+  chrome.browsingData.remove({
+        "origins": ["http://*.uvm.edu/*","https://*.uvm.edu/*"]
+      }, {
+        "appcache": true,
+        "cache": true,
+        "cacheStorage": true,
+        "cookies": true
+      }, createTab);
 }
 
 //HANDLE INCOMING MESSAGES
@@ -108,7 +137,7 @@ function handleMessage(request){
       case 'testClick':
         console.log("loginTest automation queued")
         nextCommand = "loginTest";
-        spawnTab();
+        spawnTabTest();
         break;
       default:
         break;
