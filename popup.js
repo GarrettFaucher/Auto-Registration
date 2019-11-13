@@ -53,7 +53,7 @@ async function getCourseData(crn){
 }
 
 async function beginCountdown(){
-  
+
 }
 
 function updateAllCrnInfo(updateChangedOnly){
@@ -197,10 +197,19 @@ window.addEventListener('load', async function load(event){
       console.log('sending click event to background page')
       chrome.runtime.sendMessage({event: 'runClick'}, function(response){});
 
+      chrome.storage.local.get(['time'], function(result) {
+        var savedTime = result.time;
+        console.log("Got "+savedTime)
+        var output = [savedTime.slice(0, 1), ":", savedTime.slice(1)].join('');
+        $("#countdownText").html("Registration will commence at "+output)
+      });
+
+
+
       $("#dataForm").fadeOut(500);
       $("#countDown").delay(500).fadeIn(500);
       beginCountdown();
-      chrome.storage.local.set({'running': true});
+      // chrome.storage.local.set({'running': true});
     });
 
     //listen for clicks on the "run" button
