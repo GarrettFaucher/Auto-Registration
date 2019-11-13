@@ -45,9 +45,9 @@ async function timeToSpawn() {
   var atomDate = data.currentDateTime.slice(0,10);
   var atomTime = data.currentDateTime.slice(11,16);
 
-  if (regTime == '600am') {regTime = '05:30';}
-  else if (regTime == '630am') {regTime = '06:00';}
-  else if (regTime == '700am') {regTime = '06:30';}
+  if (regTime == '600am') {regTime = '05:55';}
+  else if (regTime == '630am') {regTime = '06:25';}
+  else if (regTime == '700am') {regTime = '06:55';}
 
   regTime.replace(":","");
   atomTime.replace(":","");
