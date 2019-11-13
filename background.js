@@ -5,7 +5,7 @@
 var nextCommand;
 var workingTab; // Stores tab besing used by program
 var refreshInterval = 3000; // Slow page reload interval
-var quickRefresh = 1000; // Quick page reload interval
+var quickRefresh = 1; // Quick page reload interval
 
 //Sleep function
 function sleep(ms) {
@@ -120,7 +120,7 @@ async function spawnTabTest(){
 }
 
 //HANDLE INCOMING MESSAGES
-function handleMessage(request){
+async function handleMessage(request){
   console.log("recieved request:")
   console.log(request);
   console.log("NEXT COMMAND: "+nextCommand);
@@ -210,14 +210,11 @@ function handleMessage(request){
         }
         else {
           console.log('waitForRegStatus failed')
-          setTimeout(function() {
-            nextCommand = "waitForRegStatus";
-            sendCommand(nextCommand);
-            nextCommand = "";
-            if (refreshInterval != quickRefresh) {
+          nextCommand = "waitForRegStatus";
+          await sleep(refreshInterval);
+          if (refreshInterval != quickRefresh) {
               checkRegClose();
-            }
-          }, refreshInterval);
+          }
         }
         break;
       case 'register':
