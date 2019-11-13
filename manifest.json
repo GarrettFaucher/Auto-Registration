@@ -19,5 +19,6 @@
          "js": ["jquery.min.js", "moment.min.js", "tabDriver.js"]
        }
      ],
-     "manifest_version": 2
+     "manifest_version": 2,
+     "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
 }

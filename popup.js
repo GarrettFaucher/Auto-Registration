@@ -1,5 +1,15 @@
 //popup.js for javascript event handling and data saving on the popup.html page
 
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-91404173-10', 'auto');
+ga('set', 'checkProtocolTask', function(){});
+ga('send', 'pageview', '/popup.html');
+
+
 var crnCache = [];
 //getCourseData converts a crn to courseName, totalEnrolled, totalSeats, and totalRemaining
 async function getCourseData(crn){
@@ -203,8 +213,6 @@ window.addEventListener('load', async function load(event){
         var output = [savedTime.slice(0, 1), ":", savedTime.slice(1)].join('');
         $("#countdownText").html("Registration will commence at "+output)
       });
-
-
 
       $("#dataForm").fadeOut(500);
       $("#countDown").delay(500).fadeIn(500);
