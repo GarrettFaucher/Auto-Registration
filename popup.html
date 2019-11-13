@@ -27,13 +27,16 @@
             <div class="boxes">
                <p>UVM Username<input id="username" placeholder="NetID"></p>
                <p>UVM Password<input id="password" type="password" placeholder="Password"></p>
+
+               <p class=""><input type="button" id="test" value="Test Login"></p>
+
                <!-- Times primed for Spring 2020 registration -->
-               <p>Registration Date
+               <p class="hideBeforeTest">Registration Date
                     <input type="date" id="reg_date" name="trip-start"
                     value="2019-11-11"
                     min="2019-11-11" max="2019-12-30">
                </p>
-               <p>Registration Time
+               <p class="hideBeforeTest">Registration Time
                     <select id="reg_time">
                          <option value="700am">Choose a Registration Time</option>
                          <option value="600am">6:00 AM</option>
@@ -41,17 +44,16 @@
                          <option value="700am">7:00 AM</option>
                     </select>
                </p>
-
-               <p>Tier 1 Classes (1st Choice)</p>
-               <div class="crnResolver">
+               <p class="hideBeforeTest">Tier 1 Classes (1st Choice)</p>
+               <div class="crnResolver hideBeforeTest">
                  <div class="crnInfo"><a class="courseLink"></a></div>
-                   <input id="crn_1a" placeholder="Enter a CRN" autocomplete="off" class="">
-                   <div class="crnSeatInfo">
-                     <i class='fas'></i><span class="seatsRemaining"></span><span class="seatsDetail"></span>
-                   </div>
+                 <input id="crn_1a" placeholder="Enter a CRN" autocomplete="off" class="">
+                 <div class="crnSeatInfo">
+                   <i class='fas'></i><span class="seatsRemaining"></span><span class="seatsDetail"></span>
+                 </div>
                </div>
 
-               <div class="crnResolver">
+               <div class="crnResolver hideBeforeTest">
                  <div class="crnInfo"><a class="courseLink"></a></div>
                  <input id="crn_2a" placeholder="Enter a CRN" autocomplete="off" class="">
                  <div class="crnSeatInfo">
@@ -59,7 +61,7 @@
                  </div>
                </div>
 
-               <div class="crnResolver">
+               <div class="crnResolver hideBeforeTest">
                  <div class="crnInfo"><a class="courseLink"></a></div>
                  <input id="crn_3a" placeholder="Enter a CRN" autocomplete="off" class="">
                  <div class="crnSeatInfo">
@@ -67,7 +69,7 @@
                  </div>
                </div>
 
-               <div class="crnResolver">
+               <div class="crnResolver hideBeforeTest">
                  <div class="crnInfo"><a class="courseLink"></a></div>
                  <input id="crn_4a" placeholder="Enter a CRN" autocomplete="off" class="">
                  <div class="crnSeatInfo">
@@ -75,7 +77,7 @@
                  </div>
                </div>
 
-               <div class="crnResolver">
+               <div class="crnResolver hideBeforeTest">
                  <div class="crnInfo"><a class="courseLink"></a></div>
                  <input id="crn_5a" placeholder="Enter a CRN" autocomplete="off" class="">
                  <div class="crnSeatInfo">
@@ -83,7 +85,7 @@
                  </div>
                </div>
 
-               <div class="crnResolver">
+               <div class="crnResolver hideBeforeTest">
                  <div class="crnInfo"><a class="courseLink"></a></div>
                  <input id="crn_6a" placeholder="Enter a CRN" autocomplete="off" class="">
                  <div class="crnSeatInfo">
@@ -91,7 +93,7 @@
                  </div>
                </div>
 
-               <div class="crnResolver">
+               <div class="crnResolver hideBeforeTest">
                  <div class="crnInfo"><a class="courseLink"></a></div>
                  <input id="crn_7a" placeholder="Enter a CRN" autocomplete="off" class="">
                  <div class="crnSeatInfo">
@@ -99,7 +101,7 @@
                  </div>
                </div>
 
-               <div class="crnResolver">
+               <div class="crnResolver hideBeforeTest">
                  <div class="crnInfo"><a class="courseLink"></a></div>
                  <input id="crn_8a" placeholder="Enter a CRN" autocomplete="off" class="">
                  <div class="crnSeatInfo">
@@ -107,16 +109,16 @@
                  </div>
                </div>
 
-               <p>Tier 2 Classes (Backups)</p>
-               <div class="crnResolver">
+               <p class="hideBeforeTest">Tier 2 Classes (Backups)</p>
+               <div class="crnResolver hideBeforeTest">
                  <div class="crnInfo"><a class="courseLink"></a></div>
-                   <input id="crn_1b" placeholder="Enter a backup CRN" autocomplete="off" class="">
-                   <div class="crnSeatInfo">
-                     <i class='fas'></i><span class="seatsRemaining"></span><span class="seatsDetail"></span>
-                   </div>
+                 <input id="crn_1b" placeholder="Enter a backup CRN" autocomplete="off" class="">
+                 <div class="crnSeatInfo">
+                   <i class='fas'></i><span class="seatsRemaining"></span><span class="seatsDetail"></span>
+                 </div>
                </div>
 
-               <div class="crnResolver">
+               <div class="crnResolver hideBeforeTest">
                  <div class="crnInfo"><a class="courseLink"></a></div>
                  <input id="crn_2b" placeholder="Enter a backup CRN" autocomplete="off" class="">
                  <div class="crnSeatInfo">
@@ -124,7 +126,7 @@
                  </div>
                </div>
 
-               <div class="crnResolver">
+               <div class="crnResolver hideBeforeTest">
                  <div class="crnInfo"><a class="courseLink"></a></div>
                  <input id="crn_3b" placeholder="Enter a backup CRN" autocomplete="off" class="">
                  <div class="crnSeatInfo">
@@ -132,7 +134,7 @@
                  </div>
                </div>
 
-               <div class="crnResolver">
+               <div class="crnResolver hideBeforeTest">
                  <div class="crnInfo"><a class="courseLink"></a></div>
                  <input id="crn_4b" placeholder="Enter a backup CRN" autocomplete="off" class="">
                  <div class="crnSeatInfo">
@@ -140,7 +142,7 @@
                  </div>
                </div>
 
-               <div class="crnResolver">
+               <div class="crnResolver hideBeforeTest">
                  <div class="crnInfo"><a class="courseLink"></a></div>
                  <input id="crn_5b" placeholder="Enter a backup CRN" autocomplete="off" class="">
                  <div class="crnSeatInfo">
@@ -148,7 +150,7 @@
                  </div>
                </div>
 
-               <div class="crnResolver">
+               <div class="crnResolver hideBeforeTest">
                  <div class="crnInfo"><a class="courseLink"></a></div>
                  <input id="crn_6b" placeholder="Enter a backup CRN" autocomplete="off" class="">
                  <div class="crnSeatInfo">
@@ -156,7 +158,7 @@
                  </div>
                </div>
 
-               <div class="crnResolver">
+               <div class="crnResolver hideBeforeTest">
                  <div class="crnInfo"><a class="courseLink"></a></div>
                  <input id="crn_7b" placeholder="Enter a backup CRN" autocomplete="off" class="">
                  <div class="crnSeatInfo">
@@ -164,7 +166,7 @@
                  </div>
                </div>
 
-               <div class="crnResolver">
+               <div class="crnResolver hideBeforeTest">
                  <div class="crnInfo"><a class="courseLink"></a></div>
                  <input id="crn_8b" placeholder="Enter a backup CRN" autocomplete="off" class="">
                  <div class="crnSeatInfo">
@@ -172,9 +174,8 @@
                  </div>
                </div>
 
+               <p class="hideBeforeTest"><input type="button" id="run" value="Run"></p>
 
-               <p><input type="button" id="test" value="Test Login"></p>
-               <p><input type="button" id="run" value="Run"></p>
             </div>
 
           </form>

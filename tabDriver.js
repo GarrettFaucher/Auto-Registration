@@ -247,6 +247,7 @@ async function closeTest() {
   if (regButton == undefined) {
     alert("Oops, something went wrong.\nPlease ensure that you can access the page that has the yellow button saying:\n\"Check Regestration Again\"");
   } else {
+    chrome.storage.local.set({'tested': true}); // mark as tested
     alert("Login process success!\nYou are ready to register. Press the \"Run\" button in the extension.");
   }
 }

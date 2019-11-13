@@ -184,11 +184,45 @@ window.addEventListener('load', async function load(event){
         updateAllCrnInfo(true);
     });
 
+    document.getElementById('username').addEventListener('change', function() {
+
+      chrome.storage.local.set({'tested': false}); // mark as untested
+      $(".hideBeforeTest").hide();
+      $("#test").val("Test Login");
+      $("#test").removeClass("secondaryBtn");
+
+    });
+    document.getElementById('username').addEventListener('change', function() {
+      chrome.storage.local.set({'tested': false}); // mark as untested
+      $(".hideBeforeTest").hide();
+      $("#test").val("Test Login");
+      $("#test").removeClass("secondaryBtn");
+    });
+
     var running = await new Promise((resolve, reject)=>{
       chrome.storage.local.get(["running"],function(result){
         resolve(result.running);
       })
     });
+
+    var tested = await new Promise((resolve, reject)=>{
+      chrome.storage.local.get(["tested"],function(result){
+        resolve(result.tested);
+      })
+    });
+
+    console.log("tested: ")
+    console.log(tested);
+    if(!tested || tested == undefined){
+      $(".hideBeforeTest").hide();
+      $("#test").val("Test Login");
+      $("#test").removeClass("secondaryBtn");
+    }
+    else{
+      $("#test").val("Test Login Again");
+      $("#test").addClass("secondaryBtn");
+      $(".hideAfterTest").hide();
+    }
 
     if(running){
       beginCountdown();

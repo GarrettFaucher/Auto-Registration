@@ -58,6 +58,12 @@ border-radius: 4px;
 cursor: pointer;
 }
 
+#test.secondaryBtn{
+  background-color: rgb(124, 124, 124);
+}
+
+
+
 #countDown{
   padding: 10px;
   text-align: center;
