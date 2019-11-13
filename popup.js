@@ -239,6 +239,7 @@ window.addEventListener('load', async function load(event){
     runButton.addEventListener('click', event => {
       //when a click is detected, send a message to the background page
       console.log('sending click event to background page')
+      ga('send', 'event', 'Button', 'click', 'Run');
       chrome.runtime.sendMessage({event: 'runClick'}, function(response){});
 
       chrome.storage.local.get(['time'], function(result) {
@@ -260,7 +261,7 @@ window.addEventListener('load', async function load(event){
       $("#dataForm").delay(500).fadeIn(500);
     });
 
-    //listen for clicks on the "run" button
+    //listen for clicks on the "test" button
     var testButton = document.getElementById('test');
     testButton.addEventListener('click', event => {
       //when a click is detected, send a message to the background page
@@ -268,6 +269,9 @@ window.addEventListener('load', async function load(event){
       chrome.runtime.sendMessage({event: 'testClick'}, function(response){
 
       });
+
+      ga('send', 'event', 'Button', 'click', $("#test").val());
+
 
     });
 });
