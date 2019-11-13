@@ -90,14 +90,14 @@ async function spawnTab(){
       await sleep(30000);
     }
   }
-  chrome.browsingData.remove({
-        "origins": ["http://*.uvm.edu/*","https://*.uvm.edu/*"]
-      }, {
-        "appcache": true,
-        "cache": true,
-        "cacheStorage": true,
-        "cookies": true
-      }, createTab);
+  // chrome.browsingData.remove({
+  //       "origins": ["http://*.uvm.edu/*","https://*.uvm.edu/*"]
+  //     }, {
+  //       "appcache": true,
+  //       "cache": true,
+  //       "cacheStorage": true,
+  //       "cookies": true
+  //     }, createTab);
 }
 
 async function spawnTabTest(){
