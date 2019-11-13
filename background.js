@@ -5,7 +5,7 @@
 var nextCommand;
 var workingTab; // Stores tab besing used by program
 var refreshInterval = 3000; // Slow page reload interval
-var quickRefresh = 500; // Quick page reload interval
+var quickRefresh = 1000; // Quick page reload interval
 
 //Sleep function
 function sleep(ms) {
