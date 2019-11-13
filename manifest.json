@@ -1,5 +1,5 @@
 {
-     "name": "UVM Robo-Registration",
+     "name": "Robo-Registration",
      "version": "1.1.3",
      "description": "Allows for the auto-registration of classes at the University of Vermont.",
      "icons": { "16": "./icons/icon16.png",
