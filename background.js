@@ -5,7 +5,7 @@
 var nextCommand;
 var workingTab; // Stores tab besing used by program
 var refreshInterval = 3000; // Slow page reload interval
-var quickRefresh = 1; // Quick page reload interval
+var quickRefresh = 3000; // Quick page reload interval
 
 //Sleep function
 function sleep(ms) {
@@ -129,8 +129,8 @@ async function handleMessage(request){
   if (request.event){
     switch (request.event) {
       case 'runClick':
-        console.log("clearCache automation queued")
-        nextCommand = "clearCache";
+        console.log("login automation queued")
+        nextCommand = "login";
         spawnTab();
         break;
       case 'testClick':
@@ -147,15 +147,6 @@ async function handleMessage(request){
   //incoming messages from background.js (message contains an automation and boolean success)
   if(request.automation){
     switch (request.automation) {
-      case 'clearCache':
-        if(request.success){
-          console.log('clearCache automation complete')
-          nextCommand = "login";
-        }
-        else {
-          console.log('clearCache failed')
-        }
-        break;
       case 'login':
         if(request.success){
           console.log('login automation complete, queuing checkLogin automation')
@@ -212,6 +203,7 @@ async function handleMessage(request){
           console.log('waitForRegStatus failed')
           nextCommand = "waitForRegStatus";
           await sleep(refreshInterval);
+          console.log(refreshInterval);
           if (refreshInterval != quickRefresh) {
               checkRegClose();
           }

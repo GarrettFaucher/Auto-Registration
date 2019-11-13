@@ -33,11 +33,6 @@ Each automation runs a stage of the process and returns true if it succeeded, or
 Return values are handled by start()
 
 */
-async function clearCache() {
-  window.location.reload(true);
-  return true;
-}
-
 async function login() {
   // return true;
   console.log("running login automation");
@@ -261,10 +256,6 @@ async function closeTest() {
 async function handleCommand(request){
   console.log('running automation: '+request.command);
   switch (request.command){
-    case 'clearCache':
-      var returnVal = await clearCache();
-      respondToBackground(request.command, returnVal);
-      break;
     case 'login':
       var returnVal = await login();
       respondToBackground(request.command, returnVal);
