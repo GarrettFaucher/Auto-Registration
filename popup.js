@@ -52,6 +52,10 @@ async function getCourseData(crn){
   return returnVal;
 }
 
+async function beginCountdown(){
+  
+}
+
 function updateAllCrnInfo(updateChangedOnly){
   console.log("running updateAllCrnInfo")
   var index = -1;
@@ -159,7 +163,7 @@ $(document).ready(function(){
 });
 
 // When save is clicked on popup.html, collectData is called.
-window.addEventListener('load', function load(event){
+window.addEventListener('load', async function load(event){
     fillData();
     setTimeout(function(){
       updateAllCrnInfo(false);
@@ -170,15 +174,33 @@ window.addEventListener('load', function load(event){
         updateAllCrnInfo(true);
     });
 
+    var running = await new Promise((resolve, reject)=>{
+      chrome.storage.local.get(["running"],function(result){
+        resolve(result.running);
+      })
+    });
+
+    if(running){
+      beginCountdown();
+      $("#dataForm").hide();
+      $("#countDown").show();
+    }
+    else{
+      $("#dataForm").show();
+      $("#countDown").hide();
+    }
+
     //listen for clicks on the "run" button
     var runButton = document.getElementById('run');
     runButton.addEventListener('click', event => {
       //when a click is detected, send a message to the background page
       console.log('sending click event to background page')
-      chrome.runtime.sendMessage({event: 'runClick'}, function(response){
+      chrome.runtime.sendMessage({event: 'runClick'}, function(response){});
 
-      });
-
+      $("#dataForm").fadeOut(500);
+      $("#countDown").delay(500).fadeIn(500);
+      beginCountdown();
+      chrome.storage.local.set({'running': true});
     });
 
     //listen for clicks on the "run" button
