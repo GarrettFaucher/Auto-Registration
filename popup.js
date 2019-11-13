@@ -209,7 +209,13 @@ window.addEventListener('load', async function load(event){
       $("#dataForm").fadeOut(500);
       $("#countDown").delay(500).fadeIn(500);
       beginCountdown();
-      // chrome.storage.local.set({'running': true});
+      chrome.storage.local.set({'running': true});
+    });
+
+    $("#cancelBtn").on('click', function(){
+      chrome.storage.local.set({'running': false});
+      $("#countDown").fadeOut(500);
+      $("#dataForm").delay(500).fadeIn(500);
     });
 
     //listen for clicks on the "run" button

@@ -58,6 +58,15 @@ border-radius: 4px;
 cursor: pointer;
 }
 
+#countDown{
+  padding: 10px;
+  text-align: center;
+}
+
+#countdownText{
+  text-align: center;
+}
+
 .warning{
   background-color: rgb(249, 132, 27) !important;
 }
