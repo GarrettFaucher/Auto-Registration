@@ -9,6 +9,7 @@ ga('create', 'UA-91404173-10', 'auto');
 ga('set', 'checkProtocolTask', function(){});
 ga('send', 'pageview', '/popup.html');
 
+var appFillComplete = false;
 
 var crnCache = [];
 //getCourseData converts a crn to courseName, totalEnrolled, totalSeats, and totalRemaining
@@ -130,6 +131,8 @@ function updateAllCrnInfo(updateChangedOnly){
 
 
   });
+  appFillComplete = true;
+  console.log("*** APP FILL COMPLETE ***");
 }
 
 $(document).ready(function(){
@@ -199,7 +202,7 @@ window.addEventListener('load', async function load(event){
     });
 
     document.getElementById('username').addEventListener('change', function() {
-
+      console.log("USERNAME CHANGED!!")
       chrome.storage.local.set({'tested': false}); // mark as untested
       $(".hideBeforeTest").hide();
       $(".hideAfterTest").show();
@@ -208,13 +211,14 @@ window.addEventListener('load', async function load(event){
       // $("#testError").hide();
 
     });
-    document.getElementById('username').addEventListener('change', function() {
+    document.getElementById('password').addEventListener('change', function() {
+      console.log("PASSWORD CHANGED!!!")
       chrome.storage.local.set({'tested': false}); // mark as untested
       $(".hideBeforeTest").hide();
       $(".hideAfterTest").show();
       $("#test").val("Test Login");
       $("#test").removeClass("secondaryBtn");
-      // $("#testError").hide();
+        // $("#testError").hide();
     });
 
     var running = await new Promise((resolve, reject)=>{
@@ -224,7 +228,7 @@ window.addEventListener('load', async function load(event){
     });
 
     var tested = await new Promise((resolve, reject)=>{
-      chrome.storage.local.get(["tested"],function(result){
+      chrome.storage.local.get(['tested'],function(result){
         resolve(result.tested);
       })
     });
@@ -348,13 +352,13 @@ function fillData(){
 function collectData() {
      console.log("collectData called.");
 
-     // Clear local storage
-     chrome.storage.local.clear(function() {
-          var error = chrome.runtime.lastError;
-          if (error) {
-               console.error(error);
-          }
-     });
+     // // Clear local storage
+     // chrome.storage.local.clear(function() {
+     //      var error = chrome.runtime.lastError;
+     //      if (error) {
+     //           console.error(error);
+     //      }
+     // });
 
      // Store the data from each textbox
      var username = document.getElementById('username').value;
