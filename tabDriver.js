@@ -255,7 +255,7 @@ async function closeTest() {
     chrome.storage.local.set({'tested': true}); // mark as tested
     chrome.storage.local.set({'testError': false}); // mark as nontested
     console.log("closeTest set testError to false");
-    alert("Login process success!\nYou are ready to register. Press the \"Run\" button in the extension.");
+    alert("Login process success! You are ready to register.\nEnter your CRNs into the extension.\nPress the \"Run\" button in the extension the night before your registration time.");
   }
 }
 
