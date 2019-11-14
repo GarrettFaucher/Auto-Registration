@@ -157,6 +157,10 @@ cursor: pointer;
   text-decoration: none !important;
 }
 
+.instructionsMain{
+  padding: 10px;
+}
+
 input[type=submit]:hover {
 background-color: #01533F;
 }
