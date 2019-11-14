@@ -125,7 +125,7 @@ function updateAllCrnInfo(updateChangedOnly){
       }
       else{
         $('> input',this).addClass("empty");
-        $('> .crnInfo',this).html("")
+        $('> .crnInfo > .courseLink',this).html("")
       }
     }
 
