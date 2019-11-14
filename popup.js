@@ -118,7 +118,7 @@ function updateAllCrnInfo(updateChangedOnly){
         }
         else{
           console.log("No crndata for "+newCrn);
-          $('> .crnInfo',this).html("Invalid CRN");
+          $('> .crnInfo > .courseLink',this).html("Invalid CRN");
           $('> .crnInfo',this).addClass('warning');
           $('> .crnSeatInfo',this).hide();
         }
