@@ -1,14 +1,5 @@
 //popup.js for javascript event handling and data saving on the popup.html page
 
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-91404173-10', 'auto');
-ga('set', 'checkProtocolTask', function(){});
-ga('send', 'pageview', '/popup.html');
-
 var appFillComplete = false;
 
 var crnCache = [];
@@ -261,14 +252,13 @@ window.addEventListener('load', async function load(event){
     runButton.addEventListener('click', event => {
       //when a click is detected, send a message to the background page
       console.log('sending click event to background page')
-      ga('send', 'event', 'Button', 'click', 'Run');
       chrome.runtime.sendMessage({event: 'runClick'}, function(response){});
 
       chrome.storage.local.get(['time'], function(result) {
         var savedTime = result.time;
         console.log("Got "+savedTime)
         var output = [savedTime.slice(0, 1), ":", savedTime.slice(1)].join('');
-        $("#countdownText").html("Registration will commence at "+output)
+        $("#countdownText").html("Pay for the full version for access to \"Run\" function.")
       });
 
       $("#dataForm").fadeOut(500);

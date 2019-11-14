@@ -10,13 +10,13 @@
           "default_popup": "popup.html"
      },
      "background": {
-        "scripts": ["jquery.min.js","background.js"],
+        "scripts": ["jquery.min.js"],
         "persistent": false
       },
      "content_scripts": [
        {
          "matches": ["http://*.uvm.edu/*","https://*.uvm.edu/*"],
-         "js": ["jquery.min.js", "moment.min.js", "tabDriver.js"]
+         "js": ["jquery.min.js", "moment.min.js"]
        }
      ],
      "manifest_version": 2,
