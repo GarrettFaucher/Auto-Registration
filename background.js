@@ -12,6 +12,33 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+chrome.browserAction.onClicked.addListener(openOptions);
+
+function openOptions() {
+    let optionsURL = chrome.extension.getURL('popup.html');
+    let isInWindow = false;
+    // Get all tabs in current window
+    chrome.tabs.query({}, function (tabs) {
+        tabs.forEach(function (tab) {
+            // Check if options page is present in the window
+            if (tab.url === optionsURL) {
+                isInWindow = true;
+                // if present, check if active (tab selected)
+                if (!tab.active) {
+                    // Set options page to active
+                    chrome.tabs.update(tab.id, {active: true});
+                    // Reset submit
+                    chrome.storage.sync.set({'submit': 1});
+                }
+            }
+        });
+        // Create new tab if not present
+        if (!isInWindow) {
+            chrome.tabs.create({url: optionsURL});
+        }
+    });
+}
+
 //sends a command to our spawned tab (created with spawnTab)
 function sendCommand(newCommand){
   //send a message to the active tab with given command

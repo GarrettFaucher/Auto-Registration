@@ -7,7 +7,7 @@
                 "128": "./icons/icon128.png" },
      "permissions": ["storage", "tabs","notifications","http://*.uvm.edu/*","https://*.uvm.edu/*", "power", "browsingData"],
      "browser_action": {
-          "default_popup": "popup.html"
+          "default_icon": "icons/icon16.png"
      },
      "background": {
         "scripts": ["jquery.min.js","background.js"],
