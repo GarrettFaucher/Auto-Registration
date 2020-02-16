@@ -12,6 +12,54 @@ ga('send', 'pageview', '/popup.html');
 var appFillComplete = false;
 
 var crnCache = [];
+
+const CAROUSEL_SPEED = 2500;
+const CAROUSEL_MAX_ITEMS = 4;
+var cQueue = [];
+var cVisible = [];
+var currentElement;
+function doCarousel(){
+    // $('#list-carousel-hidden > ul > li:first-child').css('color','red');
+    currentElement = $('#list-carousel-hidden > ul > li:first-child');
+    currentElement.hide();
+    $('#list-carousel > ul').append(currentElement);
+    currentElement.fadeIn('slow');
+
+    if($('#list-carousel > ul').children().length > CAROUSEL_MAX_ITEMS){
+      currentElement = $('#list-carousel > ul > li:first-child');
+      // currentElement.fadeOut(500,function(){
+      //     $(this).css({"visibility":"hidden",display:'block'}).slideUp(function(){
+      //       $(this).remove();
+      //     });
+      // });
+
+      currentElement.css({ opacity: 0, transition: 'opacity 0.5s' }).delay(100).slideUp(function(){
+        var newElem = $(this).clone()
+        newElem.css({opacity: 100, transition: ''});
+        $('#list-carousel-hidden > ul').append(newElem);
+        $(this).remove();
+      });
+
+      // currentElement.fadeOut('slow', function(){
+      //   $(this).slideUp();
+      // });
+
+    }
+
+    // currentElement = cQueue.shift();
+    // cVisible.push(currentElement);
+    // $(currentElement).css('display','block')
+    //
+    // if(cVisible.length > 3){
+    //   currentElement = cVisible.shift();
+    //   $(currentElement).css('display','none')
+    //   cQueue.push(currentElement);
+    // }
+    //
+    // console.log("Carouselling");
+    // console.log(cQueue);
+}
+
 //getCourseData converts a crn to courseName, totalEnrolled, totalSeats, and totalRemaining
 async function getCourseData(crn){
   // $.get("https://giraffe.uvm.edu/~rgweb/batch/swrsectc_spring_soc_202001/all_sections.html", function(data, status){
@@ -136,6 +184,16 @@ function updateAllCrnInfo(updateChangedOnly){
 }
 
 $(document).ready(function(){
+  /*CAROUSEL*/
+
+  //initialize
+  for(var i = 0; i < CAROUSEL_MAX_ITEMS; i++){
+    doCarousel();
+  }
+
+  //scroll through elements
+  var carousel = setInterval(doCarousel, CAROUSEL_SPEED);
+
   $('body').on('click', 'a.openExternal', function(){
    chrome.tabs.create({url: $(this).attr('href')});
    return false;

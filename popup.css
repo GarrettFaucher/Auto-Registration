@@ -1,7 +1,127 @@
-body {
-     font-family: Arial;
+html,body {
+    font-family: 'Roboto', sans-serif;
      margin: 0;
      padding: 0;
+     height: 100%;
+     background-color: #A2C5AC;
+}
+.formElement{
+  display: flex;
+  color: white;
+  /* background-color: rgba(255,255,255,0.8); */
+}
+.formElement > .inputIcon{
+  width: 15%;
+  float: left;
+  margin: 8px 0;
+  text-align: center;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border: 1px solid white;
+  border-right: 0;
+}
+
+.formElement > .inputIcon > i{
+  top: 50%;
+  transform: translateY(50%);
+  padding-top: 5px;
+}
+
+.formElement > input{
+  float: left;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: 0;
+  padding-left: 0;
+  background-color: rgba(0,0,0,0); /*background is transparent*/
+  color: white;
+}
+
+.formElement > input:focus{
+  outline-width: 0;
+}
+
+.wrapper{
+  /* position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%); */
+}
+
+.row{
+  /* float: left; */
+  height: 90vh;
+  width: 100vw;
+}
+.title-card > h1{
+  font-weight: 900 !important;
+}
+
+#list-carousel-hidden{
+  visibility: hidden;
+  height: 0;
+}
+
+#list-carousel > ul{
+  list-style-type: none;
+  padding-left: 0px;
+  padding-top: 10px;
+  height: 300px;
+}
+#list-carousel > ul > li{
+  margin-bottom: 20px;
+  /* display: none; */
+}
+#list-carousel > ul > li > span{
+  display: inline-flex;
+  text-align: center;
+  width: 40px;
+}
+#list-carousel > ul > li > span > i{
+  font-size: 18pt;
+  text-align: center;
+  margin: 0 auto;
+}
+#list-carousel > ul > li{
+  line-height: 18pt;
+  font-size: 16pt;
+}
+
+#loginForm{
+
+  /* position: absolute;
+  top: 50%;
+  transform: translateY(-50%); */
+  width: 100%;
+  /* float: left; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white !important;
+  /* background-color: white; */
+}
+
+#loginForm > .boxes > p{
+  color: white;
+}
+
+.wrapper{
+  min-height: 100%;
+}
+
+footer{
+  background-color: rgb(83, 83, 83);
+  color: white;
+  margin: 0;
+  padding: 10px;
+  font-size: 10pt;
+  text-align: center;
+  height: 40px;
+  margin-top: -40px;
+}
+footer > p{
+  margin: 0;
+  padding: 0;
 }
 
 .header_main {
@@ -164,21 +284,6 @@ cursor: pointer;
 input[type=submit]:hover {
 background-color: #01533F;
 }
-
-.footer{
-  background-color: rgb(83, 83, 83);
-  color: white;
-  margin: 0;
-  padding: 10px;
-  font-size: 10pt;
-  text-align: center;
-}
-
-.footer > p{
-  margin: 0;
-  padding: 0;
-}
-
 
 ::-webkit-scrollbar {
     width: 7px;
