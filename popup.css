@@ -35,12 +35,31 @@ html,body {
   padding-left: 0;
   background-color: rgba(0,0,0,0); /*background is transparent*/
   color: white;
+  border-color: white;
 }
 
 .formElement > input:focus{
   outline-width: 0;
 }
-
+#realName{
+  color: white;
+}
+#studentVerified{
+  display: none;
+  background: #007155;
+  border-radius: 3px;
+  padding: 1px 7px;
+  margin-right: 10px;
+  font-weight: 600;
+}
+#studentNotVerified{
+  display: none;
+  background: #ff2300;
+  border-radius: 3px;
+  padding: 1px 7px;
+  margin-right: 10px;
+  font-weight: 600;
+}
 .wrapper{
   /* position: absolute;
   top: 50%;
@@ -52,11 +71,16 @@ html,body {
   /* float: left; */
   height: 90vh;
   width: 100vw;
+  padding-top: 8em;
 }
 .title-card > h1{
   font-weight: 900 !important;
 }
-
+.dismissBtn{
+  float: right;
+  padding-top: 2px;
+  cursor: pointer;
+}
 #list-carousel-hidden{
   visibility: hidden;
   height: 0;
@@ -87,8 +111,18 @@ html,body {
   font-size: 16pt;
 }
 
-#loginForm{
+#loginForm > .boxes > h5{
+  color: white;
+  text-align: center;
+  margin-bottom: 1em;
+}
 
+#loginForm:hover{
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.4), 0 6px 25px 0 rgba(0, 0, 0, 0.4);
+}
+
+#loginForm{
+  border-radius: 7px;
   /* position: absolute;
   top: 50%;
   transform: translateY(-50%); */
@@ -98,6 +132,7 @@ html,body {
   padding: 20px;
   background-color: rgba(0, 0, 0, 0.8);
   color: white !important;
+  transition: box-shadow 0.5s;
   /* background-color: white; */
 }
 
@@ -176,6 +211,11 @@ margin: 8px 0;
 border: none;
 border-radius: 4px;
 cursor: pointer;
+transition: box-shadow 0.3s;
+}
+input[type=button]:hover{
+
+  box-shadow: 0 4px 8px 0 rgba(0,71,55, 0.2), 0 6px 20px 0 rgba(0,71,55, 0.2);
 }
 
 #test.secondaryBtn{
@@ -190,6 +230,7 @@ cursor: pointer;
 }
 
 #testError{
+  display: none;
   border-radius: 4px;
   padding: 5px;
   margin-bottom: 1em;

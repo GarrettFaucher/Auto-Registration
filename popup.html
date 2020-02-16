@@ -18,11 +18,11 @@
      </head>
      <body>
        <div class="wrapper">
-         <div class="row justify-content-md-center align-items-center">
+         <div class="row justify-content-md-center">
            <div class="col-4">
              <div class="title-card">
                <h1>RoboReg</h1>
-               <h5>The smartest way to register.</h3>
+               <h5>The smartest way to register for classes</h3>
                  <div id="list-carousel">
                    <ul>
 
@@ -45,15 +45,18 @@
            <div class="col-4">
              <form id="loginForm">
                <div class="boxes">
+                 <h5>Link to UVM Registrar</h2>
                  <div id="testError" class="danger">
+                   <i class="far fa-times-circle dismissBtn"></i>
                    <b>Account Error</b>
                   <p>Make sure you can get to the "Check Availability" Registrar page with this account, then try again.</p>
                  </div>
-                <div class="formElement"><div class="inputIcon"><i class="fas fa-user"></i></div><input id="username" placeholder="NetID"></div>
-                <div class="formElement"><div class="inputIcon"><i class="fas fa-key"></i></div><input id="password" type="password" placeholder="Password"></div>
+                <span id="studentVerified"><i class="fas fa-user-graduate"></i> Verified</span><span id="studentNotVerified"><i class="fas fa-exclamation-triangle"></i> Not a Student</span><span id="realName"></span>
+                <div class="formElement"><div class="inputIcon"><i class="fas fa-user"></i></div><input id="username" placeholder="NetID" autocomplete="off"></div>
+                <div class="formElement"><div class="inputIcon"><i class="fas fa-key"></i></div><input id="password" type="password" placeholder="Password" autocomplete="off"></div>
 
-                <p class=""><input type="button" id="test" value="Test Login"></p>
-                <p class="hideAfterTest testTextInfo">A valid login is required to proceed. Your credentials will be stored on your computer.</p>
+                <p class=""><input type="button" id="test" value="Login with NetID"></p>
+                <p class="hideAfterTest testTextInfo">This application is not endorsed by UVM, but interacts with the UVM website. Your credentials will be stored on your computer.</p>
 
                </div>
              </form>
@@ -226,7 +229,7 @@
          </div>
        </div>
        <footer>
-         <p>Not endorsed by the University of Vermont. Use at your own risk. Software offered with absolutely no warranty.</p>
+         <p>&copy; 2020 LSGN Enterprises LLC.</p>
        </footer>
      </body>
 </html>

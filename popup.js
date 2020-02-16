@@ -60,6 +60,55 @@ function doCarousel(){
     // console.log(cQueue);
 }
 
+async function verifyTextbox(textbox){
+  var netIdData = await verifyNetID($(textbox).val());
+  if(netIdData){
+    var fullName = netIdData['cn'][0];
+    $("#realName").hide();
+    $("#realName").text(fullName);
+    $("#realName").fadeIn();
+
+    if(netIdData['edupersonprimaryaffiliation'][0].toLowerCase() == "student"){
+      $("#studentNotVerified").hide();
+      $("#studentVerified").fadeIn();
+    }
+    else{
+      $("#studentVerified").hide();
+      $("#studentNotVerified").fadeIn();
+    }
+  }
+  else{
+    $("#realName").hide();
+    $("#studentVerified").hide();
+    $("#studentNotVerified").hide();
+  }
+
+}
+async function verifyNetID(netID){
+  var returnVal;
+  await $.get("https://www.uvm.edu/directory/api/query_results.php?name="+netID, function(data,status){
+
+    if(status != "success"){
+      console.log(status)
+      returnVal = false;
+    }
+
+    try {
+      returnVal = data['data'][0];
+
+    } catch (e) {
+
+      returnVal = false;
+
+    }
+
+
+
+  });
+
+  return returnVal;
+}
+
 //getCourseData converts a crn to courseName, totalEnrolled, totalSeats, and totalRemaining
 async function getCourseData(crn){
   // $.get("https://giraffe.uvm.edu/~rgweb/batch/swrsectc_spring_soc_202001/all_sections.html", function(data, status){
@@ -184,6 +233,7 @@ function updateAllCrnInfo(updateChangedOnly){
 }
 
 $(document).ready(function(){
+
   /*CAROUSEL*/
 
   //initialize
@@ -194,6 +244,9 @@ $(document).ready(function(){
   //scroll through elements
   var carousel = setInterval(doCarousel, CAROUSEL_SPEED);
 
+  $("#username").change(async function(){
+    verifyTextbox("#username");
+  });
   $('body').on('click', 'a.openExternal', function(){
    chrome.tabs.create({url: $(this).attr('href')});
    return false;
@@ -264,7 +317,7 @@ window.addEventListener('load', async function load(event){
       chrome.storage.local.set({'tested': false}); // mark as untested
       $(".hideBeforeTest").hide();
       $(".hideAfterTest").show();
-      $("#test").val("Test Login");
+      $("#test").val("Login with NetID");
       $("#test").removeClass("secondaryBtn");
       // $("#testError").hide();
 
@@ -274,7 +327,7 @@ window.addEventListener('load', async function load(event){
       chrome.storage.local.set({'tested': false}); // mark as untested
       $(".hideBeforeTest").hide();
       $(".hideAfterTest").show();
-      $("#test").val("Test Login");
+      $("#test").val("Login with NetID");
       $("#test").removeClass("secondaryBtn");
         // $("#testError").hide();
     });
@@ -295,7 +348,7 @@ window.addEventListener('load', async function load(event){
     console.log(tested);
     if(!tested || tested == undefined){
       $(".hideBeforeTest").hide();
-      $("#test").val("Test Login");
+      $("#test").val("Login with NetID");
       $("#test").removeClass("secondaryBtn");
     }
     else{
@@ -341,19 +394,27 @@ window.addEventListener('load', async function load(event){
       $("#dataForm").delay(500).fadeIn(500);
     });
 
+    $(".dismissBtn").on('click', function(){
+      $(this).parent().fadeOut();
+      chrome.storage.local.set({'testError': false});
+    });
+
     //listen for clicks on the "test" button
     var testButton = document.getElementById('test');
     testButton.addEventListener('click', event => {
       //when a click is detected, send a message to the background page
-      console.log('sending click event to background page')
-      chrome.runtime.sendMessage({event: 'testClick'}, function(response){
+      if($("#username").val() != "" && $("#password").val() != ""){
+        console.log('sending click event to background page')
+        chrome.runtime.sendMessage({event: 'testClick'}, function(response){
 
-      });
+        });
 
-      ga('send', 'event', 'Button', 'click', $("#test").val());
+        ga('send', 'event', 'Button', 'click', $("#test").val());
+      }
 
 
     });
+    verifyTextbox("#username");
 });
 
 
