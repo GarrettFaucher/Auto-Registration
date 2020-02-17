@@ -250,13 +250,27 @@ async function closeTest() {
     chrome.storage.local.set({'tested': false}); // mark as nontested
     chrome.storage.local.set({'testError': true});
     console.log("closeTest set testError to true");
-    alert("Oops, something went wrong.\nPlease ensure that you can access the page that has the yellow button saying:\n\"Check registration Again\"");
+    alert("Oops, something went wrong!\n\n"+
+          "Please ensure that you can access the page that has the yellow button saying:\n"+
+          "\"Check registration Again\"");
   } else {
-    chrome.storage.local.set({'tested': true}); // mark as tested
-    chrome.storage.local.set({'testError': false}); // mark as nontested
-    console.log("closeTest set testError to false");
-    alert("Login process success! You are ready to register.\nEnter your CRNs into the extension.\nPress the \"Run\" button in the extension the night before your registration time.");
-  }
+    var updateCheck = document.querySelectorAll('[value="Update"]')[0];
+    if (updateCheck != undefined) {
+      chrome.storage.local.set({'tested': false}); // mark as nontested
+      chrome.storage.local.set({'testError': true}); // mark as nontested
+      console.log("closeTest set testError to true");
+      alert("Oops, something went wrong!\n\n"+
+            "Please ensure that you have updated your payment agreement on the current page.\n"+
+            "Run the login test again once you have agreed.");
+    } else {
+        chrome.storage.local.set({'tested': true}); // mark as tested
+        chrome.storage.local.set({'testError': false}); // mark as nontested
+        console.log("closeTest set testError to false");
+        alert("Login process success! You are ready to register.\n"+
+              "Enter your CRNs into the extension.\n"+
+              "Press the \"Run\" button in the extension the night before your registration time.");
+      }
+    }
 }
 
 
