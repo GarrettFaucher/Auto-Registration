@@ -311,6 +311,10 @@ window.addEventListener('load', async function load(event){
         collectData();
         updateAllCrnInfo(true);
     });
+    document.getElementById('loginForm').addEventListener('change', function() {
+        collectData();
+        // updateAllCrnInfo(true);
+    });
 
     document.getElementById('username').addEventListener('change', function() {
       console.log("USERNAME CHANGED!!")
@@ -355,6 +359,8 @@ window.addEventListener('load', async function load(event){
       $("#test").val("Test Login Again");
       $("#test").addClass("secondaryBtn");
       $(".hideAfterTest").hide();
+      $(".hideBeforeTest").show();
+      console.log("Showing hideBeforeTest")
     }
 
     if(running){
