@@ -36,7 +36,7 @@ Return values are handled by start()
 async function login() {
   // return true;
   console.log("running login automation");
-  await sleep(5000);
+  // await sleep(5000); // Note: THIS WAS IN FUNCTIONAL BUILD FOR SPRING2020 REG
   var alreadyLoggedIn = true;
 
   if (!loggedOn()) {
