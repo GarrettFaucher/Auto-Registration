@@ -21,7 +21,7 @@ async function getCourseData(crn){
   //   console.log(matched);
   // });
   var returnVal;
-  await $.get("http://www.uvm.edu/academics/courses/?term=202001&crn="+crn, function(data,status){
+  await $.get("https://www.uvm.edu/coursedirectory/?term=202109&crn="+crn, function(data,status){
 
     if(status != "success"){
       console.log(status)
